@@ -39,7 +39,7 @@
 <option value="">-- None --</option>
 <option value="susisiekta">Susisiekta / laukiama atsakymo</option>
 <option value="pasiulymas">Išsiųstas pasiūlymas</option>
-<option value="derybos">Pradėtos derybos</option>
+<option value="derybos">Derybos</option>
 <option value="sutarta">Sutarta parama</option>
 <option value="atsisake">Atsisakė remti</option>
 <option value="perskambinti">Perskambinti</option>
@@ -63,7 +63,7 @@
 <div>
 <label style="font-size: 12px; color: var(--text-warning); display:block; margin-bottom:4px; font-weight:500;">Negotiated Amount (€)</label>
 <input type="number" placeholder="0.00" style="width:100%;">
-<p id="negotiatedHint" style="font-size:11px; color: var(--text-secondary); margin: 4px 0 0;">Rodoma, kai Answer Status = Pradėtos derybos</p>
+<p id="negotiatedHint" style="font-size:11px; color: var(--text-secondary); margin: 4px 0 0;">Rodoma, kai Answer Status = Derybos</p>
 </div>
 </div>
 
@@ -94,6 +94,6 @@ var showTraining = (v==='sutarta');
 document.getElementById('negotiatedRow').style.display = showAmount ? 'grid' : 'none';
 document.getElementById('trainingRow').style.display = showTraining ? 'grid' : 'none';
 var hint = document.getElementById('negotiatedHint');
-hint.textContent = (v==='sutarta') ? 'Rodoma, kai Answer Status = Pradėtos derybos arba Sutarta parama' : 'Rodoma, kai Answer Status = Pradėtos derybos';
+hint.textContent = (v==='sutarta') ? 'Rodoma, kai Answer Status = Derybos arba Sutarta parama' : 'Rodoma, kai Answer Status = Derybos';
 }
 </script>
