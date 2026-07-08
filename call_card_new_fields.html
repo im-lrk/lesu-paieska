@@ -1,0 +1,95 @@
+<div style="background: var(--surface-1); border-radius: 12px; padding: 1.5rem;">
+<div style="background: var(--surface-2); border-radius: 12px; border: 0.5px solid var(--border); padding: 1.25rem 1.5rem; max-width: 640px; margin: 0 auto;">
+
+<div style="display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;">
+<i class="ti ti-phone" style="font-size:18px; color: var(--text-secondary);" aria-hidden="true"></i>
+<span style="font-weight: 500; font-size: 15px;">Call</span>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+<div>
+<label style="font-size: 12px; color: var(--text-secondary); display:block; margin-bottom:4px;">Subject</label>
+<input type="text" value="Call" style="width:100%;">
+</div>
+<div>
+<label style="font-size: 12px; color: var(--text-secondary); display:block; margin-bottom:4px;">Comments</label>
+<textarea rows="2" style="width:100%; resize:none;">Tip: Type Control + period to insert quick text.</textarea>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+<div>
+<label style="font-size: 12px; color: var(--text-secondary); display:block; margin-bottom:4px;">Name</label>
+<input type="text" placeholder="Search Contacts..." style="width:100%;">
+</div>
+<div>
+<label style="font-size: 12px; color: var(--text-secondary); display:block; margin-bottom:4px;">Related To</label>
+<input type="text" value="Amapa, MB" style="width:100%;">
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+<div>
+<label style="font-size: 12px; color: var(--text-secondary); display:block; margin-bottom:4px;">Follow Up Call</label>
+<input type="checkbox" style="width:16px; height:16px;">
+</div>
+<div>
+<label style="font-size: 12px; color: var(--text-secondary); display:block; margin-bottom:4px;">Answer Status</label>
+<select id="answerStatus" style="width:100%;" onchange="updateFields()">
+<option value="">-- None --</option>
+<option value="susisiekta">Susisiekta / laukiama atsakymo</option>
+<option value="pasiulymas">Išsiųstas pasiūlymas</option>
+<option value="derybos">Pradėtos derybos</option>
+<option value="sutarta">Sutarta parama</option>
+<option value="atsisake">Atsisakė remti</option>
+<option value="perskambinti">Perskambinti</option>
+<option value="neprileidzia">Neprileidžia prie atsakingo</option>
+<option value="nekele">Nekėlė</option>
+<option value="numeris">Numeris nenaudojamas</option>
+<option value="jauremia">Jau remia</option>
+</select>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+<div>
+<label style="font-size: 12px; color: var(--text-secondary); display:block; margin-bottom:4px;">Manager</label>
+<select style="width:100%;"><option>Telemarketing</option></select>
+</div>
+<div></div>
+</div>
+
+<div id="negotiatedRow" style="display:none; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; padding: 10px 12px; background: var(--bg-warning); border-radius: var(--radius);">
+<div>
+<label style="font-size: 12px; color: var(--text-warning); display:block; margin-bottom:4px; font-weight:500;">Negotiated Amount (€)</label>
+<input type="number" placeholder="0.00" style="width:100%;">
+<p style="font-size:11px; color: var(--text-secondary); margin: 4px 0 0;">Rodoma, kai Answer Status = Pradėtos derybos</p>
+</div>
+</div>
+
+<div id="trainingRow" style="display:none; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; padding: 10px 12px; background: var(--bg-success); border-radius: var(--radius);">
+<div>
+<label style="font-size: 12px; color: var(--text-success); display:block; margin-bottom:4px; font-weight:500;">Training Package (Gift)</label>
+<select style="width:100%;">
+<option value="">-- Pasirinkti --</option>
+<option value="CS">CS -- Civilinė sauga</option>
+<option value="PPB">PPB -- Pirmoji pagalba bazinė</option>
+<option value="PPP">PPP -- Pirmoji psichologinė pagalba</option>
+</select>
+<p style="font-size:11px; color: var(--text-secondary); margin: 4px 0 0;">Rodoma, kai Answer Status = Sutarta parama</p>
+</div>
+</div>
+
+<div style="display: flex; justify-content: flex-end; border-top: 0.5px solid var(--border); padding-top: 12px; margin-top: 4px;">
+<button style="background: var(--fill-brand); color: var(--on-brand); border: none;">Save</button>
+</div>
+
+</div>
+</div>
+<script>
+function updateFields(){
+var v = document.getElementById('answerStatus').value;
+document.getElementById('negotiatedRow').style.display = (v==='derybos') ? 'grid' : 'none';
+document.getElementById('trainingRow').style.display = (v==='sutarta') ? 'grid' : 'none';
+}
+</script>
