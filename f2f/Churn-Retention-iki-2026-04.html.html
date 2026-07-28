@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LRK F2F · Retention 2025–2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Figtree:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0f2f7;--surface:#fff;--surface2:#f7f8fc;--border:#dde1ec;
+  --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
+  --red:#dc2626;--green:#059669;--amber:#d97706;--blue:#2563eb;--teal:#0891b2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',sans-serif;font-size:14px;line-height:1.5}
+.topbar{background:var(--surface);border-bottom:2px solid var(--border);padding:16px 40px;display:flex;justify-content:space-between;align-items:center}
+.topbar h1{font-family:'Figtree',sans-serif;font-size:21px;font-weight:900;letter-spacing:-0.3px}
+.topbar h1 span{color:var(--red)}
+.topbar-meta{font-size:13px;color:var(--ink3);margin-top:2px}
+.main{padding:28px 40px 60px;max-width:1400px;margin:0 auto}
+.sh{font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--ink3);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.sh::after{content:'';flex:1;height:2px;background:var(--border)}
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:28px}
+.card-title{font-family:'Figtree',sans-serif;font-size:16px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.card-sub{font-size:12px;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px}
+
+/* TABS */
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:24px}
+.tab-btn{padding:11px 28px;font-family:'Figtree',sans-serif;font-size:14px;font-weight:700;color:var(--ink3);cursor:pointer;border:none;background:transparent;border-bottom:3px solid transparent;margin-bottom:-2px;border-radius:8px 8px 0 0;transition:all 0.15s}
+.tab-btn:hover{color:var(--ink);background:var(--surface2)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);background:var(--surface2)}
+.tab-btn.active.eur{color:var(--teal);border-bottom-color:var(--teal)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* Heatmap */
+.htable{width:100%;border-collapse:collapse;font-size:12px}
+.htable th{font-family:'Figtree',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--ink3);padding:6px 8px;text-align:center;border-bottom:2px solid var(--border);white-space:nowrap}
+.htable th.left{text-align:left}
+.htable td{padding:5px 6px;text-align:center;font-size:11px;font-weight:700;border:1px solid #eef0f7;white-space:nowrap;min-width:42px}
+.htable td.cohort-label{text-align:left;font-size:12px;color:var(--ink2);padding:5px 10px;background:var(--surface2);border-right:2px solid var(--border);white-space:nowrap}
+.htable td.n-cell{font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;color:var(--ink3);background:var(--surface2);border-right:1.5px solid var(--border);text-align:right;padding-right:8px}
+.htable td.base-cell{font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;color:var(--teal);background:var(--surface2);border-right:1.5px solid var(--border);text-align:right;padding-right:8px}
+.htable td.start{background:#1e3a5f;color:#fff;font-family:'Figtree',sans-serif;font-size:12px}
+.htable td.na{background:#f8f9fc;color:#c4c9d8;font-weight:400;font-style:italic}
+.h90plus{background:#d1fae5;color:#064e3b}
+.h80{background:#a7f3d0;color:#065f46}
+.h70{background:#fef9c3;color:#713f12}
+.h60{background:#fef3c7;color:#92400e}
+.h50{background:#fed7aa;color:#7c2d12}
+.h40{background:#fecaca;color:#7f1d1d}
+.h30{background:#f87171;color:#fff}
+.hlow{background:#dc2626;color:#fff}
+.warn-cell::after{content:'⚠';font-size:8px;opacity:0.6;margin-left:2px}
+
+/* KPI */
+.kpi-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px}
+.kpi{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:16px 18px;border-top:4px solid var(--ac,var(--border))}
+.kpi-label{font-family:'Figtree',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);margin-bottom:6px}
+.kpi-val{font-family:'Figtree',sans-serif;font-size:28px;font-weight:900;color:var(--ink);line-height:1}
+.kpi-sub{font-size:12px;color:var(--ink3);margin-top:4px}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+.note-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#92400e;display:flex;gap:10px}
+.insight-box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#0c4a6e;display:flex;gap:10px}
+
+/* Legend */
+.legend-strip{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.legend-chip{padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+
+.foot{background:var(--surface);border-top:2px solid var(--border);padding:12px 40px;font-size:12px;color:var(--ink3);font-weight:600;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div>
+    <h1>LRK <span>F2F</span> · Kohortų retention 2025–2026</h1>
+    <div class="topbar-meta">Visi nauji rėmėjai nuo 2025-02 · Duomenys iki 2026-04</div>
+  </div>
+  <div style="font-size:13px;color:var(--ink3);font-weight:700">Atnaujinta: 2026-04</div>
+</div>
+
+<div class="main">
+
+<!-- KPI -->
+<div class="sh">Bendri rodikliai</div>
+<div class="kpi-strip">
+  <div class="kpi" style="--ac:#111827">
+    <div class="kpi-label">Iš viso rėmėjų</div>
+    <div class="kpi-val">1 555</div>
+    <div class="kpi-sub">2025-02 – 2026-04</div>
+  </div>
+  <div class="kpi" style="--ac:#2563eb">
+    <div class="kpi-label">Didžiausia kohorta</div>
+    <div class="kpi-val">240</div>
+    <div class="kpi-sub">2025-07 · liepa</div>
+  </div>
+  <div class="kpi" style="--ac:#059669">
+    <div class="kpi-label">Geriausias M+1</div>
+    <div class="kpi-val">87%</div>
+    <div class="kpi-sub">2025-03 · skaičiumi</div>
+  </div>
+  <div class="kpi" style="--ac:#dc2626">
+    <div class="kpi-label">Žemiausias M+1</div>
+    <div class="kpi-val">38%</div>
+    <div class="kpi-sub">2025-09 ⚠ nesklandumai</div>
+  </div>
+  <div class="kpi" style="--ac:#d97706">
+    <div class="kpi-label">Vid. M+1 retention</div>
+    <div class="kpi-val">72%</div>
+    <div class="kpi-sub">visi 2025 mėnesiai</div>
+  </div>
+</div>
+
+<div class="sh">Nauji rėmėjai · 2025 vs 2026 vidurkis per mėnesį</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px">
+
+  <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px 24px;border-top:4px solid #2563eb">
+    <div style="font-family:'Figtree',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#2563eb;margin-bottom:14px">2025 · vasaris–gruodis · 11 mėnesių</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);margin-bottom:4px">Avg rėmėjų/mėn.</div>
+        <div style="font-family:'Figtree',sans-serif;font-size:32px;font-weight:900;color:var(--ink);line-height:1">109</div>
+        <div style="font-size:12px;color:var(--ink3);margin-top:4px">iš viso 1 201 rėmėjų</div>
+      </div>
+      <div>
+        <div style="font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);margin-bottom:4px">Avg EUR/mėn.</div>
+        <div style="font-family:'Figtree',sans-serif;font-size:32px;font-weight:900;color:#0891b2;line-height:1">1 444 €</div>
+        <div style="font-size:12px;color:var(--ink3);margin-top:4px">iš viso 15 880 €</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--ink3)">
+      Pastaba: 2025-03/04 EUR išpūstas dėl IT nesklandumų (keli nuskaitymai/mėn.)
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px 24px;border-top:4px solid #059669">
+    <div style="font-family:'Figtree',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#059669;margin-bottom:14px">2026 · sausis–balandis · 4 mėnesiai</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);margin-bottom:4px">Avg rėmėjų/mėn.</div>
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <div style="font-family:'Figtree',sans-serif;font-size:32px;font-weight:900;color:var(--ink);line-height:1">88</div>
+          <div style="font-size:12px;font-weight:700;color:#dc2626;background:#fee2e2;padding:2px 8px;border-radius:20px">−20%</div>
+        </div>
+        <div style="font-size:12px;color:var(--ink3);margin-top:4px">iš viso 350 rėmėjų</div>
+      </div>
+      <div>
+        <div style="font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);margin-bottom:4px">Avg EUR/mėn.</div>
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <div style="font-family:'Figtree',sans-serif;font-size:32px;font-weight:900;color:#0891b2;line-height:1">872 €</div>
+          <div style="font-size:12px;font-weight:700;color:#dc2626;background:#fee2e2;padding:2px 8px;border-radius:20px">−40%</div>
+        </div>
+        <div style="font-size:12px;color:var(--ink3);margin-top:4px">iš viso 3 487 €</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--ink3)">
+      EUR kritimas iš dalies paaiškinamas 2025 IT klaidų efekto išnykimu (reali bazė mažesnė)
+    </div>
+  </div>
+
+</div>
+
+<div class="note-box">
+  <span style="font-size:16px">⚠</span>
+  <div><strong>Žinomi nesklandumai:</strong> 2025 pradžioje kai kuriems rėmėjams per mėnesį nuskaičiuota kelios įmokos (2–6×) — iškreipia EUR retention žemyn; 2026-02 pabaigos įmokos persikėlė į kovą (oranžinė korekcija taikyta); ⚠ žymos prie neįprastai žemų rodiklių.</div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('count',this)">📊 Rėmėjų skaičius</button>
+  <button class="tab-btn eur" onclick="switchTab('eur',this)">💶 EUR pajamos</button>
+</div>
+
+<!-- ══ TAB: COUNT ══ -->
+<div id="pane-count" class="tab-pane active">
+
+  <div class="sh">Rėmėjų retention heatmap · % nuo pradinės kohortos</div>
+  <div class="card" style="overflow-x:auto">
+    <div class="card-title">Kohortų retention matrica · skaičiumi</div>
+    <div class="card-sub">Eilutė = kohorta · Stulpeliai = mėnesiai nuo pirmosios įmokos</div>
+    <table class="htable">
+      <thead><tr>
+        <th class="left">Kohorta</th><th>N</th><th>M+0</th>
+        <th>M+1</th><th>M+2</th><th>M+3</th><th>M+4</th><th>M+5</th><th>M+6</th>
+        <th>M+7</th><th>M+8</th><th>M+9</th><th>M+10</th><th>M+11</th><th>M+12</th><th>M+13</th>
+      </tr></thead>
+      <tbody id="tbody-count"></tbody>
+    </table>
+    <div class="legend-strip">
+      <span style="font-size:11px;color:var(--ink3);font-weight:600">Spalvų skalė:</span>
+      <span class="legend-chip h90plus">≥80%</span>
+      <span class="legend-chip h70">70–79%</span>
+      <span class="legend-chip h60">60–69%</span>
+      <span class="legend-chip h50">50–59%</span>
+      <span class="legend-chip h40">40–49%</span>
+      <span class="legend-chip h30">30–39%</span>
+      <span class="legend-chip hlow">&lt;30%</span>
+      <span class="legend-chip na" style="background:#f8f9fc;color:#c4c9d8;border:1px solid #e5e7eb">N/A</span>
+      <span class="legend-chip start" style="background:#1e3a5f;color:#fff">Pradžia</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">M+1 retention pagal kohortą</div>
+      <div class="card-sub">% išlikusių po pirmo mėnesio</div>
+      <div style="position:relative;height:260px"><canvas id="chartM1count"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Retention kreivės · pasirinktos kohortos</div>
+      <div class="card-sub">M+0 iki M+6 · palyginimas</div>
+      <div style="position:relative;height:260px"><canvas id="chartCurveCount"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB: EUR ══ -->
+<div id="pane-eur" class="tab-pane">
+
+  <div class="insight-box">
+    <span style="font-size:16px">💡</span>
+    <div>
+      <strong>EUR retention skiriasi nuo skaičiaus retention:</strong>
+      2025-03/04 kohortų vidutinė įmoka siekė ~30 €/rėmėjas — tai <strong>ne didesni donoriai</strong>, o IT nesklandumai: tuo laikotarpiu iš kai kurių rėmėjų per vieną mėnesį buvo nuskaitoma po 2–3 įmokas. Dėl to EUR bazė yra išpūsta, o tolimesni EUR retention % atrodo mažesni nei realybėje. Nuo 2025-07 sistema stabilizavosi, vidutinė įmoka ~10 €, ir EUR retention atitinka skaičiaus retention.
+    </div>
+  </div>
+
+  <div class="sh">EUR retention heatmap · % nuo pradinių mėnesinių pajamų</div>
+  <div class="card" style="overflow-x:auto">
+    <div class="card-title">Kohortų EUR retention matrica</div>
+    <div class="card-sub">% pajamų išlaikyta · Pradžia = mėnesinių pajamų suma pirmą mėnesį</div>
+    <table class="htable">
+      <thead><tr>
+        <th class="left">Kohorta</th><th>N</th><th style="color:var(--teal)">€ start</th><th>Avg €</th><th>M+0</th>
+        <th>M+1</th><th>M+2</th><th>M+3</th><th>M+4</th><th>M+5</th><th>M+6</th>
+        <th>M+7</th><th>M+8</th><th>M+9</th><th>M+10</th><th>M+11</th><th>M+12</th>
+      </tr></thead>
+      <tbody id="tbody-eur"></tbody>
+    </table>
+    <div class="legend-strip">
+      <span style="font-size:11px;color:var(--ink3);font-weight:600">Spalvų skalė (ta pati):</span>
+      <span class="legend-chip h90plus">≥80%</span>
+      <span class="legend-chip h70">70–79%</span>
+      <span class="legend-chip h60">60–69%</span>
+      <span class="legend-chip h50">50–59%</span>
+      <span class="legend-chip h40">40–49%</span>
+      <span class="legend-chip h30">30–39%</span>
+      <span class="legend-chip hlow">&lt;30%</span>
+      <span class="legend-chip na" style="background:#f8f9fc;color:#c4c9d8;border:1px solid #e5e7eb">N/A</span>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">EUR M+1 retention pagal kohortą</div>
+      <div class="card-sub">% pajamų išlaikyta po pirmo mėnesio</div>
+      <div style="position:relative;height:260px"><canvas id="chartM1eur"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">EUR vs skaičiaus retention · palyginimas</div>
+      <div class="card-sub">M+1 abiem metrikoms pagal kohortą</div>
+      <div style="position:relative;height:260px"><canvas id="chartCompare"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Vidutinė įmoka pagal kohortą</div>
+    <div class="card-sub">€/rėmėjas pirmą mėnesį · aukštas vidurkis = didesnė EUR/skaičiaus skirtumo rizika</div>
+    <div style="position:relative;height:200px"><canvas id="chartAvg"></canvas></div>
+  </div>
+</div>
+
+</div>
+<div class="foot">
+  <span>Šaltinis: Rėmėjų_portfelio_analizė_2025-2026_04.xlsx · 1 555 rėmėjai · 15 kohortų</span>
+  <span>LRK Duomenų valdymas · 2026</span>
+</div>
+
+<script>
+Chart.defaults.font.family = "'Atkinson Hyperlegible', sans-serif";
+Chart.defaults.font.size = 12;
+
+// ── DATA ──────────────────────────────────────────────────────────────────
+var labels = ['2025-02','2025-03','2025-04','2025-05','2025-06','2025-07',
+              '2025-08','2025-09','2025-10','2025-11','2025-12',
+              '2026-01','2026-02','2026-03','2026-04'];
+
+var countData = [
+  {label:'2025-02', n:22,  d:[100,86,73,55,64,59,59,55,14,59,59,55,55,55,55], warn:[8]},
+  {label:'2025-03', n:52,  d:[100,87,75,73,67,58,62,44,52,56,50,38,46,44,null]},
+  {label:'2025-04', n:81,  d:[100,84,75,68,56,62,46,54,56,56,48,49,51,null,null]},
+  {label:'2025-05', n:164, d:[100,75,68,61,58,32,46,46,45,39,38,38,null,null,null], warn:[5]},
+  {label:'2025-06', n:177, d:[100,72,52,53,28,41,46,38,37,38,38,null,null,null,null], warn:[4]},
+  {label:'2025-07', n:240, d:[100,68,58,40,39,45,41,37,36,34,null,null,null,null,null]},
+  {label:'2025-08', n:148, d:[100,69,46,50,45,43,35,36,36,null,null,null,null,null,null]},
+  {label:'2025-09', n:58,  d:[100,38,57,53,50,48,52,50,null,null,null,null,null,null,null], warn:[1]},
+  {label:'2025-10', n:41,  d:[100,83,78,73,66,63,61,null,null,null,null,null,null,null,null]},
+  {label:'2025-11', n:60,  d:[100,65,57,45,52,50,null,null,null,null,null,null,null,null,null]},
+  {label:'2025-12', n:158, d:[100,65,49,51,47,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-01', n:84,  d:[100,56,62,54,null,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-02', n:46,  d:[100,74,72,null,null,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-03', n:93,  d:[100,80,null,null,null,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-04', n:127, d:[100,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},
+];
+
+var eurData = [
+  {label:'2025-02', n:22,  base:412,  avg:18.7, d:[100,90,80,63,35,34,34,29,11,31,31,30,30,30,null]},
+  {label:'2025-03', n:52,  base:1700, avg:32.7, d:[100,56,53,24,23,19,20,12,16,17,16,11,21,null,null]},
+  {label:'2025-04', n:81,  base:2365, avg:29.2, d:[100,57,25,21,19,21,15,18,18,18,15,16,null,null,null]},
+  {label:'2025-05', n:164, base:2271, avg:13.8, d:[100,55,48,41,40,22,31,31,29,27,26,null,null,null,null]},
+  {label:'2025-06', n:177, base:1860, avg:10.5, d:[100,67,48,52,26,38,41,35,33,38,null,null,null,null,null]},
+  {label:'2025-07', n:240, base:2527, avg:10.5, d:[100,65,53,39,38,41,38,34,32,null,null,null,null,null,null]},
+  {label:'2025-08', n:148, base:1549, avg:10.5, d:[100,67,46,50,45,40,34,33,null,null,null,null,null,null,null]},
+  {label:'2025-09', n:58,  base:651,  avg:11.2, d:[100,39,55,52,50,44,48,null,null,null,null,null,null,null,null]},
+  {label:'2025-10', n:41,  base:426,  avg:10.4, d:[100,79,74,70,61,59,57,null,null,null,null,null,null,null,null]},
+  {label:'2025-11', n:60,  base:567,  avg:9.4,  d:[100,60,54,40,48,46,null,null,null,null,null,null,null,null,null]},
+  {label:'2025-12', n:158, base:1552, avg:9.8,  d:[100,61,44,54,47,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-01', n:84,  base:927,  avg:11.0, d:[100,56,65,56,null,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-02', n:46,  base:491,  avg:10.7, d:[100,80,71,null,null,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-03', n:93,  base:903,  avg:9.7,  d:[100,75,null,null,null,null,null,null,null,null,null,null,null,null,null]},
+  {label:'2026-04', n:127, base:1166, avg:9.2,  d:[100,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},
+];
+
+// ── HEAT COLOR ────────────────────────────────────────────────────────────
+function hcls(v, warn) {
+  if (v === null) return 'na';
+  if (v === 100) return 'start';
+  var c = v>=80?'h90plus':v>=70?'h80':v>=60?'h70':v>=50?'h60':v>=40?'h50':v>=30?'h40':v>=20?'h30':'hlow';
+  return c + (warn?' warn-cell':'');
+}
+
+// ── BUILD HEATMAP: COUNT ──────────────────────────────────────────────────
+var tbodyC = document.getElementById('tbody-count');
+countData.forEach(function(c) {
+  var warns = c.warn||[];
+  var html = '<td class="cohort-label">'+c.label+'</td><td class="n-cell">'+c.n+'</td>';
+  for (var i=0; i<15; i++) {
+    var v = c.d[i]!==undefined?c.d[i]:null;
+    var w = warns.indexOf(i)>-1;
+    var txt = v===null?'—':(v===100?'100%':v+'%');
+    html += '<td class="'+hcls(v,w)+'">'+txt+'</td>';
+  }
+  var tr = document.createElement('tr');
+  tr.innerHTML = html;
+  tbodyC.appendChild(tr);
+});
+
+// ── BUILD HEATMAP: EUR ────────────────────────────────────────────────────
+var tbodyE = document.getElementById('tbody-eur');
+eurData.forEach(function(c) {
+  var html = '<td class="cohort-label">'+c.label+'</td>'
+    +'<td class="n-cell">'+c.n+'</td>'
+    +'<td class="base-cell">'+c.base+' €</td>'
+    +'<td class="n-cell">'+c.avg+' €</td>';
+  for (var i=0; i<14; i++) {
+    var v = c.d[i]!==undefined?c.d[i]:null;
+    var txt = v===null?'—':(v===100?'100%':v+'%');
+    html += '<td class="'+hcls(v,false)+'">'+txt+'</td>';
+  }
+  var tr = document.createElement('tr');
+  tr.innerHTML = html;
+  tbodyE.appendChild(tr);
+});
+
+// ── CHART BASE ────────────────────────────────────────────────────────────
+var baseOpts = {
+  responsive:true, maintainAspectRatio:false,
+  plugins:{
+    legend:{position:'bottom',labels:{font:{size:11},color:'#374151',boxWidth:12,padding:10}},
+    tooltip:{backgroundColor:'#111827',titleFont:{family:"'Figtree',sans-serif",size:12,weight:'700'},
+             bodyFont:{size:12},padding:10,cornerRadius:8}
+  },
+  scales:{
+    x:{ticks:{color:'#6b7280',font:{size:11}},grid:{display:false}},
+    y:{min:0,max:100,ticks:{color:'#6b7280',callback:function(v){return v+'%'}},grid:{color:'#f0f2f7'}}
+  }
+};
+
+// M+1 count
+var m1c = countData.map(function(c){return c.d[1]||null;});
+new Chart(document.getElementById('chartM1count'),{type:'bar',
+  data:{labels:labels, datasets:[{label:'M+1 %',data:m1c,borderRadius:3,
+    backgroundColor:m1c.map(function(v){return !v?'#e5e7eb':v>=70?'#34d399':v>=50?'#fbbf24':'#f87171'})
+  }]},
+  options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{legend:{display:false}})})
+});
+
+// M+1 EUR
+var m1e = eurData.map(function(c){return c.d[1]||null;});
+new Chart(document.getElementById('chartM1eur'),{type:'bar',
+  data:{labels:labels, datasets:[{label:'EUR M+1 %',data:m1e,borderRadius:3,
+    backgroundColor:m1e.map(function(v){return !v?'#e5e7eb':v>=70?'#67e8f9':v>=50?'#fbbf24':'#f87171'})
+  }]},
+  options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{legend:{display:false}})})
+});
+
+// Count curves
+var curvesC = [
+  {label:'2025-03',color:'#2563eb',data:[100,87,75,73,67,58,62]},
+  {label:'2025-07',color:'#7c3aed',data:[100,68,58,40,39,45,41]},
+  {label:'2025-10',color:'#059669',data:[100,83,78,73,66,63,61]},
+  {label:'2025-12',color:'#d97706',data:[100,65,49,51,47,null,null]},
+  {label:'2026-01',color:'#dc2626',data:[100,56,62,54,null,null,null]},
+];
+new Chart(document.getElementById('chartCurveCount'),{type:'line',
+  data:{labels:['M+0','M+1','M+2','M+3','M+4','M+5','M+6'],
+    datasets:curvesC.map(function(c){return{label:c.label,data:c.data,borderColor:c.color,
+      backgroundColor:'transparent',tension:0.3,pointRadius:5,pointBackgroundColor:c.color,
+      borderWidth:2.5,spanGaps:false};})},
+  options:Object.assign({},baseOpts,{spanGaps:false})
+});
+
+// Compare EUR vs count M+1
+new Chart(document.getElementById('chartCompare'),{type:'bar',
+  data:{labels:labels,datasets:[
+    {label:'Skaičiaus retention M+1',data:m1c,backgroundColor:'#93c5fd',borderRadius:2},
+    {label:'EUR retention M+1',      data:m1e,backgroundColor:'#5eead4',borderRadius:2},
+  ]},
+  options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{
+    tooltip:{backgroundColor:'#111827',bodyFont:{size:12},padding:10,cornerRadius:8,
+      callbacks:{label:function(ctx){return ctx.dataset.label+': '+(ctx.raw||'—')+'%';}}}
+  })})
+});
+
+// Avg amount chart
+new Chart(document.getElementById('chartAvg'),{type:'bar',
+  data:{labels:labels,datasets:[{
+    label:'Avg €/rėmėjas',
+    data:[18.7,32.7,29.2,13.8,10.5,10.5,10.5,11.2,10.4,9.4,9.8,11.0,10.7,9.7,9.2],
+    backgroundColor:labels.map(function(l,i){
+      var v=[18.7,32.7,29.2,13.8,10.5,10.5,10.5,11.2,10.4,9.4,9.8,11.0,10.7,9.7,9.2][i];
+      return v>20?'#f87171':v>15?'#fbbf24':'#34d399';
+    }),
+    borderRadius:4,
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+      tooltip:{backgroundColor:'#111827',bodyFont:{size:12},padding:10,cornerRadius:8,
+        callbacks:{label:function(ctx){return 'Avg: '+ctx.raw+' €/rėmėjas';}}}},
+    scales:{
+      x:{ticks:{color:'#6b7280',font:{size:11}},grid:{display:false}},
+      y:{ticks:{color:'#6b7280',callback:function(v){return v+' €'}},grid:{color:'#f0f2f7'}}
+    }
+  }
+});
+
+// ── TAB SWITCH ────────────────────────────────────────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('pane-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
