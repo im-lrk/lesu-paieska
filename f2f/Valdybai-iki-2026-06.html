@@ -11,7 +11,7 @@
   --bg:#f0f2f7;--surface:#fff;--surface2:#f7f8fc;--border:#dde1ec;
   --ink:#111827;--ink2:#374151;--ink3:#6b7280;--ink4:#9ca3af;
   --green:#059669;--green-bg:#d1fae5;
-  --red:#dc2626;--red-bg:#fee2e2;
+  --red:#C8102E;--red-bg:#fee2e2;
   --amber:#d97706;--amber-bg:#fef3c7;
   --blue:#2563eb;--blue-bg:#dbeafe;
   --teal:#0d9488;--teal-bg:#ccfbf1;
@@ -76,7 +76,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 
 .abctable{width:100%;border-collapse:collapse}
 .abctable th,.abctable td{padding:9px 12px;text-align:center;border:1px solid var(--border);font-size:13px}
-.abctable thead th{background:#dc2626;color:#fff;font-family:'Figtree',sans-serif;font-weight:800}
+.abctable thead th{background:#C8102E;color:#fff;font-family:'Figtree',sans-serif;font-weight:800}
 .abctable td:first-child,.abctable th:first-child{text-align:left;font-weight:700}
 .abctable tr.total-row{background:var(--surface2);font-weight:800}
 
@@ -118,7 +118,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
     <div class="kpi-val" style="color:var(--green)">287</div>
     <div class="kpi-sub">272 r&#279;m&#279;jai &middot; padidino &#303;mok&#261; per nauj&#261; sutart&#303;</div>
   </div>
-  <div class="kpi" style="--ac:#dc2626">
+  <div class="kpi" style="--ac:#C8102E">
     <div class="kpi-label">I&#353; viso Downgrades</div>
     <div class="kpi-val" style="color:var(--red)">21</div>
     <div class="kpi-sub">21 r&#279;m&#279;jas &middot; suma&#382;ino &#303;mok&#261; per nauj&#261; sutart&#303;</div>
@@ -296,6 +296,54 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
   </div>
 </div>
 
+<div class="sh">Kaip skai&#269;iuojama ABC kategorija</div>
+<div class="card">
+  <div class="card-title">Kiekvienas r&#279;m&#279;jas gauna dvi charakteristikas</div>
+  <div class="card-sub">Rėmimo trukmę (T) ir įmokos dydį (P) &middot; i&#353; j&#371; suformuojama bendra A/B/C kategorija</div>
+  <div class="grid-2" style="margin-bottom:14px">
+    <div>
+      <div style="font-family:'Figtree',sans-serif;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:10px">T kategorija &middot; R&#279;mimo trukm&#279;</div>
+      <table class="ytable">
+        <thead><tr><th>Kateg.</th><th>Trukm&#279;</th></tr></thead>
+        <tbody>
+          <tr><td>T1</td><td>1&ndash;6 m&#279;n.</td></tr>
+          <tr><td>T2</td><td>7&ndash;12 m&#279;n.</td></tr>
+          <tr><td>T3</td><td>13&ndash;24 m&#279;n.</td></tr>
+          <tr><td>T4</td><td>25&ndash;48 m&#279;n.</td></tr>
+          <tr><td>T5</td><td>49+ m&#279;n.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div style="font-family:'Figtree',sans-serif;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:10px">P kategorija &middot; Įmokos dydis</div>
+      <table class="ytable">
+        <thead><tr><th>Kateg.</th><th>Suma</th></tr></thead>
+        <tbody>
+          <tr><td>P1</td><td>&#8805; 15 &euro;</td></tr>
+          <tr><td>P2</td><td>12&ndash;14,99 &euro;</td></tr>
+          <tr><td>P3</td><td>8&ndash;11,99 &euro;</td></tr>
+          <tr><td>P4</td><td>5&ndash;7,99 &euro;</td></tr>
+          <tr><td>P5</td><td>&lt; 5 &euro;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="font-family:'Figtree',sans-serif;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:10px">ABC matrica &middot; T &times; P kombinacija</div>
+  <table class="abctable">
+    <thead>
+      <tr><th>T \\ P</th><th>P1&ndash;P2 (&#8805;12&euro;)</th><th>P3 (8&ndash;11,99&euro;)</th><th>P4 (5&ndash;7,99&euro;)</th><th>P5 (&lt;5&euro;)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>T4&ndash;T5 (25+ m&#279;n.)</td><td style="background:var(--green-bg);color:var(--green);font-weight:700">A</td><td style="background:var(--green-bg);color:var(--green);font-weight:700">A</td><td style="background:var(--amber-bg);color:var(--amber);font-weight:700">B</td><td style="background:var(--amber-bg);color:var(--amber);font-weight:700">B</td></tr>
+      <tr><td>T2&ndash;T3 (7&ndash;24 m&#279;n.)</td><td style="background:var(--green-bg);color:var(--green);font-weight:700">A</td><td style="background:var(--amber-bg);color:var(--amber);font-weight:700">B</td><td style="background:var(--amber-bg);color:var(--amber);font-weight:700">B</td><td style="background:var(--red-bg);color:var(--red);font-weight:700">C</td></tr>
+      <tr><td>T1 (1&ndash;6 m&#279;n.)</td><td style="background:var(--amber-bg);color:var(--amber);font-weight:700">B</td><td style="background:var(--red-bg);color:var(--red);font-weight:700">C</td><td style="background:var(--red-bg);color:var(--red);font-weight:700">C</td><td style="background:var(--red-bg);color:var(--red);font-weight:700">C</td></tr>
+    </tbody>
+  </table>
+  <div class="insight-box insight-info" style="margin-top:16px;margin-bottom:0">
+    &#8505; <strong>A</strong> &ndash; ilgai rėmę ir/arba dosniai mokantys (didžiausia tikėtina grąža). <strong>B</strong> &ndash; vidutinė vertė. <strong>C</strong> &ndash; trumpai rėmę ir/arba mažai mokantys (mažiausia tikėtina grąža). Kategorija priskiriama tiek aktyviems, tiek neaktyviems r&#279;m&#279;jams &ndash; neaktyviems &#382;i&#363;rima paskutin&#279; &#382;inom&#261; T ir P reik&#353;m&#281; prie&#353; nutraukiant mok&#279;jimus.
+  </div>
+</div>
+
 <div class="card">
   <div class="card-title">Unikali&#371; r&#279;m&#279;j&#371; skai&#269;ius: Aktyvus / Neaktyvus pagal ABC kategorij&#261;</div>
   <div class="card-sub">SF duomenys, 2026-07</div>
@@ -389,22 +437,22 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 
 <div class="sh">Vidutinis m&#279;nesinis churn</div>
 <div class="kpi-grid">
-  <div class="kpi" style="--ac:#dc2626">
+  <div class="kpi" style="--ac:#C8102E">
     <div class="kpi-label">Vid. churn / m&#279;n. (visas laikotarpis)</div>
     <div class="kpi-val" style="color:var(--red)">~205 vnt.</div>
     <div class="kpi-sub">2018&ndash;2026, 92 m&#279;n. vidurkis</div>
   </div>
-  <div class="kpi" style="--ac:#dc2626">
+  <div class="kpi" style="--ac:#C8102E">
     <div class="kpi-label">Vid. churn suma / m&#279;n. (visas laikotarpis)</div>
     <div class="kpi-val" style="color:var(--red)">~2 014 &euro;</div>
     <div class="kpi-sub">prarasta MRR per m&#279;nes&#303;</div>
   </div>
-  <div class="kpi" style="--ac:#dc2626">
+  <div class="kpi" style="--ac:#C8102E">
     <div class="kpi-label">Vid. churn / m&#279;n. (paskutiniai 12 m&#279;n.)</div>
     <div class="kpi-val" style="color:var(--red)">~269 vnt.</div>
     <div class="kpi-sub">2025-06 &ndash; 2026-05</div>
   </div>
-  <div class="kpi" style="--ac:#dc2626">
+  <div class="kpi" style="--ac:#C8102E">
     <div class="kpi-label">Vid. churn suma / m&#279;n. (paskutiniai 12 m&#279;n.)</div>
     <div class="kpi-val" style="color:var(--red)">~2 713 &euro;</div>
     <div class="kpi-sub">34% didesn&#279; nei visos istorijos vidurkis</div>
@@ -699,8 +747,8 @@ new Chart(document.getElementById('chartPW'),{type:'bar',
 new Chart(document.getElementById('chartABC'),{type:'bar',
   data:{labels:['A','B','C'],
     datasets:[
-      {label:'Aktyvus %',data:[50.46,48.93,2.00],backgroundColor:'#059669',borderRadius:4},
-      {label:'Neaktyvus %',data:[25.50,55.20,20.08],backgroundColor:'#0d9488',borderRadius:4},
+      {label:'Aktyvus %',data:[50.46,48.93,2.00],backgroundColor:'#C8102E',borderRadius:4},
+      {label:'Neaktyvus %',data:[25.50,55.20,20.08],backgroundColor:'#9ca3af',borderRadius:4},
     ]},
   options:Object.assign({},base,{scales:Object.assign({},base.scales,{y:Object.assign({},base.scales.y,{ticks:Object.assign({},base.scales.y.ticks,{callback:function(v){return v+'%';}})})})})
 });
@@ -715,7 +763,7 @@ new Chart(document.getElementById('chartNewDonors'),{type:'bar',
 // ---- TAB 5 chart ----
 new Chart(document.getElementById('chartChurn'),{type:'bar',
   data:{labels:['2022','2023','2024','2025','2026'],
-    datasets:[{label:'Išbyrėjo (vnt., pirmi 6 mėn.)',data:[980,1890,1743,1260,2319],backgroundColor:'#dc2626',borderRadius:4}]},
+    datasets:[{label:'Išbyrėjo (vnt., pirmi 6 mėn.)',data:[980,1890,1743,1260,2319],backgroundColor:'#C8102E',borderRadius:4}]},
   options:base
 });
 
