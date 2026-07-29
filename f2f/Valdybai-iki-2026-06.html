@@ -79,6 +79,11 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 .abctable thead th{background:#dc2626;color:#fff;font-family:'Figtree',sans-serif;font-weight:800}
 .abctable td:first-child,.abctable th:first-child{text-align:left;font-weight:700}
 .abctable tr.total-row{background:var(--surface2);font-weight:800}
+
+.datatable-toggle{font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;color:var(--ink3);background:none;border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;margin-top:14px}
+.datatable-toggle:hover{color:var(--ink);border-color:var(--ink3)}
+.datatable-wrap{display:none;margin-top:10px;max-height:260px;overflow-y:auto}
+.datatable-wrap.open{display:block}
 </style>
 </head>
 <body>
@@ -93,9 +98,9 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
   <div class="tabbar">
     <button class="tabbtn active" onclick="showTab(0)">Upgrade ir Win-back</button>
     <button class="tabbtn" onclick="showTab(1)">Win-back potencialas</button>
-    <button class="tabbtn" onclick="showTab(2)">Upgrade potencialas</button>
-    <button class="tabbtn" onclick="showTab(3)">Nauji r&#279;m&#279;jai</button>
-    <button class="tabbtn" onclick="showTab(4)">Churn</button>
+    <button class="tabbtn" onclick="showTab(2)">Nauji r&#279;m&#279;jai</button>
+    <button class="tabbtn" onclick="showTab(3)">Churn</button>
+    <button class="tabbtn" onclick="showTab(4)">Su/be FID</button>
   </div>
 </div>
 
@@ -319,68 +324,8 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 
 </div>
 
-<!-- ============ TAB 3: UPGRADE POTENCIALAS ============ -->
-<div id="tabpanel-2" class="tabpanel">
-
-<div class="insight-box insight-info">
-  &#8505; <strong>&#352;altinis:</strong> perimta i&#353; &quot;Upgrade ir Win-back&quot; tabo (vieningas &#353;altinis &ndash; Baz&#279;_Closed_Won) &ndash; SF r&#279;m&#279;jai, kurie per metus padidino r&#279;mimo sum&#261; sukurdami nauj&#261; sutart&#303; (Recurring Donation ID).
-</div>
-
-<div class="sh">Upgrade potencialas &middot; 2024&ndash;2026</div>
-<div class="kpi-grid">
-  <div class="kpi" style="--ac:#9ca3af">
-    <div class="kpi-label">2024</div>
-    <div class="kpi-val">163</div>
-    <div class="kpi-sub">r&#279;m&#279;jai padidino &#303;mok&#261;</div>
-  </div>
-  <div class="kpi" style="--ac:#9ca3af">
-    <div class="kpi-label">2025</div>
-    <div class="kpi-val">9</div>
-    <div class="kpi-sub">r&#279;m&#279;jai padidino &#303;mok&#261;</div>
-  </div>
-  <div class="kpi" style="--ac:#059669">
-    <div class="kpi-label">2026 (iki 2026-07)</div>
-    <div class="kpi-val" style="color:var(--green)">90</div>
-    <div class="kpi-sub">r&#279;m&#279;jai padidino &#303;mok&#261;</div>
-  </div>
-  <div class="kpi" style="--ac:#2563eb">
-    <div class="kpi-label">I&#353; viso 2024&ndash;2026</div>
-    <div class="kpi-val" style="color:var(--blue)">262</div>
-    <div class="kpi-sub">91% vis&#371; upgrade&#39;&#371; nuo 2019 (287)</div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">Upgrade&#39;ai pagal metus</div>
-  <div class="card-sub">R&#279;m&#279;jai, kurie padidino r&#279;mimo sum&#261; sukurdami nauj&#261; sutart&#303;</div>
-  <table class="ytable">
-    <thead><tr><th>Metai</th><th>Upgrade&#39;&#371; skai&#269;ius</th></tr></thead>
-    <tbody>
-      <tr><td>2019</td><td class="up-cell">0</td></tr>
-      <tr><td>2020</td><td class="up-cell">12</td></tr>
-      <tr><td>2021</td><td class="up-cell">4</td></tr>
-      <tr><td>2022</td><td class="up-cell">5</td></tr>
-      <tr><td>2023</td><td class="up-cell">4</td></tr>
-      <tr><td>2024</td><td class="up-cell">163</td></tr>
-      <tr><td>2025</td><td class="up-cell">9</td></tr>
-      <tr><td>2026</td><td class="up-cell">90</td></tr>
-      <tr style="background:var(--surface2);font-weight:700"><td>I&#352; VISO</td><td class="up-cell">287</td></tr>
-    </tbody>
-  </table>
-  <div class="insight-box insight-good" style="margin-top:16px;margin-bottom:0">
-    &#9989; 2024&ndash;2026 m. vyko 262 upgrade&#39;ai (91% viso 2019&ndash;2026 kiekio, 287). I&#353;samesn&#279; analiz&#279; (pajamos, metodologija) &ndash; &quot;Upgrade ir Win-back&quot; tabe.
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">Upgrade dinamika 2019&ndash;2026</div>
-  <div style="position:relative;height:240px"><canvas id="chartUpgradePotential"></canvas></div>
-</div>
-
-</div>
-
 <!-- ============ TAB 4: NAUJI RĖMĖJAI ============ -->
-<div id="tabpanel-3" class="tabpanel">
+<div id="tabpanel-2" class="tabpanel">
 
 <div class="insight-box insight-info">
   &#8505; <strong>&#352;altinis:</strong> Baz&#279;_Closed_Won (visos F2F sutartys, 31 450 &#303;ra&#353;&#371;). Skai&#269;iuojama pagal <strong>Recurring Donation ID</strong>, ne pagal r&#279;m&#279;jo vard&#261; &ndash; &quot;nauja sutartis&quot; = bet kokia nauja RD ID, kurios pirmas mok&#279;jimas &#303;vyko t&#261; m&#279;t/m&#279;n., nepriklausomai nuo to, ar tai visai naujas r&#279;m&#279;jas, ar Win-back (senas r&#279;m&#279;jas gr&#303;&#382;o su nauja sutartimi), ar papildoma paraleli sutartis. Suma = pradin&#279; r&#279;mimo suma (MRR) t&#371; sutar&#269;i&#371;.
@@ -436,7 +381,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 </div>
 
 <!-- ============ TAB 5: CHURN ============ -->
-<div id="tabpanel-4" class="tabpanel">
+<div id="tabpanel-3" class="tabpanel">
 
 <div class="insight-box insight-info">
   &#8505; <strong>Metodologija:</strong> Sutartis laikoma &quot;i&#353;byr&#279;jusia&quot; t&#261; m&#279;nes&#303;, kai po paskutinio realaus mok&#279;jimo praeina m&#279;nuo be joki&#371; mok&#279;jim&#371; (su 2 m&#279;n. patvirtinimo periodu iki 2026-07 duomen&#371; ribos, kad neb&#363;t&#371; klaidingai priskirti dar &quot;gyvi&quot; atvejai). % skai&#269;iuojamas nuo portfelio dydžio (m&#279;n. ar sumos) praeit&#371; met&#371; gruod&#382;io m&#279;n.
@@ -493,8 +438,211 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 
 </div>
 
+<!-- ============ TAB 6: SU/BE FID ============ -->
+<div id="tabpanel-4" class="tabpanel">
+
+<div class="insight-box insight-info">
+  &#8505; <strong>&#352;altinis:</strong> Web_Su_ir_be_FID (SF eksportas, 2025-01 &ndash; 2026-07). <strong>FID nurodytas</strong> &ndash; r&#279;mimas atsirado per faceri&#303; (LP ambasadori&#371;) kontakt&#261;. <strong>Nenurodyta</strong> &ndash; r&#279;m&#279;jas savaranki&#353;kai u&#382;pild&#279; form&#261; RK internetiniame puslapyje. <strong>Nuolatinis</strong> (m&#279;nesinis) ir <strong>Vienkartinis</strong> &#303;na&#353;ai visur rodomi ir skai&#269;iuojami atskirai &ndash; j&#371; sumos ir vidurkiai niekur nesuma&#353;inami &#303; vien&#261;, nes tai skirtingo pob&#363;d&#382;io &#303;sipareigojimai.
+</div>
+
+<div class="sh">Nuolatinis r&#279;mimas (m&#279;nesinis) &middot; 2025-01 &ndash; 2026-07</div>
+<div class="kpi-grid">
+  <div class="kpi" style="--ac:#2563eb">
+    <div class="kpi-label">Per facerius (FID)</div>
+    <div class="kpi-val" style="color:var(--blue)">2 169</div>
+    <div class="kpi-sub">21 384,00 &euro; &middot; vid. 9,86 &euro;</div>
+  </div>
+  <div class="kpi" style="--ac:#9ca3af">
+    <div class="kpi-label">Savarankiškai (be FID)</div>
+    <div class="kpi-val">363</div>
+    <div class="kpi-sub">3 969,55 &euro; &middot; vid. 10,94 &euro;</div>
+  </div>
+  <div class="kpi" style="--ac:#059669">
+    <div class="kpi-label">I&#353; viso nuolatini&#371;</div>
+    <div class="kpi-val" style="color:var(--green)">2 532</div>
+    <div class="kpi-sub">25 353,55 &euro; &middot; vid. 10,01 &euro;</div>
+  </div>
+  <div class="kpi" style="--ac:#6b7280">
+    <div class="kpi-label">FID dalis (nuolatini&#371; kiekyje)</div>
+    <div class="kpi-val">85,7%</div>
+    <div class="kpi-sub">dauguma nuolatini&#371; &#303;na&#353;&#371; &ndash; per facerius</div>
+  </div>
+</div>
+
+<div class="sh">Vienkartinis r&#279;mimas &middot; 2025-01 &ndash; 2026-07</div>
+<div class="kpi-grid">
+  <div class="kpi" style="--ac:#2563eb">
+    <div class="kpi-label">Per facerius (FID)</div>
+    <div class="kpi-val" style="color:var(--blue)">1 206</div>
+    <div class="kpi-sub">17 690,00 &euro; &middot; vid. 14,67 &euro;</div>
+  </div>
+  <div class="kpi" style="--ac:#9ca3af">
+    <div class="kpi-label">Savarankiškai (be FID)</div>
+    <div class="kpi-val">457</div>
+    <div class="kpi-sub">15 848,33 &euro; &middot; vid. 34,68 &euro;</div>
+  </div>
+  <div class="kpi" style="--ac:#d97706">
+    <div class="kpi-label">I&#353; viso vienkartini&#371;</div>
+    <div class="kpi-val" style="color:var(--amber)">1 663</div>
+    <div class="kpi-sub">33 538,33 &euro; &middot; vid. 20,17 &euro;</div>
+  </div>
+  <div class="kpi" style="--ac:#6b7280">
+    <div class="kpi-label">FID dalis (vienkartini&#371; kiekyje)</div>
+    <div class="kpi-val">72,5%</div>
+    <div class="kpi-sub">dauguma vienkartini&#371; &#303;na&#353;&#371; &ndash; per facerius</div>
+  </div>
+</div>
+
+<div class="insight-box insight-good">
+  &#9989; FID (faceriai) atne&#353;a dauguma&#261; abiej&#371; tip&#371; &#303;na&#353;&#371; pagal kiek&#303; (85,7% nuolatini&#371;, 72,5% vienkartini&#371;). Tačiau vidutin&#279; suma abiem tipais gerokai didesn&#279; savaranki&#353;ko (be FID) kanalo naudai: nuolatinio &#303;na&#353;o vidurkis be FID 10,94&nbsp;&euro; vs 9,86&nbsp;&euro; per FID; vienkartinio &ndash; 34,68&nbsp;&euro; be FID vs 14,67&nbsp;&euro; per FID (2,4&times; didesnis). Savaranki&#353;kai atėję r&#279;m&#279;jai, ypa&#269; vienkartini&#371; &#303;na&#353;&#371; atveju, aukoja gerokai dosniau.
+</div>
+
+<div class="sh">Metin&#279; suvestin&#279;</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Nuolatinis pagal metus</div>
+    <div class="card-sub">FID vs Nenurodyta</div>
+    <table class="ytable">
+      <thead><tr><th>Metai</th><th>FID sk.</th><th>FID &euro;</th><th>Nenur. sk.</th><th>Nenur. &euro;</th></tr></thead>
+      <tbody>
+        <tr><td>2025</td><td class="blue-cell">1 361</td><td class="blue-cell">13 646,00 &euro;</td><td>319</td><td>3 383,53 &euro;</td></tr>
+        <tr><td>2026 (iki 07)</td><td class="blue-cell">808</td><td class="blue-cell">7 738,00 &euro;</td><td>44</td><td>586,02 &euro;</td></tr>
+        <tr style="background:var(--surface2);font-weight:700"><td>I&#352; VISO</td><td class="blue-cell">2 169</td><td class="blue-cell">21 384,00 &euro;</td><td>363</td><td>3 969,55 &euro;</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">Vienkartinis pagal metus</div>
+    <div class="card-sub">FID vs Nenurodyta</div>
+    <table class="ytable">
+      <thead><tr><th>Metai</th><th>FID sk.</th><th>FID &euro;</th><th>Nenur. sk.</th><th>Nenur. &euro;</th></tr></thead>
+      <tbody>
+        <tr><td>2025</td><td class="blue-cell">867</td><td class="blue-cell">12 938,00 &euro;</td><td>288</td><td>9 616,10 &euro;</td></tr>
+        <tr><td>2026 (iki 07)</td><td class="blue-cell">339</td><td class="blue-cell">4 752,00 &euro;</td><td>169</td><td>6 232,23 &euro;</td></tr>
+        <tr style="background:var(--surface2);font-weight:700"><td>I&#352; VISO</td><td class="blue-cell">1 206</td><td class="blue-cell">17 690,00 &euro;</td><td>457</td><td>15 848,33 &euro;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sh">Dinamika pagal m&#279;nes&#303;</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Nuolatinis: FID vs Nenurodyta</div>
+    <div class="card-sub">&#302;na&#353;&#371; skai&#269;ius pagal m&#279;nes&#303;</div>
+    <div style="position:relative;height:260px"><canvas id="chartNuolTrend"></canvas></div>
+    <button class="datatable-toggle" onclick="toggleTable('dt-nuoltrend')">Data table &#9662;</button>
+    <div id="dt-nuoltrend" class="datatable-wrap">
+      <table class="ytable">
+        <thead><tr><th>M&#279;nuo</th><th>FID</th><th>Nenurodyta</th></tr></thead>
+        <tbody>
+      <tr><td>2025-01</td><td class="blue-cell">0</td><td>119</td></tr>
+      <tr><td>2025-02</td><td class="blue-cell">24</td><td>89</td></tr>
+      <tr><td>2025-03</td><td class="blue-cell">46</td><td>9</td></tr>
+      <tr><td>2025-04</td><td class="blue-cell">86</td><td>8</td></tr>
+      <tr><td>2025-05</td><td class="blue-cell">208</td><td>9</td></tr>
+      <tr><td>2025-06</td><td class="blue-cell">203</td><td>6</td></tr>
+      <tr><td>2025-07</td><td class="blue-cell">307</td><td>10</td></tr>
+      <tr><td>2025-08</td><td class="blue-cell">147</td><td>8</td></tr>
+      <tr><td>2025-09</td><td class="blue-cell">47</td><td>9</td></tr>
+      <tr><td>2025-10</td><td class="blue-cell">50</td><td>30</td></tr>
+      <tr><td>2025-11</td><td class="blue-cell">77</td><td>7</td></tr>
+      <tr><td>2025-12</td><td class="blue-cell">166</td><td>15</td></tr>
+      <tr><td>2026-01</td><td class="blue-cell">85</td><td>7</td></tr>
+      <tr><td>2026-02</td><td class="blue-cell">57</td><td>9</td></tr>
+      <tr><td>2026-03</td><td class="blue-cell">138</td><td>8</td></tr>
+      <tr><td>2026-04</td><td class="blue-cell">152</td><td>5</td></tr>
+      <tr><td>2026-05</td><td class="blue-cell">308</td><td>7</td></tr>
+      <tr><td>2026-06</td><td class="blue-cell">68</td><td>5</td></tr>
+      <tr><td>2026-07</td><td class="blue-cell">0</td><td>3</td></tr>
+      <tr style="background:var(--surface2);font-weight:700"><td>I&#352; VISO</td><td class="blue-cell">2169</td><td>363</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Vienkartinis: FID vs Nenurodyta</div>
+    <div class="card-sub">&#302;na&#353;&#371; skai&#269;ius pagal m&#279;nes&#303;</div>
+    <div style="position:relative;height:260px"><canvas id="chartVienkTrend"></canvas></div>
+    <button class="datatable-toggle" onclick="toggleTable('dt-vienktrend')">Data table &#9662;</button>
+    <div id="dt-vienktrend" class="datatable-wrap">
+      <table class="ytable">
+        <thead><tr><th>M&#279;nuo</th><th>FID</th><th>Nenurodyta</th></tr></thead>
+        <tbody>
+      <tr><td>2025-01</td><td class="blue-cell">0</td><td>39</td></tr>
+      <tr><td>2025-02</td><td class="blue-cell">1</td><td>53</td></tr>
+      <tr><td>2025-03</td><td class="blue-cell">5</td><td>18</td></tr>
+      <tr><td>2025-04</td><td class="blue-cell">4</td><td>16</td></tr>
+      <tr><td>2025-05</td><td class="blue-cell">6</td><td>13</td></tr>
+      <tr><td>2025-06</td><td class="blue-cell">6</td><td>9</td></tr>
+      <tr><td>2025-07</td><td class="blue-cell">12</td><td>7</td></tr>
+      <tr><td>2025-08</td><td class="blue-cell">114</td><td>17</td></tr>
+      <tr><td>2025-09</td><td class="blue-cell">77</td><td>13</td></tr>
+      <tr><td>2025-10</td><td class="blue-cell">26</td><td>15</td></tr>
+      <tr><td>2025-11</td><td class="blue-cell">151</td><td>32</td></tr>
+      <tr><td>2025-12</td><td class="blue-cell">465</td><td>56</td></tr>
+      <tr><td>2026-01</td><td class="blue-cell">126</td><td>19</td></tr>
+      <tr><td>2026-02</td><td class="blue-cell">126</td><td>13</td></tr>
+      <tr><td>2026-03</td><td class="blue-cell">26</td><td>13</td></tr>
+      <tr><td>2026-04</td><td class="blue-cell">13</td><td>34</td></tr>
+      <tr><td>2026-05</td><td class="blue-cell">25</td><td>26</td></tr>
+      <tr><td>2026-06</td><td class="blue-cell">23</td><td>52</td></tr>
+      <tr><td>2026-07</td><td class="blue-cell">0</td><td>12</td></tr>
+      <tr style="background:var(--surface2);font-weight:700"><td>I&#352; VISO</td><td class="blue-cell">1206</td><td>457</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="sh">Pasiskirstymas &middot; FID vs Nenurodyta</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Nuolatinis</div>
+    <div class="card-sub">Skai&#269;ius ir suma, 2025-01 &ndash; 2026-07</div>
+    <div style="display:flex;gap:8px;text-align:center">
+      <div style="width:50%;font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.5px">Vnt.</div>
+      <div style="width:50%;font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.5px">Eur</div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <div style="position:relative;height:190px;width:50%"><canvas id="chartNuolShareVnt"></canvas></div>
+      <div style="position:relative;height:190px;width:50%"><canvas id="chartNuolShareEur"></canvas></div>
+    </div>
+    <table class="ytable" style="margin-top:18px">
+      <thead><tr><th>Kategorija</th><th>Skai&#269;ius</th><th>%</th><th>Suma</th><th>%</th><th>Vid. &#303;moka</th></tr></thead>
+      <tbody>
+        <tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#2563eb;margin-right:6px"></span>Per facerius (FID)</td><td class="blue-cell">2 169</td><td>85,66%</td><td class="blue-cell">21 384,00 &euro;</td><td>84,34%</td><td class="blue-cell">9,86 &euro;</td></tr>
+        <tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#9ca3af;margin-right:6px"></span>Savaranki&#353;kai (be FID)</td><td>363</td><td>14,34%</td><td>3 969,55 &euro;</td><td>15,66%</td><td>10,94 &euro;</td></tr>
+        <tr style="background:var(--surface2);font-weight:700"><td>I&#352; VISO (nuolatinis)</td><td>2 532</td><td>100%</td><td>25 353,55 &euro;</td><td>100%</td><td>10,01 &euro;</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">Vienkartinis</div>
+    <div class="card-sub">Skai&#269;ius ir suma, 2025-01 &ndash; 2026-07</div>
+    <div style="display:flex;gap:8px;text-align:center">
+      <div style="width:50%;font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.5px">Vnt.</div>
+      <div style="width:50%;font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:0.5px">Eur</div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <div style="position:relative;height:190px;width:50%"><canvas id="chartVienkShareVnt"></canvas></div>
+      <div style="position:relative;height:190px;width:50%"><canvas id="chartVienkShareEur"></canvas></div>
+    </div>
+    <table class="ytable" style="margin-top:18px">
+      <thead><tr><th>Kategorija</th><th>Skai&#269;ius</th><th>%</th><th>Suma</th><th>%</th><th>Vid. &#303;moka</th></tr></thead>
+      <tbody>
+        <tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#2563eb;margin-right:6px"></span>Per facerius (FID)</td><td class="blue-cell">1 206</td><td>72,52%</td><td class="blue-cell">17 690,00 &euro;</td><td>52,75%</td><td class="blue-cell">14,67 &euro;</td></tr>
+        <tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#9ca3af;margin-right:6px"></span>Savaranki&#353;kai (be FID)</td><td>457</td><td>27,48%</td><td>15 848,33 &euro;</td><td>47,25%</td><td>34,68 &euro;</td></tr>
+        <tr style="background:var(--surface2);font-weight:700"><td>I&#352; VISO (vienkartinis)</td><td>1 663</td><td>100%</td><td>33 538,33 &euro;</td><td>100%</td><td>20,17 &euro;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
 <div class="foot">
-  <span>&#352;altinis: Baz&#279;_Closed_Won (visos F2F sutartys, vieningas &#353;altinis Upgrade/Win-back/Nauji r&#279;m&#279;jai/Churn tabams) &middot; SF ABC segmentacija (Win-back potencialas)</span>
+  <span>&#352;altinis: Baz&#279;_Closed_Won (visos F2F sutartys, vieningas &#353;altinis Upgrade/Win-back/Nauji r&#279;m&#279;jai/Churn tabams) &middot; SF ABC segmentacija (Win-back potencialas) &middot; Web_Su_ir_be_FID (Su/be FID)</span>
   <span>LRK Duomen&#371; valdymas &middot; 2026</span>
 </div>
 
@@ -506,6 +654,11 @@ function showTab(idx){
   document.querySelectorAll('.tabbtn').forEach(function(el,i){
     el.classList.toggle('active', i===idx);
   });
+}
+
+function toggleTable(id){
+  var el = document.getElementById(id);
+  el.classList.toggle('open');
 }
 
 Chart.defaults.font.family = "'Atkinson Hyperlegible', sans-serif";
@@ -552,13 +705,6 @@ new Chart(document.getElementById('chartABC'),{type:'bar',
   options:Object.assign({},base,{scales:Object.assign({},base.scales,{y:Object.assign({},base.scales.y,{ticks:Object.assign({},base.scales.y.ticks,{callback:function(v){return v+'%';}})})})})
 });
 
-// ---- TAB 3 chart ----
-new Chart(document.getElementById('chartUpgradePotential'),{type:'bar',
-  data:{labels:['2019','2020','2021','2022','2023','2024','2025','2026'],
-    datasets:[{label:'Upgrade (iš viso)',data:[0,12,4,5,4,163,9,90],backgroundColor:'#2563eb',borderRadius:4}]},
-  options:base
-});
-
 // ---- TAB 4 chart ----
 new Chart(document.getElementById('chartNewDonors'),{type:'bar',
   data:{labels:['2022','2023','2024','2025','2026 (6 mėn.)'],
@@ -571,6 +717,49 @@ new Chart(document.getElementById('chartChurn'),{type:'bar',
   data:{labels:['2022','2023','2024','2025','2026'],
     datasets:[{label:'Išbyrėjo (vnt., pirmi 6 mėn.)',data:[980,1890,1743,1260,2319],backgroundColor:'#dc2626',borderRadius:4}]},
   options:base
+});
+
+// ---- TAB 6 (Su/be FID) charts ----
+new Chart(document.getElementById('chartNuolTrend'),{type:'bar',
+  data:{labels:['2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07'],
+    datasets:[
+      {label:'Per facerius (FID)',data:[0,24,46,86,208,203,307,147,47,50,77,166,85,57,138,152,308,68,0],backgroundColor:'#2563eb',borderRadius:3},
+      {label:'Savarankiškai (be FID)',data:[119,89,9,8,9,6,10,8,9,30,7,15,7,9,8,5,7,5,3],backgroundColor:'#9ca3af',borderRadius:3},
+    ]},
+  options:base
+});
+
+new Chart(document.getElementById('chartVienkTrend'),{type:'bar',
+  data:{labels:['2025-01','2025-02','2025-03','2025-04','2025-05','2025-06','2025-07','2025-08','2025-09','2025-10','2025-11','2025-12','2026-01','2026-02','2026-03','2026-04','2026-05','2026-06','2026-07'],
+    datasets:[
+      {label:'Per facerius (FID)',data:[0,1,5,4,6,6,12,114,77,26,151,465,126,126,26,13,25,23,0],backgroundColor:'#2563eb',borderRadius:3},
+      {label:'Savarankiškai (be FID)',data:[39,53,18,16,13,9,7,17,13,15,32,56,19,13,13,34,26,52,12],backgroundColor:'#9ca3af',borderRadius:3},
+    ]},
+  options:base
+});
+
+new Chart(document.getElementById('chartNuolShareVnt'),{type:'doughnut',
+  data:{labels:['Per facerius (FID)','Savarankiškai (be FID)'],
+    datasets:[{data:[2169,363],backgroundColor:['#2563eb','#9ca3af'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:base.plugins.tooltip}}
+});
+
+new Chart(document.getElementById('chartVienkShareVnt'),{type:'doughnut',
+  data:{labels:['Per facerius (FID)','Savarankiškai (be FID)'],
+    datasets:[{data:[1206,457],backgroundColor:['#2563eb','#9ca3af'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:base.plugins.tooltip}}
+});
+
+new Chart(document.getElementById('chartNuolShareEur'),{type:'doughnut',
+  data:{labels:['Per facerius (FID)','Savarankiškai (be FID)'],
+    datasets:[{data:[21384.00,3969.55],backgroundColor:['#2563eb','#9ca3af'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111827',titleFont:{family:"'Figtree',sans-serif",size:12,weight:'700'},bodyFont:{size:12},padding:10,cornerRadius:8,callbacks:{label:function(ctx){return ctx.label+': '+ctx.parsed.toFixed(2)+' €';}}}}}
+});
+
+new Chart(document.getElementById('chartVienkShareEur'),{type:'doughnut',
+  data:{labels:['Per facerius (FID)','Savarankiškai (be FID)'],
+    datasets:[{data:[17690.00,15848.33],backgroundColor:['#2563eb','#9ca3af'],borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111827',titleFont:{family:"'Figtree',sans-serif",size:12,weight:'700'},bodyFont:{size:12},padding:10,cornerRadius:8,callbacks:{label:function(ctx){return ctx.label+': '+ctx.parsed.toFixed(2)+' €';}}}}}
 });
 </script>
 </body>
