@@ -84,6 +84,27 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 .datatable-toggle:hover{color:var(--ink);border-color:var(--ink3)}
 .datatable-wrap{display:none;margin-top:10px;max-height:260px;overflow-y:auto}
 .datatable-wrap.open{display:block}
+
+/* Cohort matrix table */
+.cohort-wrap{overflow-x:auto}
+.cohorttable{border-collapse:collapse;width:100%;min-width:800px}
+.cohorttable th{font-family:'Figtree',sans-serif;font-size:12px;font-weight:700;padding:10px 12px;text-align:center;white-space:nowrap}
+.cohorttable th.corner{background:#1e3a5f;color:#fff;border-radius:6px 0 0 0;text-align:left;padding-left:16px}
+.cohorttable th.col-hdr{background:#1e3a5f;color:#fff}
+.cohorttable th.col-hdr.total{background:#1e4d6b}
+.cohorttable td{padding:9px 14px;text-align:right;font-size:13px;border:1px solid #e8eaf2;white-space:nowrap}
+.cohorttable td.row-hdr{text-align:left;font-family:'Figtree',sans-serif;font-weight:800;font-size:13px;background:var(--blue-bg);color:#1e3a5f;border-right:2px solid var(--blue);padding-left:16px}
+.cohorttable td.row-hdr .cnt{font-size:11px;color:var(--ink3);font-weight:400;margin-left:6px}
+.cohorttable td.na{background:#f0f0f0;color:#c4c9d8;text-align:center;font-size:12px}
+.cohorttable td.total-col{font-family:'Figtree',sans-serif;font-weight:700;background:#e8f5e9;color:var(--green);border-left:2px solid var(--green)}
+.cohorttable td.total-row{font-family:'Figtree',sans-serif;font-weight:700;background:var(--green-bg);color:#065f46;border-top:2px solid var(--green)}
+.cohorttable td.grand-total{font-family:'Figtree',sans-serif;font-weight:900;font-size:14px;background:#a7f3d0;color:#064e3b;border-top:2px solid var(--green);border-left:2px solid var(--green)}
+.cohorttable .h1{background:#f0fdf4}
+.cohorttable .h2{background:#dcfce7}
+.cohorttable .h3{background:#bbf7d0}
+.cohorttable .h4{background:#86efac}
+.cohorttable .h5{background:#4ade80;color:#14532d}
+.cohort-note{font-size:12px;color:var(--ink3);margin-top:14px;font-style:italic}
 </style>
 </head>
 <body>
@@ -101,6 +122,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
     <button class="tabbtn" onclick="showTab(2)">Nauji r&#279;m&#279;jai</button>
     <button class="tabbtn" onclick="showTab(3)">Churn</button>
     <button class="tabbtn" onclick="showTab(4)">Su/be FID</button>
+    <button class="tabbtn" onclick="showTab(5)">Kohortos</button>
   </div>
 </div>
 
@@ -689,6 +711,208 @@ body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',s
 
 </div>
 
+<div id="tabpanel-5" class="tabpanel">
+
+<div class="insight-box insight-info">
+  &#8505; <strong>&#352;altinis:</strong> Baz&#279;_Closed_Won_r&#279;mimo_m&#279;nesiams_paskai&#269;iuoti.xlsx. Eilut&#279; = metai, kai r&#279;m&#279;jas <strong>prad&#279;jo</strong> remti (pirmoji sutartis); stulpelis = metai, kai realiai <strong>gautos</strong> &#303;mokos. Matrica rodo, kiek pajam&#371; kiekviena kohorta atne&#353;a per laik&#261; &ndash; t.y. kaip &quot;i&#353;sila&#382;ina&quot; ir kiek dar u&#382;dirba senesni r&#279;m&#279;jai metai i&#353; met&#371;.
+</div>
+
+<div class="sh">Pagrindiniai rodikliai</div>
+<div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="kpi" style="--ac:#059669">
+    <div class="kpi-label">Visos kohortos i&#353; viso</div>
+    <div class="kpi-val" style="color:var(--green)">8&nbsp;756&nbsp;744&nbsp;&euro;</div>
+    <div class="kpi-sub">2018&ndash;2026 visi mok&#279;jimai &middot; 31&nbsp;450 sutar&#269;i&#371;</div>
+  </div>
+  <div class="kpi" style="--ac:#2563eb">
+    <div class="kpi-label">Did&#382;iausia kohorta pagal pajamas</div>
+    <div class="kpi-val" style="color:var(--blue)">2019 &middot; 1,9&nbsp;M&euro;</div>
+    <div class="kpi-sub">seniausi, daugiausiai sumok&#279;jo i&#353; viso</div>
+  </div>
+  <div class="kpi" style="--ac:#d97706">
+    <div class="kpi-label">Metai su did&#382;iausiomis bendromis &#303;plaukomis</div>
+    <div class="kpi-val" style="color:var(--amber)">2024 &middot; 1,7&nbsp;M&euro;</div>
+    <div class="kpi-sub">vis&#371; kohort&#371; suma per t&#371; metus</div>
+  </div>
+</div>
+
+<div class="sh">Pajam&#371; matrica pagal kohort&#261; ir metus</div>
+<div class="card">
+  <div class="card-title">Kiek EUR sumok&#279;jo kiekvienos kohortos r&#279;m&#279;jai kiekvienais metais</div>
+  <div class="card-sub">Eilut&#279; = metai, kai prad&#279;tas r&#279;mimas &middot; Stulpelis = metai, kai gautos pajamos</div>
+  <div class="cohort-wrap">
+  <table class="cohorttable">
+    <thead>
+      <tr>
+        <th class="corner" rowspan="2">Metai, kai<br>prad&#279;tas r&#279;mimas</th>
+        <th class="col-hdr" colspan="9">Metai, kai gautos pajamos</th>
+        <th class="col-hdr total">VISO</th>
+      </tr>
+      <tr>
+        <th class="col-hdr">2018</th>
+        <th class="col-hdr">2019</th>
+        <th class="col-hdr">2020</th>
+        <th class="col-hdr">2021</th>
+        <th class="col-hdr">2022</th>
+        <th class="col-hdr">2023</th>
+        <th class="col-hdr">2024</th>
+        <th class="col-hdr">2025</th>
+        <th class="col-hdr">2026</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="row-hdr">2018<span class="cnt">(1,060 sut.)</span></td>
+        <td class="h1">18,270</td>
+        <td class="h3">92,965</td>
+        <td class="h3">80,072</td>
+        <td class="h2">74,591</td>
+        <td class="h2">67,637</td>
+        <td class="h2">59,197</td>
+        <td class="h2">55,134</td>
+        <td class="h2">50,882</td>
+        <td class="h1">21,312</td>
+        <td class="total-col">520,060</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2019<span class="cnt">(4,049 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="h5">218,022</td>
+        <td class="h5">337,051</td>
+        <td class="h5">302,133</td>
+        <td class="h5">274,532</td>
+        <td class="h5">246,110</td>
+        <td class="h5">227,650</td>
+        <td class="h5">218,960</td>
+        <td class="h3">89,947</td>
+        <td class="total-col">1,914,406</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2020<span class="cnt">(4,287 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="h4">198,271</td>
+        <td class="h5">317,846</td>
+        <td class="h5">261,109</td>
+        <td class="h5">221,646</td>
+        <td class="h4">208,148</td>
+        <td class="h4">193,730</td>
+        <td class="h3">84,070</td>
+        <td class="total-col">1,484,819</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2021<span class="cnt">(4,593 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="h4">190,068</td>
+        <td class="h5">363,409</td>
+        <td class="h5">283,680</td>
+        <td class="h5">260,111</td>
+        <td class="h5">231,061</td>
+        <td class="h3">100,799</td>
+        <td class="total-col">1,429,127</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2022<span class="cnt">(6,283 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="h5">290,395</td>
+        <td class="h5">418,495</td>
+        <td class="h5">360,004</td>
+        <td class="h5">312,460</td>
+        <td class="h4">134,319</td>
+        <td class="total-col">1,515,673</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2023<span class="cnt">(7,234 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="h5">412,367</td>
+        <td class="h5">532,464</td>
+        <td class="h5">441,524</td>
+        <td class="h4">183,693</td>
+        <td class="total-col">1,570,048</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2024<span class="cnt">(2,034 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="h3">90,091</td>
+        <td class="h3">100,682</td>
+        <td class="h2">37,310</td>
+        <td class="total-col">228,083</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2025<span class="cnt">(1,213 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="h2">48,857</td>
+        <td class="h2">29,392</td>
+        <td class="total-col">78,248</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2026<span class="cnt">(697 sut.)</span></td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="na">&mdash;</td>
+        <td class="h1">16,280</td>
+        <td class="total-col">16,280</td>
+      </tr>
+      <tr>
+        <td class="total-row" style="text-align:left;padding-left:16px">VISO</td>
+        <td class="total-row">18,270</td>
+        <td class="total-row">310,988</td>
+        <td class="total-row">615,394</td>
+        <td class="total-row">884,638</td>
+        <td class="total-row">1,257,082</td>
+        <td class="total-row">1,641,496</td>
+        <td class="total-row">1,733,600</td>
+        <td class="total-row">1,598,156</td>
+        <td class="total-row">697,121</td>
+        <td class="grand-total">8,756,744</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="cohort-note">* Spalv&#371; intensyvumas rodo santykin&#303; pajam&#371; dyd&#303; eilut&#279;s viduje. Skai&#269;iai EUR.</div>
+</div>
+
+<div class="sh">Kohort&#371; dalis &middot; pajamos ir sutar&#269;i&#371; kiekis</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Pasiskirstymas pagal pajamas (&euro;)</div>
+    <div class="card-sub">Kiek kiekviena kohorta atne&#353;&#279; i&#353; viso, 2018&ndash;2026</div>
+    <div style="position:relative;height:280px"><canvas id="chartCohortEur"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Pasiskirstymas pagal sutar&#269;i&#371; kiek&#303; (vnt.)</div>
+    <div class="card-sub">Kiek sutar&#269;i&#371; sudaryta kiekvienoje kohortoje</div>
+    <div style="position:relative;height:280px"><canvas id="chartCohortVnt"></canvas></div>
+  </div>
+</div>
+
+</div>
+
 <div class="foot">
   <span>&#352;altinis: Baz&#279;_Closed_Won (visos F2F sutartys, vieningas &#353;altinis Upgrade/Win-back/Nauji r&#279;m&#279;jai/Churn tabams) &middot; SF ABC segmentacija (Win-back potencialas) &middot; Web_Su_ir_be_FID (Su/be FID)</span>
   <span>LRK Duomen&#371; valdymas &middot; 2026</span>
@@ -808,6 +1032,40 @@ new Chart(document.getElementById('chartVienkShareEur'),{type:'doughnut',
   data:{labels:['Per facerius (FID)','Savarankiškai (be FID)'],
     datasets:[{data:[17690.00,15848.33],backgroundColor:['#2563eb','#9ca3af'],borderWidth:0}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#111827',titleFont:{family:"'Figtree',sans-serif",size:12,weight:'700'},bodyFont:{size:12},padding:10,cornerRadius:8,callbacks:{label:function(ctx){return ctx.label+': '+ctx.parsed.toFixed(2)+' €';}}}}}
+});
+
+// ---- TAB 6 (Kohortos) charts ----
+var cohortLabels = ['2018','2019','2020','2021','2022','2023','2024','2025','2026'];
+var cohortColors = ['#94a3b8','#2563eb','#0d9488','#059669','#d97706','#C8102E','#7c3aed','#db2777','#eab308'];
+
+new Chart(document.getElementById('chartCohortEur'),{type:'doughnut',
+  data:{labels:cohortLabels,
+    datasets:[{data:[520060,1914406,1484819,1429127,1515673,1570048,228083,78248,16280],backgroundColor:cohortColors,borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'right',labels:{font:{size:11},color:'#374151',boxWidth:10,padding:8}},
+      tooltip:{backgroundColor:'#111827',titleFont:{family:"'Figtree',sans-serif",size:12,weight:'700'},bodyFont:{size:12},padding:10,cornerRadius:8,
+        callbacks:{label:function(ctx){
+          var total=ctx.dataset.data.reduce(function(a,b){return a+b;},0);
+          var pct=(ctx.parsed/total*100).toFixed(1);
+          return ctx.label+': '+ctx.parsed.toLocaleString('lt-LT')+' € ('+pct+'%)';
+        }}}
+    }}
+});
+
+new Chart(document.getElementById('chartCohortVnt'),{type:'doughnut',
+  data:{labels:cohortLabels,
+    datasets:[{data:[1060,4049,4287,4593,6283,7234,2034,1213,697],backgroundColor:cohortColors,borderWidth:0}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'right',labels:{font:{size:11},color:'#374151',boxWidth:10,padding:8}},
+      tooltip:{backgroundColor:'#111827',titleFont:{family:"'Figtree',sans-serif",size:12,weight:'700'},bodyFont:{size:12},padding:10,cornerRadius:8,
+        callbacks:{label:function(ctx){
+          var total=ctx.dataset.data.reduce(function(a,b){return a+b;},0);
+          var pct=(ctx.parsed/total*100).toFixed(1);
+          return ctx.label+': '+ctx.parsed.toLocaleString('lt-LT')+' vnt. ('+pct+'%)';
+        }}}
+    }}
 });
 </script>
 </body>
