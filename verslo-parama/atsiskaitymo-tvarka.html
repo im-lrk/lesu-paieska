@@ -29,6 +29,11 @@
     --danger-border: #fecaca;
     --danger-text: #991b1b;
 
+    --role: #7c3aed;
+    --role-light: #f5f3ff;
+    --role-border: #ddd6fe;
+    --role-text: #5b21b6;
+
     --bg-main: #f8fafc;
     --card-bg: #ffffff;
     --text-title: #0f172a;
@@ -76,6 +81,13 @@
     font-size: 14px;
     color: var(--text-muted);
     margin-top: 6px;
+  }
+
+  .process-header .source-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-style: italic;
   }
 
   .grid-container {
@@ -234,6 +246,14 @@
     border-color: var(--primary-border);
   }
 
+  /* Responsible-person chip */
+  .chip-role {
+    background-color: var(--role-light);
+    color: var(--role-text);
+    border-color: var(--role-border);
+    font-weight: 600;
+  }
+
   .alert-card {
     margin-top: 12px;
     padding: 8px 12px;
@@ -260,7 +280,7 @@
     gap: 8px;
   }
 
-  /* Loop / control-step styling (paralleling step 6 in reference) */
+  /* Loop / control-step styling */
   .step-row-loop .node {
     border-color: var(--warning);
     color: var(--warning);
@@ -317,7 +337,8 @@
 
   <div class="process-header">
     <h1>CC atsiskaitymo ir komisinio procesas</h1>
-    <p>Kairėje – pagrindiniai proceso žingsniai. Dešinėje – naudojami laukai, lapai ir logika.</p>
+    <p>Kairėje – proceso žingsniai, terminai ir atsakingi asmenys. Dešinėje – ką tai reiškia Excel faile / Salesforce.</p>
+    <p class="source-note">Žingsniai, terminai ir atsakomybės – pagal Ingridos parengtą lapą „PROCESAS“.</p>
   </div>
 
   <div class="grid-container">
@@ -327,23 +348,18 @@
       <div class="step-block">
         <div class="node">1</div>
         <div class="step-info">
-          <div class="step-title">Banko išrašo įkėlimas</div>
-          <div class="step-sub">Buhalterija → lapas „2026_ataskaita“</div>
+          <div class="step-title">Banko išrašo ištraukimas</div>
+          <div class="step-sub">Kasdien</div>
         </div>
       </div>
       <div class="details-block">
-        <div class="details-header">Kas mėnesį įkeliama</div>
+        <div class="details-header">Atsakingas</div>
         <div class="chip-group">
-          <span class="chip">Klientas (įmonės kodas)</span>
-          <span class="chip">Pavadinimas</span>
-          <span class="chip">Oper. data</span>
-          <span class="chip">Dokumento Nr.</span>
-          <span class="chip">Sąskaita</span>
-          <span class="chip">Suma, Eur</span>
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
         </div>
-        <div class="info-card">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.5 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0z"/></svg>
-          <div>Datos įkeliamos kaip <strong>tikra Excel data</strong> (ne tekstas) – nuo to priklauso „Mėnuo“ stulpelis ir visos vėlesnės formulės.</div>
+        <div class="details-header">Sistemoje</div>
+        <div class="chip-group">
+          <span class="chip">Klientas · Data · Suma → lapas „2026_ataskaita“</span>
         </div>
       </div>
     </div>
@@ -353,23 +369,19 @@
       <div class="step-block">
         <div class="node">2</div>
         <div class="step-info">
-          <div class="step-title">SF duomenų kelias</div>
-          <div class="step-sub">Lygiagrečiai su 1 žingsniu</div>
+          <div class="step-title">Įmokų / rėmimų suvedimas į Salesforce</div>
+          <div class="step-sub">Kasdien · importas iš banko išrašo</div>
         </div>
       </div>
       <div class="details-block">
-        <div class="details-header">Statuso eiga Salesforce</div>
+        <div class="details-header">Atsakingas</div>
         <div class="chip-group">
-          <span class="chip">Pardavėjas žymi „Pledged“</span>
-          <span class="chip chip-warning">Emilija tikrina banką</span>
-          <span class="chip chip-success">Paverčia į „Won“</span>
-          <span class="chip chip-success">Mėn. pabaigoje: Closed Won sąrašas</span>
+          <span class="chip chip-role">Veiklos koordinatorius/ė</span>
         </div>
-
-        <div class="details-header">Ištraukiami sąrašai</div>
+        <div class="details-header">SF statuso eiga</div>
         <div class="chip-group">
-          <span class="chip">„CC įm. iš SF“ (Telemarketing / Telenordi)</span>
-          <span class="chip">„Vidinio įm. iš SF“ (vidinis darbuotojas)</span>
+          <span class="chip">Pledged</span>
+          <span class="chip chip-success">→ Won</span>
         </div>
       </div>
     </div>
@@ -379,20 +391,20 @@
       <div class="step-block">
         <div class="node">3</div>
         <div class="step-info">
-          <div class="step-title">Automatinis sugretinimas</div>
-          <div class="step-sub">SUTIKRINIMAS CC / SUTIKRINIMAS Vidinis</div>
+          <div class="step-title">Mėnesio rėmimų ataskaitos suformavimas Salesforce</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 2 d. d.</div>
         </div>
       </div>
       <div class="details-block">
-        <div class="details-header">Sugretinimo raktas</div>
+        <div class="details-header">Atsakingas</div>
         <div class="chip-group">
-          <span class="chip chip-primary">Klientas (įmonės kodas)</span>
-          <span class="chip chip-primary">+ Metai-Mėnuo</span>
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
         </div>
-
-        <div class="details-header">Kodėl ne diena?</div>
-        <div style="font-size: 13px; color: var(--text-body);">
-          Banko įskaitymo data ir SF „Close Date“ ne visada sutampa iki dienos.
+        <div class="details-header">Sistemoje</div>
+        <div class="chip-group">
+          <span class="chip">Closed Won sąrašas</span>
+          <span class="chip">→ „CC įm. iš SF“</span>
+          <span class="chip">→ „Vidinio įm. iš SF“</span>
         </div>
       </div>
     </div>
@@ -402,60 +414,58 @@
       <div class="step-block">
         <div class="node">4</div>
         <div class="step-info">
-          <div class="step-title">Pritraukimo šaltinio priskyrimas</div>
-          <div class="step-sub">Inga → stulpelis „Pritraukimo šaltinis“</div>
+          <div class="step-title">Verslo rėmimų ataskaitos iš Rivilės pateikimas</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 2 d. d.</div>
         </div>
       </div>
       <div class="details-block">
-        <div class="details-header">Galimos reikšmės</div>
+        <div class="details-header">Atsakingas</div>
         <div class="chip-group">
-          <span class="chip">Vidinis darbuotojas</span>
-          <span class="chip">UAB Telemarketing</span>
-          <span class="chip">UAB Telenordi</span>
-          <span class="chip">Kitas</span>
+          <span class="chip chip-role">Buhalterija</span>
         </div>
-        <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted);">
-          * Pasirenkama iš sąrašo (Data Validation, šaltinis – lapas „SARASAI“).
+        <div class="details-header">Sistemoje</div>
+        <div class="chip-group">
+          <span class="chip">Rivilės ataskaita = kontrolinis šaltinis lapui „KONTROLĖ“</span>
         </div>
       </div>
     </div>
 
     <!-- ŽINGSNIS 5 -->
-    <div class="step-row">
+    <div class="step-row step-row-loop">
       <div class="step-block">
         <div class="node">5</div>
         <div class="step-info">
-          <div class="step-title">Automatinis komisinio skaičiavimas</div>
-          <div class="step-sub">Lapas „IŠMOKA CC“</div>
+          <div class="step-title">Salesforce ir Rivilės duomenų sutikrinimas</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 3 d. d.</div>
         </div>
       </div>
       <div class="details-block">
-        <div class="details-header">Skaičiavimo eiga</div>
+        <div class="details-header">Atsakingas</div>
         <div class="chip-group">
-          <span class="chip">Pritrauktos pajamos (SUMIFS pagal mėnesį)</span>
-          <span class="chip">× Tarifas (lapas „Sutartys“)</span>
-          <span class="chip">+ PVM 21%</span>
-          <span class="chip chip-success">= Mokėtina su PVM</span>
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
         </div>
-        <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted);">
-          * Mėnuo pasirenkamas langelyje B2 (sąrašas iš „SARASAI“).
+        <div class="details-header">Sistemoje – du automatiniai patikrinimai</div>
+        <div class="chip-group">
+          <span class="chip chip-primary">SUTIKRINIMAS CC / Vidinis (raktas: Klientas + Metai-Mėnuo)</span>
+          <span class="chip chip-primary">Lapas „KONTROLĖ“ (Klientas + Data + Suma)</span>
         </div>
       </div>
     </div>
 
-    <!-- ŽINGSNIS 6 (KONTROLĖ) -->
+    <!-- ŽINGSNIS 6 -->
     <div class="step-row step-row-loop">
       <div class="step-block">
         <div class="node">6</div>
         <div class="step-info">
-          <div class="step-title">Kontrolė prieš apmokėjimą</div>
-          <div class="step-sub">Buhalterija → lapas „KONTROLĖ“</div>
+          <div class="step-title">Neatitikimų identifikavimas ir išsiaiškinimas</div>
+          <div class="step-sub">Po duomenų sutikrinimo</div>
         </div>
       </div>
       <div class="details-block">
-        <div style="font-size: 13px; color: var(--warning-text);">
-          Buhalterija dar kartą įkelia <strong>originalų, nepaliestą</strong> banko išrašą. Formulė automatiškai patikrina, ar
-          Klientas + Data + Suma sutampa su tuo, kas šiuo metu yra „2026_ataskaita“ lape.
+        <div class="details-header">Atsakingas</div>
+        <div class="chip-group">
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
+          <span class="chip chip-role">+ Buhalterija</span>
         </div>
         <div class="chip-group" style="margin-top: 10px;">
           <span class="chip chip-success">✅ Sutampa</span>
@@ -463,24 +473,125 @@
         </div>
         <div class="alert-card">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/></svg>
-          <div><strong>Sugauna:</strong> jei suma buvo netyčia pakeista priskyrimo metu (pvz. 100 € → 1000 €), eilutė paraudonuoja ir suvestinėje matomas skirtumas eurais.</div>
+          <div>Sugauna, jei suma buvo netyčia pakeista (pvz. 100 € → 1000 €) – eilutė paraudonuoja, suvestinėje matomas skirtumas eurais.</div>
         </div>
       </div>
     </div>
 
     <!-- ŽINGSNIS 7 -->
-    <div class="step-row step-row-final">
+    <div class="step-row">
       <div class="step-block">
         <div class="node">7</div>
         <div class="step-info">
-          <div class="step-title">Apmokėjimas CC</div>
-          <div class="step-sub">Sumos suderintos, sąskaitos apmokamos</div>
+          <div class="step-title">Apmokėjimų ir duomenų su CC partneriais sutikrinimas sąskaitų išrašymui</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 3 d. d.</div>
         </div>
       </div>
       <div class="details-block">
-        <div style="font-size: 13px; color: var(--success-text);">
-          Kai KONTROLĖS suvestinėje <strong>skirtumas = 0 €</strong> ir nėra „Nesutampa“ eilučių – sumos patvirtintos,
-          UAB Telemarketing / UAB Telenordi sąskaitos gali būti apmokamos.
+        <div class="details-header">Atsakingas</div>
+        <div class="chip-group">
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
+        </div>
+        <div class="details-header">Sistemoje</div>
+        <div class="chip-group">
+          <span class="chip">Lapas „IŠMOKA CC“</span>
+          <span class="chip">Pritrauktos pajamos × Tarifas + PVM 21%</span>
+          <span class="chip chip-success">= Mokėtina su PVM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ŽINGSNIS 8 -->
+    <div class="step-row">
+      <div class="step-block">
+        <div class="node">8</div>
+        <div class="step-info">
+          <div class="step-title">Sąskaitų faktūrų iš CC partnerių gavimas ir patikrinimas</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 3 d. d.</div>
+        </div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Atsakingas</div>
+        <div class="chip-group">
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
+        </div>
+        <div style="margin-top: 10px; font-size: 13px; color: var(--text-body);">
+          Gautos sąskaitos tikrinamos prieš „IŠMOKA CC“ lape apskaičiuotą sumą.
+        </div>
+      </div>
+    </div>
+
+    <!-- ŽINGSNIS 9 -->
+    <div class="step-row">
+      <div class="step-block">
+        <div class="node">9</div>
+        <div class="step-info">
+          <div class="step-title">Sąskaitų faktūrų pateikimas tvirtinti</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 3 d. d.</div>
+        </div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Atsakingas</div>
+        <div class="chip-group">
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
+        </div>
+        <div style="margin-top: 10px; font-size: 13px; color: var(--text-body);">
+          Pateikiama Lėšų pritraukimo departamento vadovui/ei tvirtinti.
+        </div>
+      </div>
+    </div>
+
+    <!-- ŽINGSNIS 10 -->
+    <div class="step-row">
+      <div class="step-block">
+        <div class="node">10</div>
+        <div class="step-info">
+          <div class="step-title">Sąskaitų faktūrų patvirtinimas apmokėjimui</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 3–4 d. d.</div>
+        </div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Atsakingas</div>
+        <div class="chip-group">
+          <span class="chip chip-role">Lėšų pritraukimo departamento vadovas/ė</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ŽINGSNIS 11 -->
+    <div class="step-row">
+      <div class="step-block">
+        <div class="node">11</div>
+        <div class="step-info">
+          <div class="step-title">Patvirtintų sąskaitų pateikimas buhalterijai apmokėti</div>
+          <div class="step-sub">Po patvirtinimo</div>
+        </div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Atsakingas</div>
+        <div class="chip-group">
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
+          <span class="chip chip-role">/ Buhalterija</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ŽINGSNIS 12 -->
+    <div class="step-row step-row-final">
+      <div class="step-block">
+        <div class="node">12</div>
+        <div class="step-info">
+          <div class="step-title">Bendros verslo rėmimo ataskaitos suformavimas ir pateikimas vadovybei</div>
+          <div class="step-sub">Kartą per mėnesį, iki kito mėn. 5 d. d.</div>
+        </div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Atsakingas</div>
+        <div class="chip-group">
+          <span class="chip chip-role">Verslo partnerysčių projektų vadovas/ė</span>
+        </div>
+        <div style="margin-top: 10px; font-size: 13px; color: var(--success-text);">
+          Procesas užbaigtas – sąskaitos apmokėtos, ataskaita pateikta vadovybei.
         </div>
       </div>
     </div>
