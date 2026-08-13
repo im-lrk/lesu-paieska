@@ -14,17 +14,17 @@
     --primary-light: #eff6ff;
     --primary-border: #bfdbfe;
     
-    --success: #10b981;
+    --success: #059669;
     --success-light: #ecfdf5;
     --success-border: #a7f3d0;
     --success-text: #065f46;
 
-    --warning: #f59e0b;
+    --warning: #d97706;
     --warning-light: #fffbeb;
     --warning-border: #fde68a;
     --warning-text: #92400e;
 
-    --danger: #ef4444;
+    --danger: #dc2626;
     --danger-light: #fef2f2;
     --danger-border: #fecaca;
     --danger-text: #991b1b;
@@ -34,11 +34,11 @@
     --text-title: #0f172a;
     --text-body: #334155;
     --text-muted: #64748b;
-    --border-color: #e2e8f0;
+    --border-color: #cbd5e1;
+    --border-light: #e2e8f0;
     
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   }
 
   * {
@@ -56,17 +56,17 @@
   }
 
   .process-wrapper {
-    max-width: 840px;
+    max-width: 1080px;
     margin: 0 auto;
   }
 
   .process-header {
-    margin-bottom: 32px;
+    margin-bottom: 36px;
     text-align: center;
   }
 
   .process-header h1 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--text-title);
     letter-spacing: -0.02em;
@@ -78,37 +78,63 @@
     margin-top: 6px;
   }
 
-  /* Timeline Container */
-  .timeline {
-    position: relative;
-    padding-left: 20px;
-  }
-
-  /* Step Card Item */
-  .step-item {
-    position: relative;
-    display: flex;
-    gap: 24px;
-    margin-bottom: 24px;
-  }
-
-  .step-item:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Left Timeline Line & Node */
-  .timeline-track {
+  /* Grid Layout: Left Steps, Right Details */
+  .grid-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
+  }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    align-items: stretch;
     position: relative;
+  }
+
+  /* Connecting vertical line on the left side */
+  .step-row::before {
+    content: '';
+    position: absolute;
+    left: 27px;
+    top: 48px;
+    bottom: -24px;
+    width: 2px;
+    background-color: var(--border-light);
+    z-index: 1;
+  }
+
+  .step-row:last-child::before {
+    display: none;
+  }
+
+  /* Left Side: Step Block */
+  .step-block {
+    position: relative;
+    z-index: 2;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.2s ease;
+  }
+
+  .step-row:hover .step-block {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
 
   .node {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: var(--card-bg);
+    background: var(--primary-light);
     border: 2px solid var(--primary);
     color: var(--primary);
     font-weight: 700;
@@ -116,79 +142,62 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 0 4px var(--primary-light);
-    z-index: 2;
-    transition: all 0.2s ease;
+    flex-shrink: 0;
   }
 
-  .step-item:hover .node {
-    transform: scale(1.1);
-    box-shadow: 0 0 0 6px var(--primary-light);
-  }
-
-  .line {
-    width: 2px;
-    background-color: var(--border-color);
-    flex-grow: 1;
-    margin-top: 8px;
-    margin-bottom: -16px;
-    z-index: 1;
-  }
-
-  .step-item:last-child .line {
-    display: none;
-  }
-
-  /* Card Box Content */
-  .card {
+  .step-info {
     flex: 1;
+  }
+
+  .step-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-title);
+    line-height: 1.3;
+  }
+
+  .step-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* Right Side: Variations / Details Block */
+  .details-block {
     background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-light);
     border-radius: 12px;
-    padding: 20px 24px;
+    padding: 16px 20px;
     box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     transition: all 0.2s ease;
   }
 
-  .step-item:hover .card {
+  .step-row:hover .details-block {
     border-color: #cbd5e1;
     box-shadow: var(--shadow-md);
   }
 
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 6px;
-  }
-
-  .card-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-title);
-  }
-
-  .card-sub {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  /* Section Groups inside Cards */
-  .section-label {
+  .details-header {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-muted);
-    margin: 16px 0 8px 0;
+    margin-bottom: 8px;
   }
 
-  /* Chips / Tags */
+  .details-header:not(:first-child) {
+    margin-top: 14px;
+  }
+
+  /* Chips / Tags styling */
   .chip-group {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 8px;
   }
 
   .chip {
@@ -197,8 +206,8 @@
     padding: 4px 10px;
     border-radius: 6px;
     background-color: #f1f5f9;
-    color: #475569;
-    border: 1px solid #e2e8f0;
+    color: #334155;
+    border: 1px solid var(--border-light);
     transition: background 0.15s;
   }
 
@@ -206,35 +215,32 @@
     background-color: #e2e8f0;
   }
 
-  /* Variant Chips */
+  /* Variant Color Chips */
   .chip-danger {
     background-color: var(--danger-light);
     color: var(--danger-text);
     border-color: var(--danger-border);
   }
-  .chip-danger:hover { background-color: #fee2e2; }
 
   .chip-warning {
     background-color: var(--warning-light);
     color: var(--warning-text);
     border-color: var(--warning-border);
   }
-  .chip-warning:hover { background-color: #fef3c7; }
 
   .chip-success {
     background-color: var(--success-light);
     color: var(--success-text);
     border-color: var(--success-border);
   }
-  .chip-success:hover { background-color: #dcfce7; }
 
   /* Alert Box */
   .alert-card {
-    margin-top: 14px;
-    padding: 10px 14px;
+    margin-top: 12px;
+    padding: 8px 12px;
     background-color: var(--danger-light);
     border-left: 3px solid var(--danger);
-    border-radius: 4px 8px 8px 4px;
+    border-radius: 4px 6px 6px 4px;
     font-size: 12px;
     color: var(--danger-text);
     display: flex;
@@ -242,43 +248,55 @@
     gap: 8px;
   }
 
-  /* Special Loop Step Styling (Step 6) */
-  .step-loop .node {
+  /* Step 6 Loop Styling */
+  .step-row-loop .node {
     border-color: var(--warning);
-    color: var(--warning-text);
-    background: var(--warning-light);
-    box-shadow: 0 0 0 4px #fef3c7;
+    color: var(--warning);
+    background-color: var(--warning-light);
   }
 
-  .card-loop {
+  .step-row-loop .step-block {
+    border-color: var(--warning-border);
+    background: linear-gradient(to right, #fffbeb, #ffffff);
+  }
+
+  .step-row-loop .details-block {
     background: linear-gradient(to right, #fffbeb, #ffffff);
     border-color: var(--warning-border);
   }
 
-  .loop-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    background: var(--warning-light);
-    color: var(--warning-text);
-    padding: 2px 8px;
-    border-radius: 12px;
-    border: 1px solid var(--warning-border);
-  }
-
-  /* Final Step Styling (Step 7) */
-  .step-final .node {
+  /* Step 7 Final Styling */
+  .step-row-final .node {
     border-color: var(--success);
     color: #fff;
-    background: var(--success);
-    box-shadow: 0 0 0 4px var(--success-light);
+    background-color: var(--success);
   }
 
-  .card-final {
+  .step-row-final .step-block {
+    border-color: var(--success-border);
+    background: linear-gradient(to right, #ecfdf5, #ffffff);
+  }
+
+  .step-row-final .details-block {
     background: linear-gradient(to right, #ecfdf5, #ffffff);
     border-color: var(--success-border);
+  }
+
+  /* Responsive adjustment for screens < 768px */
+  @media (max-width: 768px) {
+    .step-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .step-row::before {
+      display: none;
+    }
+
+    .details-block {
+      margin-left: 12px;
+      border-left: 3px solid var(--primary);
+    }
   }
 </style>
 </head>
@@ -287,25 +305,23 @@
 <div class="process-wrapper">
   
   <div class="process-header">
-    <h1>Mokymų pardavimo proceso schema</h1>
-    <p>Detalus CRM žingsnių ir laukų pasirinkimo algoritmas</p>
+    <h1>Mokymų pardavimo procesas</h1>
+    <p>Kairėje – pagrindiniai proceso žingsniai. Dešinėje – galimi laukai ir reikšmių pasirinkimai.</p>
   </div>
 
-  <div class="timeline">
+  <div class="grid-container">
 
     <!-- ŽINGSNIS 1 -->
-    <div class="step-item">
-      <div class="timeline-track">
+    <div class="step-row">
+      <div class="step-block">
         <div class="node">1</div>
-        <div class="line"></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Skambutis klientui</div>
+        <div class="step-info">
+          <div class="step-title">Skambutis klientui</div>
+          <div class="step-sub">SF Activities → Call</div>
         </div>
-        <div class="card-sub">Kuriamas <strong>SF Activities → Call</strong>. Kortelėje iškart matomas „Kliento tipas“:</div>
-        
-        <div class="section-label">Kliento tipas (Kilmė)</div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Kliento tipas (Kilmė / Šaltinis)</div>
         <div class="chip-group">
           <span class="chip">Šaltas skambutis (naujas)</span>
           <span class="chip">Buvęs klientas</span>
@@ -319,16 +335,16 @@
     </div>
 
     <!-- ŽINGSNIS 2 -->
-    <div class="step-item" id="step-2">
-      <div class="timeline-track">
+    <div class="step-row">
+      <div class="step-block">
         <div class="node">2</div>
-        <div class="line"></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Kontakto tipas</div>
+        <div class="step-info">
+          <div class="step-title">Kontakto tipas</div>
+          <div class="step-sub">Skambučio pobūdis</div>
         </div>
-        <div class="card-sub">Nurodomas šio konkretaus skambučio pobūdis:</div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Galimos reikšmės</div>
         <div class="chip-group">
           <span class="chip">Naujas</span>
           <span class="chip">Pakartotinis</span>
@@ -340,25 +356,23 @@
     </div>
 
     <!-- ŽINGSNIS 3 -->
-    <div class="step-item">
-      <div class="timeline-track">
+    <div class="step-row">
+      <div class="step-block">
         <div class="node">3</div>
-        <div class="line"></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Answer Status + Komentaras</div>
+        <div class="step-info">
+          <div class="step-title">Answer Status + Komentaras</div>
+          <div class="step-sub">Pokalbio rezultatas</div>
         </div>
-        <div class="card-sub">Pokalbio rezultatas (sugrupuota pagal reikšmę ir poveikį procesui):</div>
-
-        <div class="section-label">Atmesta / Ciklo pabaiga</div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Atmesta / Ciklo pabaiga</div>
         <div class="chip-group">
           <span class="chip chip-danger">Numeris nenaudojamas</span>
           <span class="chip chip-danger">Neprileidžia prie atsakingo</span>
           <span class="chip chip-danger">Atsisakė</span>
         </div>
 
-        <div class="section-label">Procesas tęsiamas / Derybos</div>
+        <div class="details-header">Procesas tęsiamas / Derybos</div>
         <div class="chip-group">
           <span class="chip chip-warning">Nekėlė</span>
           <span class="chip chip-warning">Perskambinti</span>
@@ -367,7 +381,7 @@
           <span class="chip chip-warning">Derybos</span>
         </div>
 
-        <div class="section-label">Sėkmingas rezultatas</div>
+        <div class="details-header">Sėkmingas rezultatas</div>
         <div class="chip-group">
           <span class="chip chip-success">Jau remia</span>
           <span class="chip chip-success">Sutarta parama</span>
@@ -378,23 +392,22 @@
 
         <div class="alert-card">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/></svg>
-          <div><strong>Svarbu:</strong> Jei pasirinkta „Atsisakė“ – kito kontakto data neįvedama, nauja eilutė negeneruojama ir ciklas baigiasi.</div>
+          <div><strong>Atsisakymo taisyklė:</strong> Jei pasirinkta „Atsisakė“ → kito kontakto data nekuriama, nauja eilutė negeneruojama. Ciklas baigiasi.</div>
         </div>
       </div>
     </div>
 
     <!-- ŽINGSNIS 4 -->
-    <div class="step-item">
-      <div class="timeline-track">
+    <div class="step-row">
+      <div class="step-block">
         <div class="node">4</div>
-        <div class="line"></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Poreikio & Modulio specifikacija</div>
+        <div class="step-info">
+          <div class="step-title">Poreikiai & Moduliai</div>
+          <div class="step-sub">Kliento specifika</div>
         </div>
-
-        <div class="section-label">Įmonės poreikis</div>
+      </div>
+      <div class="details-block">
+        <div class="details-header">Įmonės poreikis</div>
         <div class="chip-group">
           <span class="chip">CS</span>
           <span class="chip">PP</span>
@@ -405,7 +418,7 @@
           <span class="chip">PP/PPP/CS</span>
         </div>
 
-        <div class="section-label">Mokymų modulis</div>
+        <div class="details-header">Mokymų modulis</div>
         <div class="chip-group">
           <span class="chip">Paskaita</span>
           <span class="chip">Praktika</span>
@@ -417,57 +430,58 @@
           <span class="chip">Kita</span>
         </div>
 
-        <div class="card-sub" style="margin-top: 12px;">+ Pažymimas planuojamas <strong>grupių skaičius</strong>.</div>
+        <div style="margin-top: 10px; font-size: 12px; color: var(--text-muted);">
+          * Taip pat nurodomas <strong>planuojamas grupių skaičius</strong>.
+        </div>
       </div>
     </div>
 
     <!-- ŽINGSNIS 5 -->
-    <div class="step-item">
-      <div class="timeline-track">
+    <div class="step-row">
+      <div class="step-block">
         <div class="node">5</div>
-        <div class="line"></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Kito kontakto data</div>
+        <div class="step-info">
+          <div class="step-title">Kito kontakto data</div>
+          <div class="step-sub">Kada skambinsima vėl</div>
         </div>
-        <div class="card-sub">Nurodoma tiksli data, kada atliekamas kitas skambutis / susisiekiama vėl.</div>
+      </div>
+      <div class="details-block">
+        <div style="font-size: 13px; color: var(--text-body);">
+          Įvedama data, kada vadybininkas atliks sekantį kontaktą su klientu.
+        </div>
       </div>
     </div>
 
     <!-- ŽINGSNIS 6 (AUTOMATIKOS CIKLAS) -->
-    <div class="step-item step-loop">
-      <div class="timeline-track">
+    <div class="step-row step-row-loop">
+      <div class="step-block">
         <div class="node">6</div>
-        <div class="line"></div>
-      </div>
-      <div class="card card-loop">
-        <div class="card-header">
-          <div class="card-title">Automatika: Naujos eilutės generavimas</div>
-          <span class="loop-badge">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-            Automatinis ciklas
-          </span>
+        <div class="step-info">
+          <div class="step-title">Automatinė eilutė</div>
+          <div class="step-sub">Sistemos logika (Ciklas)</div>
         </div>
-        <div class="card-sub">
-          Sistemoje sukuriama nauja eilutė: <strong>„Kito kontakto data“</strong> tampa nauja <strong>„Kontakto data“</strong>.
+      </div>
+      <div class="details-block">
+        <div style="font-size: 13px; color: var(--warning-text); font-weight: 500;">
+          <strong>Automatika:</strong> Kito kontakto data automatiškai tampa naujos eilutės <strong>Kontakto data</strong>.
           <br>
-          <span style="color: var(--warning-text); font-weight: 600;">↻ Ciklas grąžina procesą prie 2 žingsnio.</span>
+          <span style="display: inline-block; margin-top: 4px;">↻ Ciklas grąžina procesą prie <strong>2 žingsnio</strong>.</span>
         </div>
       </div>
     </div>
 
     <!-- ŽINGSNIS 7 -->
-    <div class="step-item step-final">
-      <div class="timeline-track">
+    <div class="step-row step-row-final">
+      <div class="step-block">
         <div class="node">7</div>
-      </div>
-      <div class="card card-final">
-        <div class="card-header">
-          <div class="card-title">Pipeline / Pardavimų piltuvėlis</div>
+        <div class="step-info">
+          <div class="step-title">Pipeline vaizdas</div>
+          <div class="step-sub">Pardavimų ataskaita</div>
         </div>
-        <div class="card-sub">
-          Formuojamas bendras vaizdas: suplanuoti kontaktai, jų kiekiai bei tikėtinos mokymų apimtys ateinantiems periodams.
+      </div>
+      <div class="details-block">
+        <div style="font-size: 13px; color: var(--success-text);">
+          Suplanuoti kontaktai, jų kiekiai bei tikėtinos mokymų apimtys ateinantiems periodams.
         </div>
       </div>
     </div>
