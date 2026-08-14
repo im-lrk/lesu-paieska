@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC kategorizacija — LRK rėmėjų portfelis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #C8102E;
+    --red-dark: #8f0b21;
+    --ink: #1c1c1a;
+    --ink-soft: #4d4d49;
+    --muted: #7a7a74;
+    --paper: #faf9f6;
+    --card: #ffffff;
+    --line: #e7e4dc;
+    --a-bg: #e4f3e9; --a-text: #1c6b41; --a-line: #b7dfc4;
+    --b-bg: #fdf3dc; --b-text: #8a5e0a; --b-line: #f0d89a;
+    --c-bg: #fbe7e6; --c-text: #a3312c; --c-line: #edbdba;
+    --blue-bg: #dfeafc; --blue-text: #14508f; --blue-line: #b8d5f2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Atkinson Hyperlegible', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.eyebrow{font-family:'Figtree', sans-serif;}
+  .wrap{max-width:920px; margin:0 auto; padding:56px 28px 80px;}
+
+  header.hero{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding-bottom:36px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:40px;
+  }
+  .brand-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .lrk-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--red);
+    color:#fff;
+    font-family:'Figtree', sans-serif;
+    font-weight:800;
+    font-size:15px;
+    letter-spacing:.02em;
+    padding:9px 14px;
+    border-radius:10px;
+    flex-shrink:0;
+  }
+  h1{
+    font-size:32px;
+    font-weight:800;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .sub{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:620px;
+    margin:0;
+  }
+  .hl{
+    display:inline-block;
+    background:var(--blue-bg);
+    color:var(--blue-text);
+    border:1px solid var(--blue-line);
+    font-weight:800;
+    padding:2px 10px;
+    border-radius:7px;
+  }
+  .card-title .hl{font-size:14px; margin-left:2px;}
+  h2 .hl{font-size:19px; padding:2px 12px;}
+
+  section{margin-bottom:48px;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  h2{
+    font-size:19px;
+    font-weight:700;
+    margin:0;
+  }
+  .section-note{font-size:13px; color:var(--muted); margin:0;}
+
+  /* Two small tables side by side */
+  .twin{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .card-title{
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink-soft);
+    padding:14px 18px 0;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14.5px;
+  }
+  thead th{
+    text-align:left;
+    font-size:11.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--muted);
+    padding:12px 18px 8px;
+    border-bottom:1px solid var(--line);
+  }
+  tbody td{
+    padding:10px 18px;
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  .kateg-chip{
+    display:inline-block;
+    font-weight:700;
+    font-size:13px;
+    padding:2px 9px;
+    border-radius:999px;
+    background:#f1efe6;
+    color:var(--ink);
+  }
+  td.val{color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+
+  /* ABC matrix */
+  .matrix-wrap{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px;
+    overflow-x:auto;
+  }
+  table.matrix{width:100%; border-collapse:separate; border-spacing:6px; font-size:14px;}
+  table.matrix th{
+    font-size:12px;
+    font-weight:700;
+    text-align:center;
+    color:var(--ink-soft);
+    padding:8px 6px;
+  }
+  table.matrix th.corner{
+    background:var(--red);
+    color:#fff;
+    border-radius:8px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  table.matrix td.rowlabel{
+    text-align:left;
+    font-weight:700;
+    font-size:13.5px;
+    padding:0 14px;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  table.matrix td.cell{
+    text-align:center;
+    font-weight:700;
+    font-size:17px;
+    border-radius:8px;
+    padding:16px 8px;
+    border:1px solid transparent;
+  }
+  .cat-A{background:var(--a-bg); color:var(--a-text); border-color:var(--a-line);}
+  .cat-B{background:var(--b-bg); color:var(--b-text); border-color:var(--b-line);}
+  .cat-C{background:var(--c-bg); color:var(--c-text); border-color:var(--c-line);}
+
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+  }
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 12px 6px 8px;
+  }
+  .dot{width:10px; height:10px; border-radius:50%; flex-shrink:0;}
+  .dot-A{background:var(--a-text);}
+  .dot-B{background:var(--b-text);}
+  .dot-C{background:var(--c-text);}
+
+  .note-box{
+    margin-top:20px;
+    background:#f4f6f2;
+    border-left:3px solid var(--red);
+    border-radius:0 10px 10px 0;
+    padding:16px 20px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .note-box strong{color:var(--ink);}
+
+  /* Example walkthrough */
+  .example{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 22px;
+    font-size:14.5px;
+  }
+  .example .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-weight:700;
+    padding:6px 12px;
+    border-radius:999px;
+    background:#f1efe6;
+    font-size:13.5px;
+    white-space:nowrap;
+  }
+  .example .arrow{color:var(--muted); font-size:16px;}
+  .example .result{
+    font-weight:800;
+    font-size:15px;
+    padding:6px 14px;
+    border-radius:999px;
+  }
+
+  footer{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width:640px){
+    .wrap{padding:36px 18px 60px;}
+    h1{font-size:26px;}
+    .twin{grid-template-columns:1fr;}
+    table.matrix{font-size:12.5px;}
+    table.matrix td.cell{padding:12px 4px; font-size:15px;}
+    table.matrix td.rowlabel{font-size:12px; white-space:normal;}
+    .section-head{flex-direction:column; align-items:flex-start; gap:4px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand-row">
+      <span class="lrk-badge">LRK</span>
+      <h1>Kaip skaičiuojama ABC kategorija</h1>
+    </div>
+    <p class="sub">Kiekvienas rėmėjas gauna dvi charakteristikas — rėmimo trukmę (T) ir įmokos dydį (P). Iš jų kombinacijos suformuojama bendra A / B / C kategorija, naudojama portfelio segmentavimui ir win-back strategijai.</p>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <h2>1. Dvi bazinės charakteristikos</h2>
+      <p class="section-note">Kiekvienas rėmėjas patenka į vieną T ir vieną P kategoriją</p>
+    </div>
+    <div class="twin">
+      <div class="card">
+        <div class="card-title">T kategorija · <span class="hl">rėmimo trukmė</span></div>
+        <table>
+          <thead><tr><th>Kateg.</th><th>Trukmė</th></tr></thead>
+          <tbody>
+            <tr><td><span class="kateg-chip">T1</span></td><td class="val">1–6 mėn.</td></tr>
+            <tr><td><span class="kateg-chip">T2</span></td><td class="val">7–12 mėn.</td></tr>
+            <tr><td><span class="kateg-chip">T3</span></td><td class="val">13–24 mėn.</td></tr>
+            <tr><td><span class="kateg-chip">T4</span></td><td class="val">25–48 mėn.</td></tr>
+            <tr><td><span class="kateg-chip">T5</span></td><td class="val">49+ mėn.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">P kategorija · <span class="hl">įmokos dydis</span></div>
+        <table>
+          <thead><tr><th>Kateg.</th><th>Suma</th></tr></thead>
+          <tbody>
+            <tr><td><span class="kateg-chip">P1</span></td><td class="val">≥ 15 €</td></tr>
+            <tr><td><span class="kateg-chip">P2</span></td><td class="val">12–14,99 €</td></tr>
+            <tr><td><span class="kateg-chip">P3</span></td><td class="val">8–11,99 €</td></tr>
+            <tr><td><span class="kateg-chip">P4</span></td><td class="val">5–7,99 €</td></tr>
+            <tr><td><span class="kateg-chip">P5</span></td><td class="val">&lt; 5 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>2. <span class="hl">ABC matrica</span> · T × P kombinacija</h2>
+      <p class="section-note">Kertasi trukmė ir suma — gaunama galutinė kategorija</p>
+    </div>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <tr>
+          <th class="corner">T \ P</th>
+          <th>P1–P2 (≥12€)</th>
+          <th>P3 (8–11,99€)</th>
+          <th>P4 (5–7,99€)</th>
+          <th>P5 (&lt;5€)</th>
+        </tr>
+        <tr>
+          <td class="rowlabel">T4–T5 (25+ mėn.)</td>
+          <td class="cell cat-A">A</td>
+          <td class="cell cat-A">A</td>
+          <td class="cell cat-B">B</td>
+          <td class="cell cat-B">B</td>
+        </tr>
+        <tr>
+          <td class="rowlabel">T2–T3 (7–24 mėn.)</td>
+          <td class="cell cat-A">A</td>
+          <td class="cell cat-B">B</td>
+          <td class="cell cat-B">B</td>
+          <td class="cell cat-C">C</td>
+        </tr>
+        <tr>
+          <td class="rowlabel">T1 (1–6 mėn.)</td>
+          <td class="cell cat-B">B</td>
+          <td class="cell cat-C">C</td>
+          <td class="cell cat-C">C</td>
+          <td class="cell cat-C">C</td>
+        </tr>
+      </table>
+
+      <div class="legend">
+        <span class="legend-item"><span class="dot dot-A"></span>A — ilgai rėmę ir/arba dosniai mokantys (didžiausia tikėtina grąža)</span>
+        <span class="legend-item"><span class="dot dot-B"></span>B — vidutinė vertė</span>
+        <span class="legend-item"><span class="dot dot-C"></span>C — trumpai rėmę ir/arba mažai mokantys (mažiausia tikėtina grąža)</span>
+      </div>
+
+      <div class="note-box">
+        <strong>Svarbu:</strong> kategorija priskiriama tiek aktyviems, tiek neaktyviems rėmėjams. Neaktyviems žiūrima paskutinė žinoma T ir P reikšmė prieš nutraukiant mokėjimus.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>3. Pavyzdys</h2>
+      <p class="section-note">Kaip skaitoma matrica praktiškai</p>
+    </div>
+    <div class="example">
+      <span class="chip">36 mėn. rėmimas</span>
+      <span class="arrow">→</span>
+      <span class="chip">T3</span>
+      <span class="arrow">+</span>
+      <span class="chip">10 €/mėn.</span>
+      <span class="arrow">→</span>
+      <span class="chip">P3</span>
+      <span class="arrow">=</span>
+      <span class="result cat-A">Kategorija A</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>LRK Duomenų valdymas · Parengė Sonata</span>
+    <span>Individualių rėmėjų portfelio analitika</span>
+  </footer>
+
+</div>
+</body>
+</html>
