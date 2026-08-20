@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LP F2F · Ataskaita valdybai · 2026-07</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Figtree:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#f0f2f7;--surface:#fff;--border:#dde1ec;
+  --ink:#111827;--ink2:#374151;--ink3:#6b7280;
+  --red:#C8102E;--red-bg:#fde8ea;
+  --blue:#2563eb;--blue-bg:#dbeafe;
+  --green:#059669;--green-bg:#d1fae5;
+  --amber:#d97706;--amber-bg:#fef3c7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Atkinson Hyperlegible',sans-serif;font-size:14px}
+.topbar{background:#1e1e2e;color:#fff;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar h1{font-family:'Figtree',sans-serif;font-size:20px;font-weight:900}
+.topbar h1 span{color:var(--red)}
+.topbar-meta{font-size:12px;opacity:0.7;margin-top:3px}
+.tabs{display:flex;gap:6px;padding:0 40px;background:#fff;border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:10}
+.tabbtn{font-family:'Figtree',sans-serif;font-size:13px;font-weight:700;color:var(--ink3);background:none;border:none;padding:14px 18px;cursor:pointer;border-bottom:3px solid transparent}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--red);border-bottom-color:var(--red)}
+.main{padding:24px 40px 60px;max-width:1180px;margin:0 auto}
+.tabpanel{display:none}
+.tabpanel.active{display:block}
+.sh{font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--ink3);margin:26px 0 12px;display:flex;align-items:center;gap:12px}
+.sh:first-child{margin-top:0}
+.sh::after{content:'';flex:1;height:2px;background:var(--border)}
+
+.insight-box{background:#eef4ff;border:1.5px solid #c7dbff;border-radius:10px;padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.55;margin-bottom:4px}
+.insight-box.warn{background:var(--amber-bg);border-color:#fcd9a3;color:#7c4a03}
+
+/* KPI cards */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px}
+.kpi-card{background:var(--surface);border:1.5px solid var(--border);border-top:5px solid var(--ac);border-radius:12px;padding:18px 20px}
+.kpi-card .kpi-title{font-family:'Figtree',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--ac2);margin-bottom:2px}
+.kpi-card .kpi-sub{font-size:11px;color:var(--ink3);margin-bottom:12px}
+.kpi-line{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--border)}
+.kpi-line:last-of-type{border-bottom:none}
+.kpi-line .lbl{font-size:12px;color:var(--ink3);font-weight:600}
+.kpi-line .val{font-family:'Figtree',sans-serif;font-size:19px;font-weight:800;color:var(--ink)}
+.kpi-line .val .unit{font-size:12px;font-weight:600;color:var(--ink3);margin-left:2px}
+.delta{font-family:'Figtree',sans-serif;font-size:11px;font-weight:800;padding:2px 7px;border-radius:5px;white-space:nowrap;margin-left:8px}
+.delta.good{background:var(--green-bg);color:#065f46}
+.delta.bad{background:var(--red-bg);color:#9f1128}
+.delta.muted{background:#f0f0f0;color:var(--ink3)}
+.kpi-spark{margin-top:12px;height:46px;position:relative}
+.kpi-foot{font-size:10.5px;color:var(--ink3);margin-top:8px;font-style:italic}
+
+/* Comparison tables */
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:20px;overflow-x:auto}
+.card-title{font-family:'Figtree',sans-serif;font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.card-title .dot{width:10px;height:10px;border-radius:3px;background:var(--ac)}
+.card-sub{font-size:12px;color:var(--ink3);margin-bottom:14px}
+table.cmp{border-collapse:collapse;width:100%;min-width:520px}
+table.cmp th{font-family:'Figtree',sans-serif;font-size:13px;font-weight:800;text-transform:none;letter-spacing:0.2px;color:var(--ink);text-align:right;padding:9px 12px}
+table.cmp th:first-child{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink3);font-weight:700}
+table.cmp td{padding:8px 12px;text-align:right;font-size:13px;border-bottom:1px solid #eef0f6}
+table.cmp td:first-child{text-align:left;font-weight:700;font-family:'Figtree',sans-serif;color:var(--ink2)}
+table.cmp td.good{color:#059669;font-weight:800;font-family:'Figtree',sans-serif}
+table.cmp td.bad{color:#C8102E;font-weight:800;font-family:'Figtree',sans-serif}
+table.cmp td.muted{color:var(--ink3);font-weight:600;font-family:'Figtree',sans-serif}
+table.cmp tr.total-row td{background:#f7f8fc;font-weight:800;border-top:2px solid var(--border);border-bottom:none;color:var(--ink)}
+table.cmp tr.total-row td.good{color:#059669}
+table.cmp tr.total-row td.bad{color:#C8102E}
+.grp-hdr th{padding:9px 12px 7px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;border-radius:6px 6px 0 0}
+.grp-hdr th.blk-vnt{background:#e2e8f7;color:#33415c}
+.grp-hdr th.blk-eur{background:#fbead6;color:#7a4a12}
+th.col-vnt, td.col-vnt{background:#f2f4fb}
+th.col-eur, td.col-eur{background:#fdf8f0}
+table.cmp tr.total-row td.col-vnt{background:#e4f1ea}
+table.cmp tr.total-row td.col-eur{background:#e4f1ea}
+.mini-chart{position:relative;height:170px;margin-bottom:16px}
+
+/* Annual table (tab 2) */
+table.annual{border-collapse:collapse;width:100%;min-width:760px}
+table.annual th{font-family:'Figtree',sans-serif;font-size:11.5px;font-weight:700;text-align:right;padding:9px 12px;background:#1e1e2e;color:#fff}
+table.annual th:first-child{text-align:left;border-radius:6px 0 0 0}
+table.annual td{padding:8px 12px;text-align:right;font-size:13px;border:1px solid #eef0f6}
+table.annual td:first-child{text-align:left;font-weight:800;font-family:'Figtree',sans-serif;background:#f7f8fc}
+table.annual tr.total-row td{background:var(--green-bg);font-weight:800;color:#065f46;border-top:2px solid var(--green)}
+table.annual tr.partial td{color:var(--ink2)}
+table.annual .grpblue{color:var(--blue)}
+table.annual .grpgreen{color:var(--green)}
+table.annual .grpred{color:var(--red)}
+
+.foot{background:#1e1e2e;color:#fff;padding:12px 40px;font-size:12px;opacity:0.75}
+.note{font-size:11.5px;color:var(--ink3);margin-top:10px;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <h1>LP <span>F2F</span> · Ataskaita valdybai</h1>
+    <div class="topbar-meta">Nuolatinės rėmimo sutartys · duomenys iki 2026-07 (imtinai)</div>
+  </div>
+  <div style="font-size:12px;opacity:0.7">Atnaujinta: 2026-08</div>
+</div>
+
+<div class="tabs">
+  <button class="tabbtn active" onclick="showTab(0)">2026 m. liepa</button>
+  <button class="tabbtn" onclick="showTab(1)">Visas periodas (2018–2026)</button>
+</div>
+
+<div class="main">
+
+<!-- ============ TAB 0: LIEPA ============ -->
+<div id="tabpanel-0" class="tabpanel active">
+
+<div class="sh">Liepos m&#279;nesio suvestin&#279; &middot; palyginimas su 2025-07</div>
+<div class="kpi-row">
+
+  <div class="kpi-card" style="--ac:#2563eb;--ac2:#2563eb">
+    <div class="kpi-title">Pajamos (nuolatin&#279;s)</div>
+    <div class="kpi-sub">Visi liepos m&#279;n. gauti mok&#279;jimai</div>
+    <div class="kpi-line"><span class="lbl">Sk. (vnt.)</span><span class="val">12 384 <span class="delta bad">&minus;10,5%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Suma</span><span class="val">120 304 &euro; <span class="delta bad">&minus;10,1%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Vid. &#303;moka</span><span class="val">9,71 &euro; <span class="delta good">+0,4%</span></span></div>
+    <div class="kpi-spark"><canvas id="sparkPajamos"></canvas></div>
+    <div class="kpi-foot">YTD (sau&ndash;lie): 83 952 vnt. (&minus;14,2%) &middot; 816 699 &euro; (&minus;13,7%)</div>
+  </div>
+
+  <div class="kpi-card" style="--ac:#059669;--ac2:#059669">
+    <div class="kpi-title">Nauji r&#279;m&#279;jai</div>
+    <div class="kpi-sub">Unikal&#363;s, pirmas mok&#279;jimas liepoje</div>
+    <div class="kpi-line"><span class="lbl">Sk. (vnt.)</span><span class="val">8 <span class="delta bad">&minus;96,7%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Suma</span><span class="val">79 &euro; <span class="delta bad">&minus;96,9%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Vid. &#303;moka</span><span class="val">9,88 &euro; <span class="delta bad">&minus;6,2%</span></span></div>
+    <div class="kpi-spark"><canvas id="sparkNauji"></canvas></div>
+    <div class="kpi-foot">YTD (sau&ndash;lie): 703 vnt. (&minus;20,7%) &middot; 6 763 &euro; (&minus;24,6%)</div>
+  </div>
+
+  <div class="kpi-card" style="--ac:#C8102E;--ac2:#C8102E">
+    <div class="kpi-title">Atkrito (Churn)</div>
+    <div class="kpi-sub">Paskutin&#303; kart&#261; mok&#279;jo 2026-04</div>
+    <div class="kpi-line"><span class="lbl">Sk. (vnt.)</span><span class="val">255 <span class="delta bad">+44,1%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Prarasta suma</span><span class="val">2 531 &euro; <span class="delta bad">+39,5%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Vid. suma</span><span class="val">9,93 &euro; <span class="delta good">&minus;3,2%</span></span></div>
+    <div class="kpi-spark"><canvas id="sparkChurn"></canvas></div>
+    <div class="kpi-foot">YTD (sau&ndash;lie): 1 820 vnt. (+21,0%) &middot; 18 048 &euro; (+23,2%)</div>
+  </div>
+
+</div>
+<div class="note">* Mini grafikuose: pilka punktyrin&#279; linija = 2025, spalvota = 2026 (sausis&ndash;liepa, pagal vnt.).</div>
+
+<div class="sh">M&#279;nesio dinamika 2026 vs 2025 (sausis&ndash;liepa)</div>
+
+<div class="card">
+  <div class="card-title"><span class="dot" style="background:#2563eb"></span>Pajamos (nuolatin&#279;s &#303;mokos)</div>
+  <div class="card-sub">Visi gauti mok&#279;jimai per m&#279;nes&#303;</div>
+  <div class="mini-chart"><canvas id="barPajamos"></canvas></div>
+  <table class="cmp">
+    <thead>
+      <tr class="grp-hdr"><th></th><th class="blk-vnt" colspan="3">Sk. (vnt.)</th><th class="blk-eur" colspan="3">Suma (&euro;)</th></tr>
+      <tr><th>M&#279;nuo</th><th class="col-vnt">2025</th><th class="col-vnt">2026</th><th class="col-vnt">&Delta;</th><th class="col-eur">2025</th><th class="col-eur">2026</th><th class="col-eur">&Delta;</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sausis</td><td class="col-vnt">14 263</td><td class="col-vnt">7 158</td><td class="bad col-vnt">&minus;49,8%*</td><td class="col-eur">137 729,92</td><td class="col-eur">72 246,80</td><td class="bad col-eur">&minus;47,5%*</td></tr>
+      <tr><td>Vasaris</td><td class="col-vnt">14 000</td><td class="col-vnt">12 790</td><td class="bad col-vnt">&minus;8,6%</td><td class="col-eur">135 339,59</td><td class="col-eur">124 217,81</td><td class="bad col-eur">&minus;8,2%</td></tr>
+      <tr><td>Kovas</td><td class="col-vnt">14 012</td><td class="col-vnt">13 046</td><td class="bad col-vnt">&minus;6,9%</td><td class="col-eur">135 736,36</td><td class="col-eur">126 506,91</td><td class="bad col-eur">&minus;6,8%</td></tr>
+      <tr><td>Balandis</td><td class="col-vnt">13 991</td><td class="col-vnt">12 845</td><td class="bad col-vnt">&minus;8,2%</td><td class="col-eur">135 505,82</td><td class="col-eur">124 294,41</td><td class="bad col-eur">&minus;8,3%</td></tr>
+      <tr><td>Gegu&#382;&#279;</td><td class="col-vnt">14 046</td><td class="col-vnt">13 043</td><td class="bad col-vnt">&minus;7,1%</td><td class="col-eur">135 907,37</td><td class="col-eur">126 270,46</td><td class="bad col-eur">&minus;7,1%</td></tr>
+      <tr><td>Bir&#382;elis</td><td class="col-vnt">13 664</td><td class="col-vnt">12 686</td><td class="bad col-vnt">&minus;7,2%</td><td class="col-eur">132 340,47</td><td class="col-eur">122 858,41</td><td class="bad col-eur">&minus;7,2%</td></tr>
+      <tr><td>Liepa</td><td class="col-vnt">13 836</td><td class="col-vnt">12 384</td><td class="bad col-vnt">&minus;10,5%</td><td class="col-eur">133 810,42</td><td class="col-eur">120 303,86</td><td class="bad col-eur">&minus;10,1%</td></tr>
+      <tr class="total-row"><td>YTD (sau&ndash;lie)</td><td class="col-vnt">97 812</td><td class="col-vnt">83 952</td><td class="bad col-vnt">&minus;14,2%</td><td class="col-eur">946 369,95</td><td class="col-eur">816 698,66</td><td class="bad col-eur">&minus;13,7%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">* Sausio 2026 kritimas &ndash; ne organinis: d&#279;l IT nesklandumo (Agmio klaida) ne visos periodini&#371; mok&#279;jim&#371; s&#261;skaitos buvo laiku i&#353;ra&#353;ytos ir pateiktos bankams, tod&#279;l dalis sausio &#303;mok&#371; neu&#382;fiksuota.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="dot" style="background:#059669"></span>Nauji r&#279;m&#279;jai</div>
+  <div class="card-sub">Unikal&#363;s r&#279;m&#279;jai, kuri&#371; pirmas mok&#279;jimas &#303;vyko t&#261; m&#279;nes&#303;</div>
+  <div class="mini-chart"><canvas id="barNauji"></canvas></div>
+  <table class="cmp">
+    <thead>
+      <tr class="grp-hdr"><th></th><th class="blk-vnt" colspan="3">Sk. (vnt.)</th><th class="blk-eur" colspan="3">Suma (&euro;)</th></tr>
+      <tr><th>M&#279;nuo</th><th class="col-vnt">2025</th><th class="col-vnt">2026</th><th class="col-vnt">&Delta;</th><th class="col-eur">2025</th><th class="col-eur">2026</th><th class="col-eur">&Delta;</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sausis</td><td class="col-vnt">1</td><td class="col-vnt">86</td><td class="muted col-vnt">n/a*</td><td class="col-eur">10,00</td><td class="col-eur">927,00</td><td class="good col-eur">+9170,0%*</td></tr>
+      <tr><td>Vasaris</td><td class="col-vnt">23</td><td class="col-vnt">49</td><td class="good col-vnt">+113,0%</td><td class="col-eur">221,03</td><td class="col-eur">521,00</td><td class="good col-eur">+135,7%</td></tr>
+      <tr><td>Kovas</td><td class="col-vnt">95</td><td class="col-vnt">116</td><td class="good col-vnt">+22,1%</td><td class="col-eur">1 041,00</td><td class="col-eur">1 080,00</td><td class="good col-eur">+3,7%</td></tr>
+      <tr><td>Balandis</td><td class="col-vnt">153</td><td class="col-vnt">128</td><td class="bad col-vnt">&minus;16,3%</td><td class="col-eur">1 486,00</td><td class="col-eur">1 166,00</td><td class="bad col-eur">&minus;21,5%</td></tr>
+      <tr><td>Gegu&#382;&#279;</td><td class="col-vnt">196</td><td class="col-vnt">251</td><td class="good col-vnt">+28,1%</td><td class="col-eur">1 927,00</td><td class="col-eur">2 369,00</td><td class="good col-eur">+22,9%</td></tr>
+      <tr><td>Bir&#382;elis</td><td class="col-vnt">178</td><td class="col-vnt">65</td><td class="bad col-vnt">&minus;63,5%</td><td class="col-eur">1 752,00</td><td class="col-eur">621,00</td><td class="bad col-eur">&minus;64,6%</td></tr>
+      <tr><td>Liepa</td><td class="col-vnt">240</td><td class="col-vnt">8</td><td class="bad col-vnt">&minus;96,7%</td><td class="col-eur">2 527,00</td><td class="col-eur">79,00</td><td class="bad col-eur">&minus;96,9%</td></tr>
+      <tr class="total-row"><td>YTD (sau&ndash;lie)</td><td class="col-vnt">886</td><td class="col-vnt">703</td><td class="bad col-vnt">&minus;20,7%</td><td class="col-eur">8 964,03</td><td class="col-eur">6 763,00</td><td class="bad col-eur">&minus;24,6%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">* 2025-01 baz&#279; buvo tik 1 r&#279;m&#279;jas &ndash; tuo metu vyko kanalo pasikeitimas (i&#353; i&#353;orinio Magnum &#303; vidin&#303; In-House), tod&#279;l % pokytis neatspindi realios tendencijos ir nevertintinas.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="dot" style="background:#C8102E"></span>Atkrito (Churn)</div>
+  <div class="card-sub">Pagal m&#279;nes&#303;, kada u&#382;fiksuotas paskutinis mok&#279;jimas (3 m&#279;n. taisykl&#279; &ndash; pvz. Liepos churn = paskutin&#303; kart&#261; mok&#279;jo 2026-04)</div>
+  <div class="mini-chart"><canvas id="barChurn"></canvas></div>
+  <table class="cmp">
+    <thead>
+      <tr class="grp-hdr"><th></th><th class="blk-vnt" colspan="3">Sk. (vnt.)</th><th class="blk-eur" colspan="3">Prarasta suma (&euro;)</th></tr>
+      <tr><th>Ataskaitos m&#279;n.</th><th class="col-vnt">2025</th><th class="col-vnt">2026</th><th class="col-vnt">&Delta;</th><th class="col-eur">2025</th><th class="col-eur">2026</th><th class="col-eur">&Delta;</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sausis</td><td class="col-vnt">223</td><td class="col-vnt">222</td><td class="good col-vnt">&minus;0,4%</td><td class="col-eur">2 288,00</td><td class="col-eur">2 132,00</td><td class="good col-eur">&minus;6,8%</td></tr>
+      <tr><td>Vasaris</td><td class="col-vnt">217</td><td class="col-vnt">272</td><td class="bad col-vnt">+25,3%</td><td class="col-eur">2 291,00</td><td class="col-eur">2 641,00</td><td class="bad col-eur">+15,3%</td></tr>
+      <tr><td>Kovas</td><td class="col-vnt">231</td><td class="col-vnt">359</td><td class="bad col-vnt">+55,4%</td><td class="col-eur">2 179,00</td><td class="col-eur">3 395,01</td><td class="bad col-eur">+55,8%</td></tr>
+      <tr><td>Balandis</td><td class="col-vnt">243</td><td class="col-vnt">231</td><td class="good col-vnt">&minus;4,9%</td><td class="col-eur">2 185,00</td><td class="col-eur">2 261,00</td><td class="bad col-eur">+3,5%</td></tr>
+      <tr><td>Gegu&#382;&#279;</td><td class="col-vnt">209</td><td class="col-vnt">246</td><td class="bad col-vnt">+17,7%</td><td class="col-eur">2 104,00</td><td class="col-eur">2 491,50</td><td class="bad col-eur">+18,4%</td></tr>
+      <tr><td>Bir&#382;elis</td><td class="col-vnt">204</td><td class="col-vnt">235</td><td class="bad col-vnt">+15,2%</td><td class="col-eur">1 786,01</td><td class="col-eur">2 596,50</td><td class="bad col-eur">+45,4%</td></tr>
+      <tr><td>Liepa</td><td class="col-vnt">177</td><td class="col-vnt">255</td><td class="bad col-vnt">+44,1%</td><td class="col-eur">1 814,00</td><td class="col-eur">2 531,00</td><td class="bad col-eur">+39,5%</td></tr>
+      <tr class="total-row"><td>YTD (sau&ndash;lie)</td><td class="col-vnt">1 504</td><td class="col-vnt">1 820</td><td class="bad col-vnt">+21,0%</td><td class="col-eur">14 647,01</td><td class="col-eur">18 048,01</td><td class="bad col-eur">+23,2%</td></tr>
+    </tbody>
+  </table>
+  <div class="insight-box warn" style="margin-top:14px;margin-bottom:0">
+    &#9888; <strong>Tendencija nerimą kelianti:</strong> churn vnt. YTD +21% ir suma +23,2% lyginant su 2025 &ndash; o tuo pačiu naujų rėmėjų srautas krito &minus;20,7% (vnt.). Abi kryptys blogėja vienu metu, o liepos naujų rėmėjų skaičius (8) yra beveik nulinis &ndash; tikėtina, kad tai susiję su LP ambasadorių koordinatorių (Gytis, Jeronimas) i&#353;&#279;jimu ir F2F kanalo netikrumu.
+  </div>
+</div>
+
+<div class="sh">&#352;altiniai, metodologija ir duomen&#371; kokyb&#279;</div>
+<div class="insight-box">
+  &#8505; <strong>&#352;altinis ir metodologija:</strong> LP-F2F-2026-07_ATASKAITA.xlsx (SF pivot, First/Last Gift Date pjūviai). <strong>Pajamos</strong> = visi t&#279; m&#279;n. gauti mok&#279;jimai (Count/Sum of &#302;moka). <strong>Nauji</strong> = unikal&#363;s r&#279;m&#279;jai, kuri&#371; pirmas mok&#279;jimas &#303;vyko t&#261; m&#279;n. <strong>Atkrito (Churn)</strong> = r&#279;m&#279;jai, kuri&#371; paskutinis mok&#279;jimas buvo prie&#353; 3 m&#279;n. ir nuo tada daugiau nemok&#279;jo &ndash; t.y. <strong>liepos churn = tie, kurie paskutin&#303; kart&#261; mok&#279;jo 2026-04</strong> (tas pats principas taikomas visiems m&#279;nesiams).
+</div>
+<div class="insight-box warn" style="margin-top:8px">
+  &#9888; <strong>Duomen&#371; kokyb&#279;s pastabos:</strong> (1) <strong>2026-01 &quot;Pajamos&quot;</strong> neb&#363;dingai &#382;emos (7 158 vs ~12&ndash;14 t&#363;kst. kitais m&#279;n.) &ndash; d&#279;l IT nesklandumo (Agmio klaida) ne visos periodini&#371; mok&#279;jim&#371; s&#261;skaitos buvo i&#353;ra&#353;ytos ir pateiktos bankams. (2) <strong>2025-01 &quot;Nauji&quot;</strong> baz&#279; buvo beveik nulin&#279; (1 r&#279;m&#279;jas) &ndash; tuo metu keit&#279;si kanalas (i&#353; i&#353;orinio Magnum &#303; vidin&#303; In-House), tod&#279;l sausio % pokytis &#382;ymimas kaip n/a. (3) <strong>2026-08</strong> skai&#269;iai &#353;ioje ataskaitoje visai nevertinami &ndash; duomenys dar nepilni/klaidingi (pvz. &quot;Atkrito&quot; lentel&#279;se liepos-rugpj&#363;&#269;io Grand Total reik&#353;m&#279;s SF pivot faile yra sugadintos; &#353;ioje ataskaitoje jos neaudojamos &ndash; visi skai&#269;iai perskai&#269;iuoti i&#353; &#353;vari&#371; m&#279;nesio reik&#353;mi&#371;).
+</div>
+
+</div>
+
+<!-- ============ TAB 1: VISAS PERIODAS ============ -->
+<div id="tabpanel-1" class="tabpanel">
+
+
+<div class="sh">Nuo 2018 m. iki &#353;iol</div>
+<div class="kpi-row">
+  <div class="kpi-card" style="--ac:#2563eb;--ac2:#2563eb">
+    <div class="kpi-title">Pajamos i&#353; viso</div>
+    <div class="kpi-sub">2018 &ndash; 2026-07</div>
+    <div class="kpi-line"><span class="lbl">Sk.</span><span class="val">896 076 <span class="unit">vnt.</span></span></div>
+    <div class="kpi-line"><span class="lbl">Suma</span><span class="val">8 853 011 <span class="unit">&euro;</span></span></div>
+  </div>
+  <div class="kpi-card" style="--ac:#059669;--ac2:#059669">
+    <div class="kpi-title">Nauj&#371; r&#279;m&#279;j&#371; i&#353; viso</div>
+    <div class="kpi-sub">2018 &ndash; 2026-07</div>
+    <div class="kpi-line"><span class="lbl">Sk.</span><span class="val">30 346 <span class="unit">vnt.</span></span></div>
+    <div class="kpi-line"><span class="lbl">Pirm. &#303;mok&#371; suma</span><span class="val">292 486 <span class="unit">&euro;</span></span></div>
+  </div>
+  <div class="kpi-card" style="--ac:#C8102E;--ac2:#C8102E">
+    <div class="kpi-title">Atkrito i&#353; viso</div>
+    <div class="kpi-sub">2018 &ndash; 2026-06</div>
+    <div class="kpi-line"><span class="lbl">Sk.</span><span class="val">17 850 <span class="unit">vnt.</span></span></div>
+    <div class="kpi-line"><span class="lbl">Prarasta suma</span><span class="val">172 140 <span class="unit">&euro;</span></span></div>
+  </div>
+</div>
+
+<div class="sh">Metin&#279; suvestin&#279;</div>
+<div class="card">
+  <div class="card-title">Pajamos, Nauji r&#279;m&#279;jai ir Churn pagal metus</div>
+  <div class="card-sub">2026 &ndash; dalinis laikotarpis (nurodyta kiekvienam stulpeliui)</div>
+  <div style="overflow-x:auto">
+  <table class="annual">
+    <thead>
+      <tr>
+        <th>Metai</th>
+        <th class="grpblue">Pajamos (vnt.)</th><th class="grpblue">Pajamos (&euro;)</th>
+        <th class="grpgreen">Nauji (vnt.)</th><th class="grpgreen">Nauji (&euro;)</th>
+        <th class="grpred">Atkrito (vnt.)</th><th class="grpred">Atkrito (&euro;)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>2018</td><td>1 680</td><td>18 113,04</td><td>936</td><td>10 056,01</td><td>72</td><td>672,00</td></tr>
+      <tr><td>2019</td><td>28 818</td><td>309 067,61</td><td>3 864</td><td>39 602,10</td><td>860</td><td>8 165,00</td></tr>
+      <tr><td>2020</td><td>59 751</td><td>612 303,03</td><td>4 088</td><td>37 831,79</td><td>1 311</td><td>11 102,09</td></tr>
+      <tr><td>2021</td><td>86 630</td><td>880 681,12</td><td>4 415</td><td>42 275,53</td><td>1 631</td><td>15 863,35</td></tr>
+      <tr><td>2022</td><td>125 192</td><td>1 253 544,61</td><td>6 048</td><td>58 930,32</td><td>2 403</td><td>25 735,56</td></tr>
+      <tr><td>2023</td><td>167 252</td><td>1 637 523,67</td><td>6 936</td><td>66 257,20</td><td>3 651</td><td>33 359,48</td></tr>
+      <tr><td>2024</td><td>177 892</td><td>1 729 997,38</td><td>2 006</td><td>17 153,00</td><td>3 025</td><td>29 649,50</td></tr>
+      <tr><td>2025</td><td>164 909</td><td>1 595 081,65</td><td>1 350</td><td>13 617,53</td><td>2 840</td><td>27 543,02</td></tr>
+      <tr class="partial"><td>2026*</td><td>83 952<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>816 698,66<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>703<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>6 763,00<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>2 057<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 06)</span></td><td>20 050,10<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 06)</span></td></tr>
+      <tr class="total-row"><td>I&#352; VISO</td><td>896 076</td><td>8 853 010,77</td><td>30 346</td><td>292 486,48</td><td>17 850</td><td>172 140,10</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">* 2026 metų stulpeliai dalinės &ndash; Pajamos ir Nauji apima sausio&ndash;liepos duomenis, Atkrito &ndash; tik sausio&ndash;birželio (dėl 3 mėn. patvirtinimo vėlavimo liepos ir rugpjūčio kohortos dar nėra galutinės, o SF pivot Grand Total reikšmės liepos/rugpjūčio eilutėse yra sugadintos, todėl neįtrauktos).</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Pajam&#371; dinamika pagal metus</div>
+  <div style="position:relative;height:260px"><canvas id="chartAnnual"></canvas></div>
+</div>
+
+<div class="sh">&#352;altiniai ir metodologija</div>
+<div class="insight-box">
+  &#8505; Suvestin&#279; nuo 2018 m. iki 2026-07 (Pajamos, Nauji) / 2026-06 (Churn &ndash; d&#279;l 3 m&#279;n. patvirtinimo v&#279;lavimo liepos-rugpj&#363;&#269;io kohortos dar negalutin&#279;s). 2026 metai &#382;ymimi kaip <strong>dalinis (7 arba 6 m&#279;n.)</strong>.
+</div>
+
+</div>
+
+</div>
+
+<div class="foot">LRK Duomen&#371; valdymas &middot; LP F2F &middot; &#352;altinis: LP-F2F-2026-07_ATASKAITA.xlsx (SF pivot)</div>
+
+<script>
+function showTab(i){
+  document.querySelectorAll('.tabpanel').forEach((el,idx)=>el.classList.toggle('active', idx===i));
+  document.querySelectorAll('.tabbtn').forEach((el,idx)=>el.classList.toggle('active', idx===i));
+}
+
+const months7 = ['Sau','Vas','Kov','Bal','Geg','Bir','Lie'];
+
+function sparkline(id, data25, data26, color){
+  new Chart(document.getElementById(id), {
+    type:'line',
+    data:{labels:months7, datasets:[
+      {data:data25, borderColor:'#c4c9d8', borderWidth:1.5, borderDash:[3,3], pointRadius:0, tension:0.3},
+      {data:data26, borderColor:color, borderWidth:2.5, pointRadius:0, tension:0.3}
+    ]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}, tooltip:{enabled:false}},
+      scales:{x:{display:false}, y:{display:false}}
+    }
+  });
+}
+
+sparkline('sparkPajamos', [14263,14000,14012,13991,14046,13664,13836], [7158,12790,13046,12845,13043,12686,12384], '#2563eb');
+sparkline('sparkNauji', [1,23,95,153,196,178,240], [86,49,116,128,251,65,8], '#059669');
+sparkline('sparkChurn', [223,217,231,243,209,204,177], [222,272,359,231,246,235,255], '#C8102E');
+
+function groupedBar(id, data25, data26, color, label){
+  new Chart(document.getElementById(id), {
+    type:'bar',
+    data:{labels:months7, datasets:[
+      {label:'2025', data:data25, backgroundColor:'#d1d5db', borderRadius:3, maxBarThickness:20},
+      {label:'2026', data:data26, backgroundColor:color, borderRadius:3, maxBarThickness:20}
+    ]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:true, position:'top', align:'end', labels:{boxWidth:10, font:{size:11, family:"'Figtree',sans-serif", weight:'700'}, color:'#6b7280'}},
+        tooltip:{backgroundColor:'#111827', padding:10, cornerRadius:8, titleFont:{family:"'Figtree',sans-serif",weight:'700'},
+          callbacks:{label:function(ctx){return ctx.dataset.label+': '+ctx.parsed.y.toLocaleString('lt-LT')+' '+label;}}}
+      },
+      scales:{
+        x:{grid:{display:false}, ticks:{font:{size:11}}},
+        y:{grid:{color:'#eef0f6'}, ticks:{font:{size:10}}}
+      }
+    }
+  });
+}
+
+groupedBar('barPajamos', [14263,14000,14012,13991,14046,13664,13836], [7158,12790,13046,12845,13043,12686,12384], '#2563eb', 'vnt.');
+groupedBar('barNauji', [1,23,95,153,196,178,240], [86,49,116,128,251,65,8], '#059669', 'vnt.');
+groupedBar('barChurn', [223,217,231,243,209,204,177], [222,272,359,231,246,235,255], '#C8102E', 'vnt.');
+
+new Chart(document.getElementById('chartAnnual'), {
+  type:'bar',
+  data:{
+    labels:['2018','2019','2020','2021','2022','2023','2024','2025','2026*'],
+    datasets:[{
+      label:'Pajamos (€)',
+      data:[18113.04,309067.61,612303.03,880681.12,1253544.61,1637523.67,1729997.38,1595081.65,816698.66],
+      backgroundColor:['#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#2563eb'],
+      borderRadius:4
+    }]
+  },
+  options:{responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+      tooltip:{backgroundColor:'#111827', padding:10, cornerRadius:8,
+        callbacks:{label:function(ctx){return ctx.parsed.y.toLocaleString('lt-LT',{maximumFractionDigits:0})+' €'+(ctx.dataIndex===8?' (dalinė, iki 07)':'');}}}
+    },
+    scales:{y:{ticks:{callback:function(v){return (v/1000)+'k €';}}}}
+  }
+});
+</script>
+
+</body>
+</html>
