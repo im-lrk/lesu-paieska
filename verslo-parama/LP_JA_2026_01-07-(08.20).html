@@ -103,26 +103,6 @@ table.heatmap tr.total-row td:first-child{text-align:left;padding-left:16px}
 .legend-scale{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink3);margin-top:12px}
 .legend-bar{flex:1;max-width:220px;height:10px;border-radius:5px;background:linear-gradient(90deg,#fee2e2,#bbf7d0)}
 
-/* Cohort revenue matrix */
-.cohort-wrap{overflow-x:auto}
-table.cohorttable{border-collapse:collapse;width:100%;min-width:820px}
-table.cohorttable th{font-size:13px;font-weight:800;padding:10px 12px;text-align:center;white-space:nowrap;background:#1e3a5f;color:#fff}
-table.cohorttable th.corner{text-align:left;padding-left:16px;border-radius:6px 0 0 0;font-size:12px}
-table.cohorttable th.total-hdr{background:#16314f}
-table.cohorttable td{padding:8px 12px;text-align:right;font-size:13px;font-weight:600;border:1px solid #e8eaf2}
-table.cohorttable td.row-hdr{text-align:left;font-weight:800;background:#dbe8f7;color:#1e3a5f;border-right:2px solid var(--blue);padding-left:16px}
-table.cohorttable td.row-hdr .cnt{font-size:11px;color:var(--ink3);font-weight:500;margin-left:6px}
-table.cohorttable td.na{background:#f3f4f6;color:#c4c9d8;text-align:center;font-weight:400}
-table.cohorttable td.h1{background:#f0fdf4}
-table.cohorttable td.h2{background:#dcfce7}
-table.cohorttable td.h3{background:#bbf7d0}
-table.cohorttable td.h4{background:#86efac}
-table.cohorttable td.h5{background:#4ade80;color:#14532d}
-table.cohorttable td.total-col{font-weight:800;background:#e8f5e9;color:var(--green);border-left:2px solid var(--green)}
-table.cohorttable tr.total-row td{background:var(--green-bg);font-weight:800;color:#065f46;border-top:2px solid var(--green)}
-table.cohorttable tr.total-row td:first-child{text-align:left;padding-left:16px}
-table.cohorttable td.grand-total{background:#a7f3d0;color:#064e3b;font-size:14px;border-left:2px solid var(--green)}
-
 .foot{background:#1e1e2e;color:#fff;padding:12px 40px;font-size:12px;opacity:0.75}
 .note{font-size:11.5px;color:var(--ink3);margin-top:10px;font-style:italic}
 </style>
@@ -327,8 +307,8 @@ table.cohorttable td.grand-total{background:#a7f3d0;color:#064e3b;font-size:14px
 
 <div class="sh">Nauj&#371; r&#279;m&#279;j&#371; sezoni&#353;kumas</div>
 <div class="card">
-  <div class="card-title">Pirmas mok&#279;jimas (First Gift Date) &middot; nauj&#371; sutar&#269;i&#371; matrica</div>
-  <div class="card-sub">Eilut&#279; = m&#279;nuo, stulpelis = metai &middot; skai&#269;iuojama pagal Recurring Donation ID (ne unikal&#371; r&#279;m&#279;j&#261;) &middot; spalva &ndash; nuo &#382;alios (daugiausiai pritraukta) iki raudonos (ma&#382;iausiai)</div>
+  <div class="card-title">Pirmas mok&#279;jimas (First Gift Date) &middot; nauj&#371; r&#279;m&#279;j&#371; matrica</div>
+  <div class="card-sub">Eilut&#279; = m&#279;nuo, stulpelis = metai &middot; unikal&#363;s r&#279;m&#279;jai (ta pati skai&#269;iavimo logika kaip Metin&#279;je suvestin&#279;je) &middot; spalva &ndash; nuo &#382;alios (daugiausiai pritraukta) iki raudonos (ma&#382;iausiai)</div>
   <div class="heatmap-wrap">
   <table class="heatmap">
     <thead>
@@ -339,103 +319,30 @@ table.cohorttable td.grand-total{background:#a7f3d0;color:#064e3b;font-size:14px
       </tr>
     </thead>
     <tbody>
-      <tr><td class="row-hdr">1</td><td class="blank"></td><td style="background:#e7e9dc">414</td><td style="background:#eae8dd">350</td><td style="background:#fde2e2">22</td><td style="background:#ebe8dd">347</td><td style="background:#deecd9">577</td><td style="background:#eee7de">282</td><td style="background:#fee2e2">1</td><td style="background:#f9e3e1">86</td><td class="total-col">2 079</td></tr>
-      <tr><td class="row-hdr">2</td><td class="blank"></td><td style="background:#ede7dd">309</td><td style="background:#eee7de">287</td><td style="background:#fde2e2">12</td><td style="background:#efe7de">266</td><td style="background:#f2e6df">219</td><td style="background:#f8e4e0">115</td><td style="background:#fde2e2">27</td><td style="background:#fbe3e1">49</td><td class="total-col">1 284</td></tr>
-      <tr><td class="row-hdr">3</td><td class="blank"></td><td style="background:#e9e9dc">373</td><td style="background:#dfecda">544</td><td style="background:#fee2e2">6</td><td style="background:#e8e9dc">396</td><td style="background:#bbf7d0">1 192</td><td style="background:#efe7de">262</td><td style="background:#fbe3e1">52</td><td style="background:#f8e4e0">116</td><td class="total-col">2 941</td></tr>
-      <tr><td class="row-hdr">4</td><td class="blank"></td><td style="background:#f0e6de">242</td><td style="background:#f9e4e1">91</td><td style="background:#fde2e2">11</td><td style="background:#e6eadc">429</td><td style="background:#caf2d4">927</td><td style="background:#f5e5e0">156</td><td style="background:#f9e3e1">82</td><td style="background:#f7e4e0">128</td><td class="total-col">2 066</td></tr>
-      <tr><td class="row-hdr">5</td><td class="blank"></td><td style="background:#e7e9dc">412</td><td style="background:#fde2e2">17</td><td style="background:#e3eadb">483</td><td style="background:#e6eadc">428</td><td style="background:#c9f3d4">945</td><td style="background:#f8e4e0">116</td><td style="background:#f5e5e0">166</td><td style="background:#f0e6de">253</td><td class="total-col">2 820</td></tr>
-      <tr><td class="row-hdr">6</td><td class="blank"></td><td style="background:#efe7de">270</td><td style="background:#f8e4e0">114</td><td style="background:#d1f0d6">805</td><td style="background:#deecd9">569</td><td style="background:#cff1d5">835</td><td style="background:#f2e6df">217</td><td style="background:#f4e5df">178</td><td style="background:#fae3e1">65</td><td class="total-col">3 053</td></tr>
-      <tr><td class="row-hdr">7</td><td class="blank"></td><td style="background:#e6e9dc">424</td><td style="background:#dbedd9">621</td><td style="background:#c9f3d4">947</td><td style="background:#d7eed7">698</td><td style="background:#d0f1d6">826</td><td style="background:#f0e6de">251</td><td style="background:#f1e6de">240</td><td class="blank"></td><td class="total-col">4 007</td></tr>
-      <tr><td class="row-hdr">8</td><td class="blank"></td><td style="background:#ede7dd">312</td><td style="background:#cbf2d4">900</td><td style="background:#e7e9dc">418</td><td style="background:#daedd8">645</td><td style="background:#ddecd9">595</td><td style="background:#f3e5df">188</td><td style="background:#f6e5e0">148</td><td class="blank"></td><td class="total-col">3 206</td></tr>
-      <tr><td class="row-hdr">9</td><td style="background:#fce3e1">37</td><td style="background:#eae8dd">350</td><td style="background:#e2ebdb">493</td><td style="background:#d8eed8">679</td><td style="background:#d7eed7">700</td><td style="background:#ddecd9">584</td><td style="background:#f7e4e0">120</td><td style="background:#fbe3e1">58</td><td class="blank"></td><td class="total-col">3 021</td></tr>
-      <tr><td class="row-hdr">10</td><td style="background:#f1e6df">230</td><td style="background:#efe7de">271</td><td style="background:#e4eadb">462</td><td style="background:#e5eadb">450</td><td style="background:#ddecd9">594</td><td style="background:#f4e5df">174</td><td style="background:#fae3e1">70</td><td style="background:#fce3e1">41</td><td class="blank"></td><td class="total-col">2 292</td></tr>
-      <tr><td class="row-hdr">11</td><td style="background:#e8e9dc">397</td><td style="background:#e9e8dc">367</td><td style="background:#ebe8dd">330</td><td style="background:#e9e8dc">369</td><td style="background:#dbedd9">623</td><td style="background:#fce3e1">42</td><td style="background:#f7e4e0">128</td><td style="background:#fbe3e1">60</td><td class="blank"></td><td class="total-col">2 316</td></tr>
-      <tr><td class="row-hdr">12</td><td style="background:#e8e9dc">396</td><td style="background:#ede7dd">305</td><td style="background:#fae3e1">78</td><td style="background:#e8e9dc">391</td><td style="background:#ddecd9">588</td><td style="background:#ece8dd">318</td><td style="background:#f7e4e0">129</td><td style="background:#f5e5e0">160</td><td class="blank"></td><td class="total-col">2 365</td></tr>
+      <tr><td class="row-hdr">1</td><td class="blank"></td><td style="background:#e8e9dc">383</td><td style="background:#eae8dd">342</td><td style="background:#fde2e2">17</td><td style="background:#ebe8dd">334</td><td style="background:#ddecd9">563</td><td style="background:#eee7de">277</td><td style="background:#fee2e2">1</td><td style="background:#f9e4e1">86</td><td class="total-col">2 003</td></tr>
+      <tr><td class="row-hdr">2</td><td class="blank"></td><td style="background:#ede7dd">296</td><td style="background:#eee7de">277</td><td style="background:#fde2e2">11</td><td style="background:#efe7de">256</td><td style="background:#f2e6df">212</td><td style="background:#f8e4e0">112</td><td style="background:#fde2e2">23</td><td style="background:#fbe3e1">49</td><td class="total-col">1 236</td></tr>
+      <tr><td class="row-hdr">3</td><td class="blank"></td><td style="background:#eae8dd">352</td><td style="background:#e1ebda">499</td><td style="background:#fee2e2">5</td><td style="background:#e8e9dc">378</td><td style="background:#bbf7d0">1 157</td><td style="background:#efe7de">261</td><td style="background:#f9e4e1">95</td><td style="background:#f7e4e0">116</td><td class="total-col">2 863</td></tr>
+      <tr><td class="row-hdr">4</td><td class="blank"></td><td style="background:#f1e6de">229</td><td style="background:#f9e4e1">84</td><td style="background:#fde2e2">10</td><td style="background:#e6eadc">415</td><td style="background:#ccf2d4">872</td><td style="background:#f5e5e0">152</td><td style="background:#f5e5e0">153</td><td style="background:#f7e4e0">128</td><td class="total-col">2 043</td></tr>
+      <tr><td class="row-hdr">5</td><td class="blank"></td><td style="background:#e8e9dc">388</td><td style="background:#fde2e2">14</td><td style="background:#e3eadb">466</td><td style="background:#e6e9dc">413</td><td style="background:#cbf2d4">887</td><td style="background:#f7e4e0">114</td><td style="background:#f3e6df">196</td><td style="background:#f0e7de">251</td><td class="total-col">2 729</td></tr>
+      <tr><td class="row-hdr">6</td><td class="blank"></td><td style="background:#f0e7de">251</td><td style="background:#f8e4e0">109</td><td style="background:#d1f0d6">779</td><td style="background:#deecd9">555</td><td style="background:#d1f0d6">783</td><td style="background:#f1e6df">217</td><td style="background:#f4e5df">178</td><td style="background:#fae3e1">65</td><td class="total-col">2 937</td></tr>
+      <tr><td class="row-hdr">7</td><td class="blank"></td><td style="background:#e7e9dc">405</td><td style="background:#dcedd9">587</td><td style="background:#c9f3d4">914</td><td style="background:#d7eed8">673</td><td style="background:#cff1d5">819</td><td style="background:#f0e6de">246</td><td style="background:#f0e6de">240</td><td style="background:#fee2e2">8</td><td class="total-col">3 892</td></tr>
+      <tr><td class="row-hdr">8</td><td class="blank"></td><td style="background:#ece8dd">310</td><td style="background:#cbf2d4">879</td><td style="background:#e7e9dc">401</td><td style="background:#daedd8">627</td><td style="background:#ddecd9">566</td><td style="background:#f4e5df">182</td><td style="background:#f5e5e0">148</td><td class="blank"></td><td class="total-col">3 113</td></tr>
+      <tr><td class="row-hdr">9</td><td style="background:#fce2e2">27</td><td style="background:#ebe8dd">333</td><td style="background:#e3ebdb">472</td><td style="background:#d8eed8">654</td><td style="background:#d7eed8">672</td><td style="background:#deecd9">560</td><td style="background:#f7e4e0">120</td><td style="background:#fbe3e1">58</td><td class="blank"></td><td class="total-col">2 896</td></tr>
+      <tr><td class="row-hdr">10</td><td style="background:#f4e5df">175</td><td style="background:#efe7de">264</td><td style="background:#e5eadb">434</td><td style="background:#e5eadb">437</td><td style="background:#dcedd9">581</td><td style="background:#f4e5df">167</td><td style="background:#fae3e1">70</td><td style="background:#fce3e1">41</td><td class="blank"></td><td class="total-col">2 169</td></tr>
+      <tr><td class="row-hdr">11</td><td style="background:#e9e9dc">369</td><td style="background:#e9e8dc">358</td><td style="background:#ebe8dd">323</td><td style="background:#eae8dd">342</td><td style="background:#dbedd9">597</td><td style="background:#fce3e1">41</td><td style="background:#f7e4e0">127</td><td style="background:#fbe3e1">60</td><td class="blank"></td><td class="total-col">2 217</td></tr>
+      <tr><td class="row-hdr">12</td><td style="background:#e9e9dc">365</td><td style="background:#ede7dd">295</td><td style="background:#fae3e1">68</td><td style="background:#e8e9dc">379</td><td style="background:#deecd9">547</td><td style="background:#ece8dd">309</td><td style="background:#f7e4e0">128</td><td style="background:#f5e5e0">157</td><td class="blank"></td><td class="total-col">2 248</td></tr>
       <tr class="total-row">
         <td>Grand Total</td>
-        <td>1 060</td><td>4 049</td><td>4 287</td><td>4 593</td><td>6 283</td><td>7 234</td><td>2 034</td><td>1 213</td><td>697</td>
-        <td class="total-col" style="background:#d1d5db">31 450</td>
+        <td>936</td><td>3 864</td><td>4 088</td><td>4 415</td><td>6 048</td><td>6 936</td><td>2 006</td><td>1 350</td><td>703</td>
+        <td class="total-col" style="background:#d1d5db">30 346</td>
       </tr>
     </tbody>
   </table>
   </div>
   <div class="legend-scale">
-    <span>Ma&#382;iausiai (1)</span><div class="legend-bar"></div><span>Daugiausiai (1 192)</span>
+    <span>Ma&#382;iausiai (1)</span><div class="legend-bar"></div><span>Daugiausiai (1 157)</span>
   </div>
-  <div class="note">* Skai&#269;iuojama pagal sutart&#303; (RD ID), ne unikal&#371; r&#279;m&#279;j&#261; &ndash; apima Win-back ir papildomas sutartis. 2018 duomenys nuo rugs&#279;jo, 2026 iki liepos.</div>
-</div>
-
-<div class="sh">Kohort&#371; pjūvis &middot; pajamos per laik&#261;</div>
-<div class="card">
-  <div class="card-title">Kiek EUR sumok&#279;jo kiekvienos kohortos r&#279;m&#279;jai kiekvienais metais</div>
-  <div class="card-sub">Eilut&#279; = metai, kai prad&#279;tas r&#279;mimas (kohorta) &middot; Stulpelis = metai, kai gautos pajamos</div>
-  <div class="cohort-wrap">
-  <table class="cohorttable">
-    <thead>
-      <tr>
-        <th class="corner" rowspan="2">Metai, kai<br>prad&#279;tas r&#279;mimas</th>
-        <th colspan="9">Metai, kai gautos pajamos</th>
-        <th class="total-hdr" rowspan="2">VISO</th>
-      </tr>
-      <tr>
-        <th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="row-hdr">2018<span class="cnt">(1 060 sut.)</span></td>
-        <td class="h1">18 270</td><td class="h3">92 965</td><td class="h3">80 072</td><td class="h2">74 591</td><td class="h2">67 637</td><td class="h2">59 197</td><td class="h2">55 134</td><td class="h2">50 882</td><td class="h1">21 312</td>
-        <td class="total-col">520 060</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2019<span class="cnt">(4 049 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="h5">218 022</td><td class="h5">337 051</td><td class="h5">302 133</td><td class="h5">274 532</td><td class="h5">246 110</td><td class="h5">227 650</td><td class="h5">218 960</td><td class="h3">89 947</td>
-        <td class="total-col">1 914 406</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2020<span class="cnt">(4 287 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h4">198 271</td><td class="h5">317 846</td><td class="h5">261 109</td><td class="h5">221 646</td><td class="h4">208 148</td><td class="h4">193 730</td><td class="h3">84 070</td>
-        <td class="total-col">1 484 819</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2021<span class="cnt">(4 593 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h4">190 068</td><td class="h5">363 409</td><td class="h5">283 680</td><td class="h5">260 111</td><td class="h5">231 061</td><td class="h3">100 799</td>
-        <td class="total-col">1 429 127</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2022<span class="cnt">(6 283 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h5">290 395</td><td class="h5">418 495</td><td class="h5">360 004</td><td class="h5">312 460</td><td class="h4">134 319</td>
-        <td class="total-col">1 515 673</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2023<span class="cnt">(7 234 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h5">412 367</td><td class="h5">532 464</td><td class="h5">441 524</td><td class="h4">183 693</td>
-        <td class="total-col">1 570 048</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2024<span class="cnt">(2 034 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h3">90 091</td><td class="h3">100 682</td><td class="h2">37 310</td>
-        <td class="total-col">228 083</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2025<span class="cnt">(1 213 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h2">48 857</td><td class="h2">29 392</td>
-        <td class="total-col">78 248</td>
-      </tr>
-      <tr>
-        <td class="row-hdr">2026<span class="cnt">(697 sut.)</span></td>
-        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h1">16 280</td>
-        <td class="total-col">16 280</td>
-      </tr>
-      <tr class="total-row">
-        <td>VISO</td>
-        <td>18 270</td><td>310 988</td><td>615 394</td><td>884 638</td><td>1 257 082</td><td>1 641 496</td><td>1 733 600</td><td>1 598 156</td><td>697 121</td>
-        <td class="grand-total">8 756 744</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-  <div class="note">* Spalv&#371; intensyvumas rodo santykin&#303; pajam&#371; dyd&#303; eilut&#279;s viduje (kiekviena kohorta lyginama pati su savimi per laik&#261;, ne su kitomis kohortomis). &#352;altinis: Baz&#279;_Closed_Won_r&#279;mimo_m&#279;nesiams_paskai&#269;iuoti.xlsx. Skai&#269;iai EUR.</div>
+  <div class="note">* Unikal&#363;s r&#279;m&#279;jai pagal pirmo mok&#279;jimo m&#279;nes&#303; &ndash; &#353;altinis LP-F2F-2026-07_ATASKAITA.xlsx, ta pati logika kaip Metin&#279;je suvestin&#279;je (Grand Total = 30 346, sutampa). 2018 duomenys nuo rugs&#279;jo, 2026 iki liepos.</div>
 </div>
 
 <div class="sh">&#352;altiniai ir metodologija</div>
