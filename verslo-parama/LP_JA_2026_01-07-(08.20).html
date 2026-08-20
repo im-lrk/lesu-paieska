@@ -3,947 +3,505 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LP JA · Juridinių Asmenų Parama 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<title>LP F2F · Ataskaita valdybai · 2026-07</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-:root {
-  --red:      #C0392B;
-  --navy:     #1B2A4A;
-  --teal:     #2471A3;
-  --cyan:     #17A589;
-  --orange:   #E67E22;
-  --amber:    #D4AC0D;
-  --green:    #1E8449;
-  --green-l:  #D5F5E3;
-  --gray-05:  #F5F6F8;
-  --gray-10:  #EAECEE;
-  --gray-30:  #BFC9CA;
-  --gray-50:  #7F8C8D;
-  --gray-80:  #2C3E50;
-  --font:     'Source Sans 3', sans-serif;
+:root{
+  --bg:#f0f2f7;--surface:#fff;--border:#dde1ec;
+  --ink:#111827;--ink2:#374151;--ink3:#6b7280;
+  --red:#C8102E;--red-bg:#fde8ea;
+  --blue:#2563eb;--blue-bg:#dbeafe;
+  --green:#059669;--green-bg:#d1fae5;
+  --amber:#d97706;--amber-bg:#fef3c7;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font); background: var(--gray-05); color: var(--gray-80); }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Figtree',sans-serif;font-size:14px}
+.topbar{background:#1e1e2e;color:#fff;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar h1{font-family:'Figtree',sans-serif;font-size:20px;font-weight:900}
+.topbar h1 span{color:var(--red)}
+.topbar-meta{font-size:12px;opacity:0.7;margin-top:3px}
+.tabs{display:flex;gap:6px;padding:0 40px;background:#fff;border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:10}
+.tabbtn{font-family:'Figtree',sans-serif;font-size:15.5px;font-weight:800;color:var(--ink3);background:none;border:none;padding:14px 20px;cursor:pointer;border-bottom:3px solid transparent}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--red);border-bottom-color:var(--red)}
+.main{padding:24px 40px 60px;max-width:1180px;margin:0 auto}
+.tabpanel{display:none}
+.tabpanel.active{display:block}
+.sh{font-family:'Figtree',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--ink3);margin:26px 0 12px;display:flex;align-items:center;gap:12px}
+.sh:first-child{margin-top:0}
+.sh::after{content:'';flex:1;height:2px;background:var(--border)}
 
-/* HEADER */
-.header {
-  background: var(--navy);
-  padding: 0 36px;
-  display: flex; align-items: stretch; justify-content: space-between;
-  min-height: 66px;
-}
-.header-brand { display: flex; align-items: center; gap: 13px; padding: 12px 0; }
-.rk-logo {
-  min-width: 42px; height: 36px; padding: 0 7px; background: var(--red); border-radius: 5px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  color: #fff; font-size: 14px; font-weight: 900; letter-spacing: .7px;
-}
-.brand-main { font-size: 16px; font-weight: 700; color: white; }
-.brand-sub  { font-size: 13px; color: rgba(255,255,255,.45); margin-top: 2px; letter-spacing: .3px; }
-.header-tabs { display: flex; align-items: stretch; }
-.htab {
-  display: flex; align-items: center; padding: 0 18px;
-  font-size: 16.5px; font-weight: 600; color: rgba(255,255,255,.55);
-  cursor: pointer; border-bottom: 3px solid transparent; border-top: 3px solid transparent;
-  transition: all .14s; white-space: nowrap;
-}
-.htab:hover  { color: rgba(255,255,255,.78); background: rgba(255,255,255,.04); }
-.htab.active { color: white; border-bottom-color: var(--red); font-size: 16.5px; }
+.insight-box{background:#eef4ff;border:1.5px solid #c7dbff;border-radius:10px;padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.55;margin-bottom:4px}
+.insight-box.warn{background:var(--amber-bg);border-color:#fcd9a3;color:#7c4a03}
 
-/* PAGE */
-.page { padding: 22px 36px 44px; max-width: 1340px; margin: 0 auto; }
-.page-title { margin-bottom: 18px; }
-.page-title h1 { font-size: 26px; font-weight: 900; color: var(--navy); letter-spacing: -.3px; }
-.page-title h1 span { color: var(--red); }
-.page-title .meta { font-size: 13.5px; color: var(--gray-80); margin-top: 3px; }
+/* KPI cards */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px}
+.kpi-card{background:var(--surface);border:1.5px solid var(--border);border-top:5px solid var(--ac);border-radius:12px;padding:18px 20px}
+.kpi-card .kpi-title{font-family:'Figtree',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--ac2);margin-bottom:2px}
+.kpi-card .kpi-sub{font-size:11px;color:var(--ink3);margin-bottom:12px}
+.kpi-line{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--border)}
+.kpi-line:last-of-type{border-bottom:none}
+.kpi-line .lbl{font-size:12px;color:var(--ink3);font-weight:600}
+.kpi-line .val{font-family:'Figtree',sans-serif;font-size:19px;font-weight:800;color:var(--ink)}
+.kpi-line .val .unit{font-size:12px;font-weight:600;color:var(--ink3);margin-left:2px}
+.delta{font-family:'Figtree',sans-serif;font-size:11px;font-weight:800;padding:2px 7px;border-radius:5px;white-space:nowrap;margin-left:8px}
+.delta.good{background:var(--green-bg);color:#065f46}
+.delta.bad{background:var(--red-bg);color:#9f1128}
+.delta.muted{background:#f0f0f0;color:var(--ink3)}
+.kpi-foot{font-size:10.5px;font-family:'Figtree',sans-serif;font-weight:600;color:var(--ink3);margin-top:8px;font-style:normal}
 
-/* KPI STRIP */
-.kpi-strip { display: grid; grid-template-columns: repeat(6,1fr); gap: 9px; margin-bottom: 18px; }
-.kpi {
-  background: white; border-radius: 7px; padding: 12px 14px 11px;
-  border-top: 3px solid var(--gray-10); box-shadow: 0 1px 3px rgba(0,0,0,.05);
-}
-.kpi.c-red    { border-top-color: var(--red); }
-.kpi.c-blue   { border-top-color: var(--teal); }
-.kpi.c-orange { border-top-color: var(--orange); }
-.kpi.c-amber  { border-top-color: var(--amber); }
-.kpi.c-green  { border-top-color: var(--green); }
-.kpi-lbl { font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gray-80); margin-bottom: 4px; }
-.kpi-val { font-size: 26px; font-weight: 900; line-height: 1; color: var(--gray-80); }
-.kpi-val.red   { color: var(--red); }
-.kpi-val.green { color: var(--green); }
-.kpi-sub { font-size: 12px; color: var(--gray-50); margin-top: 3px; }
+/* Comparison tables */
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:20px;overflow-x:auto}
+.card-title{font-family:'Figtree',sans-serif;font-size:15px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.card-title .dot{width:10px;height:10px;border-radius:3px;background:var(--ac)}
+.card-sub{font-size:12px;color:var(--ink3);margin-bottom:14px}
+table.cmp{border-collapse:collapse;width:100%;min-width:520px}
+table.cmp th{font-family:'Figtree',sans-serif;font-size:13px;font-weight:800;text-transform:none;letter-spacing:0.2px;color:var(--ink);text-align:right;padding:9px 12px}
+table.cmp th:first-child{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink3);font-weight:700}
+table.cmp td{padding:8px 12px;text-align:right;font-size:13px;font-family:'Figtree',sans-serif;font-weight:600;border-bottom:1px solid #eef0f6}
+table.cmp td:first-child{text-align:left;font-weight:700;font-family:'Figtree',sans-serif;color:var(--ink2)}
+table.cmp td.good{color:#059669;font-weight:800;font-family:'Figtree',sans-serif}
+table.cmp td.bad{color:#C8102E;font-weight:800;font-family:'Figtree',sans-serif}
+table.cmp td.muted{color:var(--ink3);font-weight:600;font-family:'Figtree',sans-serif}
+table.cmp tr.total-row td{background:#f7f8fc;font-weight:800;border-top:2px solid var(--border);border-bottom:none;color:var(--ink)}
+table.cmp tr.total-row td.good{color:#059669}
+table.cmp tr.total-row td.bad{color:#C8102E}
+.grp-hdr th{padding:9px 12px 7px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;border-radius:6px 6px 0 0}
+.grp-hdr th.blk-vnt{background:#e2e8f7;color:#33415c}
+.grp-hdr th.blk-eur{background:#fbead6;color:#7a4a12}
+th.col-vnt, td.col-vnt{background:#f2f4fb}
+th.col-eur, td.col-eur{background:#fdf8f0}
+table.cmp tr.total-row td.col-vnt{background:#e4f1ea}
+table.cmp tr.total-row td.col-eur{background:#e4f1ea}
+.mini-chart{position:relative;height:170px;margin-bottom:16px}
 
-/* BODY */
-.body-grid { display: grid; grid-template-columns: 340px 1fr; gap: 18px; align-items: start; }
+/* Annual table (tab 2) */
+table.annual{border-collapse:collapse;width:100%;min-width:760px}
+table.annual th{font-family:'Figtree',sans-serif;font-size:14.5px;font-weight:800;text-align:right;padding:12px 14px;background:#1e1e2e;color:#fff;letter-spacing:0.2px}
+table.annual th:first-child{text-align:left;border-radius:6px 0 0 0}
+table.annual td{padding:8px 12px;text-align:right;font-size:13px;font-family:'Figtree',sans-serif;font-weight:600;border:1px solid #eef0f6}
+table.annual td:first-child{text-align:left;font-weight:800;font-family:'Figtree',sans-serif;background:#f7f8fc}
+table.annual tr.total-row td{background:var(--green-bg);font-weight:800;color:#065f46;border-top:2px solid var(--green)}
+table.annual tr.partial td{color:var(--ink2)}
+table.annual .grpblue{color:var(--blue)}
+table.annual .grpgreen{color:var(--green)}
+table.annual .grpred{color:var(--red)}
 
-/* PIPELINE */
-.pipeline-card { background: white; border-radius: 9px; box-shadow: 0 1px 4px rgba(0,0,0,.07); overflow: hidden; }
-.pipeline-head { background: var(--navy); padding: 12px 18px 11px; }
-.pipeline-head-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: rgba(255,255,255,.9); }
-.pipeline-head-sub   { font-size: 12px; color: rgba(255,255,255,.6); margin-top: 2px; }
+/* New donors monthly heatmap matrix */
+.heatmap-wrap{overflow-x:auto}
+table.heatmap{border-collapse:collapse;width:100%;min-width:760px}
+table.heatmap th{font-family:'Figtree',sans-serif;font-size:13.5px;font-weight:800;padding:10px 12px;text-align:center;background:#1e1e2e;color:#fff;white-space:nowrap}
+table.heatmap th:first-child{text-align:left;padding-left:16px;border-radius:6px 0 0 0;font-size:12px}
+table.heatmap th.total-hdr{background:#0f172a}
+table.heatmap td{padding:8px 12px;text-align:right;font-size:13px;font-family:'Figtree',sans-serif;font-weight:700;border:1px solid #fff;color:#1f2937}
+table.heatmap td.row-hdr{text-align:center;font-weight:800;background:#f7f8fc;color:var(--ink)}
+table.heatmap td.blank{background:#f3f4f6;color:#d1d5db;font-weight:400}
+table.heatmap td.total-col{font-weight:800;background:#e5e7eb;color:var(--ink);border-left:2px solid #9ca3af}
+table.heatmap tr.total-row td{background:#e5e7eb;font-weight:800;color:var(--ink);border-top:2px solid #9ca3af}
+table.heatmap tr.total-row td:first-child{text-align:left;padding-left:16px}
+.legend-scale{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink3);margin-top:12px}
+.legend-bar{flex:1;max-width:220px;height:10px;border-radius:5px;background:linear-gradient(90deg,#fee2e2,#bbf7d0)}
 
-.pipe-step {
-  display: flex; align-items: stretch;
-  border-bottom: 1px solid var(--gray-10);
-}
-.pipe-step:last-child { border-bottom: none; }
-.pipe-step:hover { background: var(--gray-05); }
+/* Cohort revenue matrix */
+.cohort-wrap{overflow-x:auto}
+table.cohorttable{border-collapse:collapse;width:100%;min-width:820px}
+table.cohorttable th{font-size:13px;font-weight:800;padding:10px 12px;text-align:center;white-space:nowrap;background:#1e3a5f;color:#fff}
+table.cohorttable th.corner{text-align:left;padding-left:16px;border-radius:6px 0 0 0;font-size:12px}
+table.cohorttable th.total-hdr{background:#16314f}
+table.cohorttable td{padding:8px 12px;text-align:right;font-size:13px;font-weight:600;border:1px solid #e8eaf2}
+table.cohorttable td.row-hdr{text-align:left;font-weight:800;background:#dbe8f7;color:#1e3a5f;border-right:2px solid var(--blue);padding-left:16px}
+table.cohorttable td.row-hdr .cnt{font-size:11px;color:var(--ink3);font-weight:500;margin-left:6px}
+table.cohorttable td.na{background:#f3f4f6;color:#c4c9d8;text-align:center;font-weight:400}
+table.cohorttable td.h1{background:#f0fdf4}
+table.cohorttable td.h2{background:#dcfce7}
+table.cohorttable td.h3{background:#bbf7d0}
+table.cohorttable td.h4{background:#86efac}
+table.cohorttable td.h5{background:#4ade80;color:#14532d}
+table.cohorttable td.total-col{font-weight:800;background:#e8f5e9;color:var(--green);border-left:2px solid var(--green)}
+table.cohorttable tr.total-row td{background:var(--green-bg);font-weight:800;color:#065f46;border-top:2px solid var(--green)}
+table.cohorttable tr.total-row td:first-child{text-align:left;padding-left:16px}
+table.cohorttable td.grand-total{background:#a7f3d0;color:#064e3b;font-size:14px;border-left:2px solid var(--green)}
 
-.pipe-icon { width: 46px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.pipe-content { flex: 1; padding: 10px 10px 9px 0; }
-.pipe-label {
-  font-size: 13px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .4px; color: var(--gray-80);
-  display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
-}
-.pipe-pct { font-size: 12px; font-weight: 400; color: var(--gray-50); text-transform: none; letter-spacing: 0; }
-.pipe-num { font-size: 26px; font-weight: 900; line-height: 1.1; margin-top: 1px; }
-.pipe-desc { font-size: 13px; color: var(--gray-50); margin-top: 1px; }
-.pipe-bar-wrap { width: 5px; background: var(--gray-10); flex-shrink: 0; position: relative; }
-.pipe-bar-fill { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 3px 3px 0 0; }
-.pipe-arrow { display: flex; justify-content: center; padding: 2px 0; background: var(--gray-05); border-bottom: 1px solid var(--gray-10); }
-
-.ps-navy   .pipe-num { color: var(--navy); }    .ps-navy   .pipe-bar-fill { background: var(--navy); }
-.ps-teal   .pipe-num { color: var(--teal); }    .ps-teal   .pipe-bar-fill { background: var(--teal); }
-.ps-cyan   .pipe-num { color: var(--cyan); }    .ps-cyan   .pipe-bar-fill { background: var(--cyan); }
-.ps-blue   .pipe-num { color: #2471A3; }        .ps-blue   .pipe-bar-fill { background: #2471A3; }
-.ps-orange .pipe-num { color: var(--orange); }  .ps-orange .pipe-bar-fill { background: var(--orange); }
-.ps-amber  .pipe-num { color: var(--amber); }   .ps-amber  .pipe-bar-fill { background: var(--amber); }
-.ps-green  .pipe-num { color: var(--green); }   .ps-green  .pipe-bar-fill { background: var(--green); }
-
-/* RIGHT PANEL */
-.right-panel { display: flex; flex-direction: column; gap: 14px; }
-.card { background: white; border-radius: 9px; box-shadow: 0 1px 4px rgba(0,0,0,.07); overflow: hidden; }
-.card-head { padding: 10px 16px 9px; border-bottom: 1px solid var(--gray-10); display: flex; align-items: center; justify-content: space-between; }
-.card-title { font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--gray-80); }
-.card-body  { padding: 13px 16px; }
-
-/* STATUS TABLE */
-.st-table { width: 100%; border-collapse: collapse; }
-.st-table tr { border-bottom: 1px solid var(--gray-10); }
-.st-table tr:last-child { border-bottom: none; }
-.st-table td { padding: 8px 4px; font-size: 14px; vertical-align: middle; }
-.st-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; }
-.st-count { font-weight: 700; text-align: right; white-space: nowrap; width: 52px; }
-.st-pct   { font-size: 13px; color: var(--gray-80); text-align: right; white-space: nowrap; width: 44px; }
-.st-bar-td { width: 88px; padding-left: 10px; }
-.st-bar-bg { background: var(--gray-10); border-radius: 3px; height: 5px; overflow: hidden; }
-.st-bar-fg { height: 100%; border-radius: 3px; }
-.st-total td { font-weight: 700; border-top: 2px solid var(--gray-10) !important; padding-top: 8px; }
-.st-table .st-total { border-bottom: none; }
-
-/* Insights */
-.insight-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; }
-.insight { background: var(--gray-05); border-radius: 7px; padding: 11px 13px; border-top: 3px solid var(--gray-10); }
-.insight.i-blue   { border-top-color: var(--teal); }
-.insight.i-orange { border-top-color: var(--orange); }
-.insight.i-green  { border-top-color: var(--green); }
-.insight-pct { font-size: 32px; font-weight: 900; line-height: 1; }
-.insight-pct.blue   { color: var(--teal); }
-.insight-pct.orange { color: var(--orange); }
-.insight-pct.green  { color: var(--green); }
-.insight-lbl { font-size: 13px; color: var(--gray-80); margin-top: 3px; line-height: 1.35; }
-.insight-formula { font-size: 12px; color: var(--gray-50); margin-top: 2px; }
-
-/* Bank */
-.bank-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 9px; margin-bottom: 12px; }
-.bank-m { background: var(--gray-05); border-radius: 6px; padding: 9px 11px; border-left: 3px solid var(--green); }
-.bank-m-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--gray-80); }
-.bank-m-val  { font-size: 18px; font-weight: 900; color: var(--green); margin-top: 2px; }
-.bank-m-cnt  { font-size: 12px; color: var(--gray-80); margin-top: 1px; }
-.bank-total-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0 0; border-top: 2px solid var(--gray-10); }
-.bank-total-val { font-size: 24px; font-weight: 900; color: var(--green); }
-.bank-note { margin-top: 9px; background: #FEF9E7; border-left: 3px solid var(--amber); padding: 7px 11px; border-radius: 0 5px 5px 0; font-size: 13px; color: #7D6608; line-height: 1.45; }
-
-.note-box { background: var(--gray-05); border-radius: 7px; padding: 11px 14px; font-size: 13px; color: var(--gray-80); line-height: 1.55; border-left: 3px solid var(--gray-30); }
-.note-box strong { color: var(--gray-80); }
-.footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--gray-10); font-size: 13px; color: var(--gray-50); display: flex; gap: 18px; flex-wrap: wrap; }
-.footer strong { color: var(--gray-80); }
-
-.d-view { display: none; }
-.d-view.active { display: block; }
-
-/* DATA TABLE under charts */
-.dt {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 8px;
-  font-size: 13px;
-  font-family: var(--font);
-}
-.dt td, .dt th {
-  padding: 4px 6px;
-  text-align: center;
-  border: 1px solid var(--gray-10);
-  white-space: nowrap;
-}
-.dt th {
-  background: var(--gray-05);
-  color: var(--gray-80);
-  font-weight: 700;
-  font-size: 12.5px;
-  text-transform: uppercase;
-  letter-spacing: .3px;
-}
-.dt tr:first-child th { border-top: 2px solid var(--gray-10); }
-.dt td:first-child, .dt th:first-child {
-  text-align: left;
-  color: var(--gray-50);
-  font-weight: 600;
-  background: var(--gray-05);
-  width: 140px;
-}
-.dt td:first-child {
-  display: flex;
-  align-items: center;
-}
-
-/* ── PIPELINE PAGE ── */
-.pl-header {
-  font-size: 13px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .6px; color: var(--gray-80);
-  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
-}
-.pl-header::after { content:''; flex:1; height:1px; background:var(--gray-10); }
-
-.pl-cards { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 16px; }
-
-.pl-card {
-  background: white; border-radius: 9px;
-  padding: 16px 18px 14px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.07);
-  border-top: 3px solid var(--gray-10);
-}
-.pl-card.c-teal   { border-top-color: var(--teal); }
-.pl-card.c-cyan   { border-top-color: var(--cyan); }
-.pl-card.c-blue   { border-top-color: #2471A3; }
-.pl-card.c-orange { border-top-color: var(--orange); }
-.pl-card.c-amber  { border-top-color: var(--amber); }
-
-.pl-lbl { font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--gray-80); margin-bottom: 5px; }
-.pl-num { font-size: 28px; font-weight: 900; line-height: 1; color: var(--gray-80); margin-bottom: 6px; }
-.pl-est { font-size: 14px; font-weight: 700; color: var(--green); }
-.pl-rate { font-size: 12px; color: var(--gray-60); margin-top: 3px; }
-
-.pl-total-box {
-  background: linear-gradient(135deg, #1B2A4A 0%, #2C3E6A 100%);
-  border-radius: 10px;
-  padding: 22px 28px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  gap: 0;
-  align-items: center;
-  margin-bottom: 16px;
-}
-.pl-total-item { padding: 0 24px; border-right: 1px solid rgba(255,255,255,.12); }
-.pl-total-item:first-child { padding-left: 0; }
-.pl-total-item:last-child  { border-right: none; text-align: right; }
-.pl-total-lbl { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: rgba(255,255,255,.85); margin-bottom: 4px; }
-.pl-total-val { font-size: 28px; font-weight: 900; color: #2ECC71; line-height: 1; }
-.pl-total-note { font-size: 11px; color: rgba(255,255,255,.35); margin-top: 5px; line-height: 1.45; max-width: 260px; text-align: right; }
-
-.pl-method {
-  background: white; border-radius: 9px; padding: 16px 20px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.07);
-  font-size: 13px; color: var(--gray-80); line-height: 1.6;
-  border-left: 3px solid var(--navy);
-}
-.pl-method strong { color: var(--navy); }
-
-/* ── CHANNEL TABLE ── */
-.dt-channel { font-size: 13.5px; }
-.dt-channel td, .dt-channel th { padding: 9px 10px; }
-.dt-channel .row-call    td { background: rgba(27,42,74,.06); }
-.dt-channel .row-call    td:first-child { background: rgba(27,42,74,.11); }
-.dt-channel .row-email   td { background: rgba(26,82,118,.06); }
-.dt-channel .row-email   td:first-child { background: rgba(26,82,118,.11); }
-.dt-channel .row-meeting td { background: rgba(23,165,137,.06); }
-.dt-channel .row-meeting td:first-child { background: rgba(23,165,137,.11); }
-.dt-channel tr.dt-head th {
-  background: var(--navy);
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .4px;
-  padding: 8px 10px;
-}
-.dt-channel tr.dt-head th:first-child {
-  background: var(--navy);
-  color: rgba(255,255,255,.7);
-}
-.dt-channel .row-total td {
-  font-weight: 700;
-  border-top: 2px solid var(--gray-10);
-  background: var(--gray-05);
-}
+.foot{background:#1e1e2e;color:#fff;padding:12px 40px;font-size:12px;opacity:0.75}
+.note{font-size:11.5px;color:var(--ink3);margin-top:10px;font-style:italic}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-brand">
-    <div class="rk-logo">LRK</div>
-    <div>
-      <div class="brand-main">Juridinių asmenų parama</div>
-    </div>
+<div class="topbar">
+  <div>
+    <h1>LP <span>F2F</span> · Ataskaita valdybai</h1>
+    <div class="topbar-meta">Nuolatinės rėmimo sutartys · duomenys iki 2026-07 (imtinai)</div>
   </div>
-  <div class="header-tabs">
-    <div class="htab active" onclick="switchTab('all',this)">Viso I–VII</div>
-    <div class="htab" onclick="switchTab('m1',this)">Sausis</div>
-    <div class="htab" onclick="switchTab('m2',this)">Vasaris</div>
-    <div class="htab" onclick="switchTab('m3',this)">Kovas</div>
-    <div class="htab" onclick="switchTab('m4',this)">Balandis</div>
-    <div class="htab" onclick="switchTab('m5',this)">Gegužė</div>
-    <div class="htab" onclick="switchTab('m6',this)">Birželis</div>
-    <div class="htab" onclick="switchTab('m7',this)">Liepa</div>
-    <div class="htab" style="border-left:1px solid rgba(255,255,255,.15);margin-left:8px" onclick="switchTab('pipeline',this)">📊 Pipeline</div>
-  </div>
+  <div style="font-size:12px;opacity:0.7">Atnaujinta: 2026-08</div>
 </div>
 
-<div class="d-view active" id="dv-all">
-<div class="page">
-  <div class="page-title">
-    <h1>Juridinių Asmenų Parama <span>2026 1-7 mėn.</span></h1>
-      </div>
+<div class="tabs">
+  <button class="tabbtn active" onclick="showTab(0)">2026 m. liepa</button>
+  <button class="tabbtn" onclick="showTab(1)">Visas periodas (2018–2026)</button>
+</div>
 
-  <div class="kpi-strip">
-    <div class="kpi c-red">
-      <div class="kpi-lbl">Unikalių įmonių</div>
-      <div class="kpi-val red">12 654</div>
-      <div class="kpi-sub">kontaktuota 2026 I–VII (mėnesių suma, gali persidengti)</div>
-    </div>
-    <div class="kpi c-blue">
-      <div class="kpi-lbl">Viso kontaktų</div>
-      <div class="kpi-val">21 352</div>
-      <div class="kpi-sub">skambučiai + el. laiškai + susit.</div>
-    </div>
-    <div class="kpi c-orange">
-      <div class="kpi-lbl">Konversija</div>
-      <div class="kpi-val">3,1%</div>
-      <div class="kpi-sub">394 iš 12 654 įmonių</div>
-    </div>
-    <div class="kpi c-amber">
-      <div class="kpi-lbl">Vidutinė įmoka (Bankas)</div>
-      <div class="kpi-val">254 €</div>
-      <div class="kpi-sub">167 841 € / 660 mokėjimų · I–VII Bankas</div>
-    </div>
-    <div class="kpi c-green">
-      <div class="kpi-lbl">Sutarta parama (SF)</div>
-      <div class="kpi-val green">394</div>
-      <div class="kpi-sub">unikalios įmonės, I–VII</div>
-    </div>
-    <div class="kpi c-green">
-      <div class="kpi-lbl">Gauta parama (Bankas)</div>
-      <div class="kpi-val green">167 841 €</div>
-      <div class="kpi-sub">660 mokėjimų · I–VII</div>
-    </div>
-  </div>
-  <div class="note-box" style="margin-bottom:14px;">Kontaktų rodikliai paimti iš lapo „Kontaktai“, o gautos paramos rodikliai — iš lapo „Banko išrašas“. Unikalių įmonių I–VII rodiklis yra mėnesinių reikšmių suma, todėl ta pati įmonė skirtingais mėnesiais gali būti įskaičiuota daugiau nei kartą.</div>
+<div class="main">
 
-  <!-- 4 CHARTS BETWEEN KPI AND FUNNEL -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-    <div class="card">
-      <div class="card-head">
-        <span class="card-title">💶 Gauta parama · apimtis</span>
-        <span style="font-size:12px;color:var(--gray-80)">Suma (stulp.) + mokėjimų sk. (linija)</span>
-      </div>
-      <div class="card-body" style="padding-bottom:6px;padding-top:10px;">
-        <div style="position:relative;height:180px;"><canvas id="chart-bank1"></canvas></div>
-        <table id="dt-bank1" class="dt"></table>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <span class="card-title">💶 Gauta parama · kokybė</span>
-        <span style="font-size:12px;color:var(--gray-80)">Vid. įmoka (€) + Konversija (%)</span>
-      </div>
-      <div class="card-body" style="padding-bottom:6px;padding-top:10px;">
-        <div style="position:relative;height:180px;"><canvas id="chart-bank2"></canvas></div>
-        <table id="dt-bank2" class="dt"></table>
-      </div>
-    </div>
+<!-- ============ TAB 0: LIEPA ============ -->
+<div id="tabpanel-0" class="tabpanel active">
+
+<div class="sh">Liepos m&#279;nesio suvestin&#279; &middot; palyginimas su 2025-07</div>
+<div class="kpi-row">
+
+  <div class="kpi-card" style="--ac:#2563eb;--ac2:#2563eb">
+    <div class="kpi-title">Pajamos (nuolatin&#279;s)</div>
+    <div class="kpi-sub">Visi liepos m&#279;n. gauti mok&#279;jimai</div>
+    <div class="kpi-line"><span class="lbl">Sk. (vnt.)</span><span class="val">12 384 <span class="delta bad">&minus;10,5%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Suma</span><span class="val">120 304 &euro; <span class="delta bad">&minus;10,1%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Vid. &#303;moka</span><span class="val">9,71 &euro; <span class="delta good">+0,4%</span></span></div>
+    <div class="kpi-foot">YTD (sau&ndash;lie): 83 952 vnt. (&minus;14,2%) &middot; 816 699 &euro; (&minus;13,7%)</div>
   </div>
 
-  <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:18px;">
-    <div class="card">
-      <div class="card-head">
-        <span class="card-title">📞 Kontaktų aktyvumas</span>
-        <span style="font-size:12px;color:var(--gray-80)">Unikalios įmonės + pasiūlymai</span>
-      </div>
-      <div class="card-body" style="padding-bottom:6px;padding-top:10px;">
-        <div style="position:relative;height:220px;"><canvas id="chart-contacts"></canvas></div>
-        <table id="dt-contacts" class="dt"></table>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <span class="card-title">📞 Kontaktai pagal kanalą</span>
-        <span style="font-size:12px;color:var(--gray-80)">Unikalūs · Viso · I–VII mėn.</span>
-      </div>
-      <div class="card-body" style="padding:16px 18px;">
-        <table id="dt-contacts2" class="dt dt-channel"></table>
-      </div>
-    </div>
+  <div class="kpi-card" style="--ac:#059669;--ac2:#059669">
+    <div class="kpi-title">Nauji r&#279;m&#279;jai</div>
+    <div class="kpi-sub">Unikal&#363;s, pirmas mok&#279;jimas liepoje</div>
+    <div class="kpi-line"><span class="lbl">Sk. (vnt.)</span><span class="val">8 <span class="delta bad">&minus;96,7%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Suma</span><span class="val">79 &euro; <span class="delta bad">&minus;96,9%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Vid. &#303;moka</span><span class="val">9,88 &euro; <span class="delta bad">&minus;6,2%</span></span></div>
+    <div class="kpi-foot">YTD (sau&ndash;lie): 703 vnt. (&minus;20,7%) &middot; 6 763 &euro; (&minus;24,6%)</div>
   </div>
 
-  <div class="body-grid">
-    <div class="pipeline-card">
-      <div class="pipeline-head">
-        <div class="pipeline-head-title">Kontaktų piltuvėlis</div>
-        <div class="pipeline-head-sub">Count of Company Code · 2026 I–VII mėn.</div>
-      </div>
-      <div class="pipeline-body" id="pipe-all"></div>
-    </div>
-
-    <div class="right-panel">
-      <div class="card">
-        <div class="card-head"><span class="card-title">⚡ Pagrindinės konversijos</span></div>
-        <div class="card-body">
-          <div class="insight-grid">
-            <div class="insight i-blue">
-              <div class="insight-pct blue">10,3%</div>
-              <div class="insight-lbl">Pasiūlymų konversija nuo kontaktuotų įmonių</div>
-              <div class="insight-formula">1 306 iš 12 654</div>
-            </div>
-            <div class="insight i-orange">
-              <div class="insight-pct orange">30,2%</div>
-              <div class="insight-lbl">Sutartos paramos konversija nuo pasiūlymų</div>
-              <div class="insight-formula">394 iš 1 306</div>
-            </div>
-            <div class="insight i-green">
-              <div class="insight-pct green">3,1%</div>
-              <div class="insight-lbl">Galutinė konversija nuo kontaktuotų įmonių</div>
-              <div class="insight-formula">394 iš 12 654</div>
-            </div>
-          </div>
-          <div style="margin-top:10px;padding:9px 11px;background:var(--gray-05);border-radius:6px;font-size:13px;color:var(--gray-80);line-height:1.5;border-left:3px solid var(--navy);">
-            <strong style="color:var(--navy)">Pagrindinė įžvalga:</strong> Didžiausias potencialas — ne naujos bazės plėtimas, o esamo pipeline konversija. Reikšminga dalis kontaktų dar nepasiekta arba laukia perskambinimo, o pasiekus įmonę ir išsiuntus pasiūlymą, konversija į sutartą paramą yra reikšminga.
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          <span class="card-title">📊 Kontaktų statusai · detalės</span>
-          <span style="font-size:12px;color:var(--gray-80)">Count of Company Code · visi kanalai</span>
-        </div>
-        <div class="card-body" style="padding-top:9px;">
-          <table class="st-table" id="st-all"></table>
-        </div>
-      </div>
-
-    </div>
+  <div class="kpi-card" style="--ac:#C8102E;--ac2:#C8102E">
+    <div class="kpi-title">Atkrito (Churn)</div>
+    <div class="kpi-sub">Paskutin&#303; kart&#261; mok&#279;jo 2026-04</div>
+    <div class="kpi-line"><span class="lbl">Sk. (vnt.)</span><span class="val">255 <span class="delta bad">+44,1%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Prarasta suma</span><span class="val">2 531 &euro; <span class="delta bad">+39,5%</span></span></div>
+    <div class="kpi-line"><span class="lbl">Vid. suma</span><span class="val">9,93 &euro; <span class="delta good">&minus;3,2%</span></span></div>
+    <div class="kpi-foot">YTD (sau&ndash;lie): 1 820 vnt. (+21,0%) &middot; 18 048 &euro; (+23,2%)</div>
   </div>
 
 </div>
+<div class="note">* Pilka = 2025, spalvota = 2026 (sausis&ndash;liepa).</div>
+
+<div class="sh">M&#279;nesio dinamika 2026 vs 2025 (sausis&ndash;liepa)</div>
+
+<div class="card">
+  <div class="card-title"><span class="dot" style="background:#2563eb"></span>Pajamos (nuolatin&#279;s &#303;mokos)</div>
+  <div class="card-sub">Visi gauti mok&#279;jimai per m&#279;nes&#303;</div>
+  <div class="mini-chart"><canvas id="barPajamos"></canvas></div>
+  <table class="cmp">
+    <thead>
+      <tr class="grp-hdr"><th></th><th class="blk-vnt" colspan="3">Sk. (vnt.)</th><th class="blk-eur" colspan="3">Suma (&euro;)</th></tr>
+      <tr><th>M&#279;nuo</th><th class="col-vnt">2025</th><th class="col-vnt">2026</th><th class="col-vnt">&Delta;</th><th class="col-eur">2025</th><th class="col-eur">2026</th><th class="col-eur">&Delta;</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sausis</td><td class="col-vnt">14 263</td><td class="col-vnt">7 158</td><td class="bad col-vnt">&minus;49,8%*</td><td class="col-eur">137 729,92</td><td class="col-eur">72 246,80</td><td class="bad col-eur">&minus;47,5%*</td></tr>
+      <tr><td>Vasaris</td><td class="col-vnt">14 000</td><td class="col-vnt">12 790</td><td class="bad col-vnt">&minus;8,6%</td><td class="col-eur">135 339,59</td><td class="col-eur">124 217,81</td><td class="bad col-eur">&minus;8,2%</td></tr>
+      <tr><td>Kovas</td><td class="col-vnt">14 012</td><td class="col-vnt">13 046</td><td class="bad col-vnt">&minus;6,9%</td><td class="col-eur">135 736,36</td><td class="col-eur">126 506,91</td><td class="bad col-eur">&minus;6,8%</td></tr>
+      <tr><td>Balandis</td><td class="col-vnt">13 991</td><td class="col-vnt">12 845</td><td class="bad col-vnt">&minus;8,2%</td><td class="col-eur">135 505,82</td><td class="col-eur">124 294,41</td><td class="bad col-eur">&minus;8,3%</td></tr>
+      <tr><td>Gegu&#382;&#279;</td><td class="col-vnt">14 046</td><td class="col-vnt">13 043</td><td class="bad col-vnt">&minus;7,1%</td><td class="col-eur">135 907,37</td><td class="col-eur">126 270,46</td><td class="bad col-eur">&minus;7,1%</td></tr>
+      <tr><td>Bir&#382;elis</td><td class="col-vnt">13 664</td><td class="col-vnt">12 686</td><td class="bad col-vnt">&minus;7,2%</td><td class="col-eur">132 340,47</td><td class="col-eur">122 858,41</td><td class="bad col-eur">&minus;7,2%</td></tr>
+      <tr><td>Liepa</td><td class="col-vnt">13 836</td><td class="col-vnt">12 384</td><td class="bad col-vnt">&minus;10,5%</td><td class="col-eur">133 810,42</td><td class="col-eur">120 303,86</td><td class="bad col-eur">&minus;10,1%</td></tr>
+      <tr class="total-row"><td>YTD (sau&ndash;lie)</td><td class="col-vnt">97 812</td><td class="col-vnt">83 952</td><td class="bad col-vnt">&minus;14,2%</td><td class="col-eur">946 369,95</td><td class="col-eur">816 698,66</td><td class="bad col-eur">&minus;13,7%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">* Sausio kritimas &ndash; IT klaida (Agmis), ne rėmėjų atsisakymas.</div>
 </div>
 
-<div class="d-view" id="dv-pipeline"><div class="page" id="pg-pipeline"></div></div>
+<div class="card">
+  <div class="card-title"><span class="dot" style="background:#059669"></span>Nauji r&#279;m&#279;jai</div>
+  <div class="card-sub">Unikal&#363;s r&#279;m&#279;jai, kuri&#371; pirmas mok&#279;jimas &#303;vyko t&#261; m&#279;nes&#303;</div>
+  <div class="mini-chart"><canvas id="barNauji"></canvas></div>
+  <table class="cmp">
+    <thead>
+      <tr class="grp-hdr"><th></th><th class="blk-vnt" colspan="3">Sk. (vnt.)</th><th class="blk-eur" colspan="3">Suma (&euro;)</th></tr>
+      <tr><th>M&#279;nuo</th><th class="col-vnt">2025</th><th class="col-vnt">2026</th><th class="col-vnt">&Delta;</th><th class="col-eur">2025</th><th class="col-eur">2026</th><th class="col-eur">&Delta;</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sausis</td><td class="col-vnt">1</td><td class="col-vnt">86</td><td class="muted col-vnt">n/a*</td><td class="col-eur">10,00</td><td class="col-eur">927,00</td><td class="good col-eur">+9170,0%*</td></tr>
+      <tr><td>Vasaris</td><td class="col-vnt">23</td><td class="col-vnt">49</td><td class="good col-vnt">+113,0%</td><td class="col-eur">221,03</td><td class="col-eur">521,00</td><td class="good col-eur">+135,7%</td></tr>
+      <tr><td>Kovas</td><td class="col-vnt">95</td><td class="col-vnt">116</td><td class="good col-vnt">+22,1%</td><td class="col-eur">1 041,00</td><td class="col-eur">1 080,00</td><td class="good col-eur">+3,7%</td></tr>
+      <tr><td>Balandis</td><td class="col-vnt">153</td><td class="col-vnt">128</td><td class="bad col-vnt">&minus;16,3%</td><td class="col-eur">1 486,00</td><td class="col-eur">1 166,00</td><td class="bad col-eur">&minus;21,5%</td></tr>
+      <tr><td>Gegu&#382;&#279;</td><td class="col-vnt">196</td><td class="col-vnt">251</td><td class="good col-vnt">+28,1%</td><td class="col-eur">1 927,00</td><td class="col-eur">2 369,00</td><td class="good col-eur">+22,9%</td></tr>
+      <tr><td>Bir&#382;elis</td><td class="col-vnt">178</td><td class="col-vnt">65</td><td class="bad col-vnt">&minus;63,5%</td><td class="col-eur">1 752,00</td><td class="col-eur">621,00</td><td class="bad col-eur">&minus;64,6%</td></tr>
+      <tr><td>Liepa</td><td class="col-vnt">240</td><td class="col-vnt">8</td><td class="bad col-vnt">&minus;96,7%</td><td class="col-eur">2 527,00</td><td class="col-eur">79,00</td><td class="bad col-eur">&minus;96,9%</td></tr>
+      <tr class="total-row"><td>YTD (sau&ndash;lie)</td><td class="col-vnt">886</td><td class="col-vnt">703</td><td class="bad col-vnt">&minus;20,7%</td><td class="col-eur">8 964,03</td><td class="col-eur">6 763,00</td><td class="bad col-eur">&minus;24,6%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">* 2025-01 (=1) &ndash; vyko kanalo keitimas (Magnum &rarr; In-House), % nevertintinas.</div>
+</div>
 
-<div class="d-view" id="dv-m1"><div class="page" id="pg-m1"></div></div>
-<div class="d-view" id="dv-m2"><div class="page" id="pg-m2"></div></div>
-<div class="d-view" id="dv-m3"><div class="page" id="pg-m3"></div></div>
-<div class="d-view" id="dv-m4"><div class="page" id="pg-m4"></div></div>
-<div class="d-view" id="dv-m5"><div class="page" id="pg-m5"></div></div>
-<div class="d-view" id="dv-m6"><div class="page" id="pg-m6"></div></div>
-<div class="d-view" id="dv-m7"><div class="page" id="pg-m7"></div></div>
+<div class="card">
+  <div class="card-title"><span class="dot" style="background:#C8102E"></span>Atkrito (Churn)</div>
+  <div class="card-sub">Pagal m&#279;nes&#303;, kada u&#382;fiksuotas paskutinis mok&#279;jimas (3 m&#279;n. taisykl&#279; &ndash; pvz. Liepos churn = paskutin&#303; kart&#261; mok&#279;jo 2026-04)</div>
+  <div class="mini-chart"><canvas id="barChurn"></canvas></div>
+  <table class="cmp">
+    <thead>
+      <tr class="grp-hdr"><th></th><th class="blk-vnt" colspan="3">Sk. (vnt.)</th><th class="blk-eur" colspan="3">Prarasta suma (&euro;)</th></tr>
+      <tr><th>Ataskaitos m&#279;n.</th><th class="col-vnt">2025</th><th class="col-vnt">2026</th><th class="col-vnt">&Delta;</th><th class="col-eur">2025</th><th class="col-eur">2026</th><th class="col-eur">&Delta;</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sausis</td><td class="col-vnt">223</td><td class="col-vnt">222</td><td class="good col-vnt">&minus;0,4%</td><td class="col-eur">2 288,00</td><td class="col-eur">2 132,00</td><td class="good col-eur">&minus;6,8%</td></tr>
+      <tr><td>Vasaris</td><td class="col-vnt">217</td><td class="col-vnt">272</td><td class="bad col-vnt">+25,3%</td><td class="col-eur">2 291,00</td><td class="col-eur">2 641,00</td><td class="bad col-eur">+15,3%</td></tr>
+      <tr><td>Kovas</td><td class="col-vnt">231</td><td class="col-vnt">359</td><td class="bad col-vnt">+55,4%</td><td class="col-eur">2 179,00</td><td class="col-eur">3 395,01</td><td class="bad col-eur">+55,8%</td></tr>
+      <tr><td>Balandis</td><td class="col-vnt">243</td><td class="col-vnt">231</td><td class="good col-vnt">&minus;4,9%</td><td class="col-eur">2 185,00</td><td class="col-eur">2 261,00</td><td class="bad col-eur">+3,5%</td></tr>
+      <tr><td>Gegu&#382;&#279;</td><td class="col-vnt">209</td><td class="col-vnt">246</td><td class="bad col-vnt">+17,7%</td><td class="col-eur">2 104,00</td><td class="col-eur">2 491,50</td><td class="bad col-eur">+18,4%</td></tr>
+      <tr><td>Bir&#382;elis</td><td class="col-vnt">204</td><td class="col-vnt">235</td><td class="bad col-vnt">+15,2%</td><td class="col-eur">1 786,01</td><td class="col-eur">2 596,50</td><td class="bad col-eur">+45,4%</td></tr>
+      <tr><td>Liepa</td><td class="col-vnt">177</td><td class="col-vnt">255</td><td class="bad col-vnt">+44,1%</td><td class="col-eur">1 814,00</td><td class="col-eur">2 531,00</td><td class="bad col-eur">+39,5%</td></tr>
+      <tr class="total-row"><td>YTD (sau&ndash;lie)</td><td class="col-vnt">1 504</td><td class="col-vnt">1 820</td><td class="bad col-vnt">+21,0%</td><td class="col-eur">14 647,01</td><td class="col-eur">18 048,01</td><td class="bad col-eur">+23,2%</td></tr>
+    </tbody>
+  </table>
+  <div class="insight-box warn" style="margin-top:14px;margin-bottom:0">
+    &#9888; Nerimą kelianti tendencija: churn auga (+21%), nauji rėmėjai maž&#279;ja (&minus;21%) &ndash; galimai d&#279;l LP ambasadori&#371; koordinatori&#371; netekimo.
+  </div>
+</div>
+
+<div class="sh">Metodologija</div>
+<div class="insight-box">
+  &#8505; <strong>Pajamos</strong> = m&#279;n. gauti mok&#279;jimai. <strong>Nauji</strong> = r&#279;m&#279;jai su pirmu mok&#279;jimu t&#261; m&#279;n. <strong>Churn</strong> = paskutin&#303; kart&#261; mok&#279;jo prie&#353; 3 m&#279;n. (liepos churn = paskutin&#303; kart&#261; mok&#279;jo balandyje).
+</div>
+<div class="insight-box warn" style="margin-top:8px">
+  &#9888; 2026-01 pajamos &#382;emos (IT klaida) &middot; 2025-01 nauji=1 (kanalo keitimas) &middot; rugpj&#363;&#269;io duomenys dar nevertinami.
+</div>
+
+</div>
+
+<!-- ============ TAB 1: VISAS PERIODAS ============ -->
+<div id="tabpanel-1" class="tabpanel">
+
+
+<div class="sh">Nuo 2018 m. iki &#353;iol</div>
+<div class="kpi-row">
+  <div class="kpi-card" style="--ac:#2563eb;--ac2:#2563eb">
+    <div class="kpi-title">Pajamos i&#353; viso</div>
+    <div class="kpi-sub">2018 &ndash; 2026-07</div>
+    <div class="kpi-line"><span class="lbl">Sk.</span><span class="val">896 076 <span class="unit">vnt.</span></span></div>
+    <div class="kpi-line"><span class="lbl">Suma</span><span class="val">8 853 011 <span class="unit">&euro;</span></span></div>
+  </div>
+  <div class="kpi-card" style="--ac:#059669;--ac2:#059669">
+    <div class="kpi-title">Nauj&#371; r&#279;m&#279;j&#371; i&#353; viso</div>
+    <div class="kpi-sub">2018 &ndash; 2026-07</div>
+    <div class="kpi-line"><span class="lbl">Sk.</span><span class="val">30 346 <span class="unit">vnt.</span></span></div>
+    <div class="kpi-line"><span class="lbl">Pirm. &#303;mok&#371; suma</span><span class="val">292 486 <span class="unit">&euro;</span></span></div>
+  </div>
+  <div class="kpi-card" style="--ac:#C8102E;--ac2:#C8102E">
+    <div class="kpi-title">Atkrito i&#353; viso</div>
+    <div class="kpi-sub">2018 &ndash; 2026-06</div>
+    <div class="kpi-line"><span class="lbl">Sk.</span><span class="val">17 850 <span class="unit">vnt.</span></span></div>
+    <div class="kpi-line"><span class="lbl">Prarasta suma</span><span class="val">172 140 <span class="unit">&euro;</span></span></div>
+  </div>
+</div>
+
+<div class="sh">Metin&#279; suvestin&#279;</div>
+<div class="card">
+  <div class="card-title">Pajamos, Nauji r&#279;m&#279;jai ir Churn pagal metus</div>
+  <div class="card-sub">2026 &ndash; dalinis laikotarpis (nurodyta kiekvienam stulpeliui)</div>
+  <div style="overflow-x:auto">
+  <table class="annual">
+    <thead>
+      <tr>
+        <th>Metai</th>
+        <th class="grpblue">Pajamos (vnt.)</th><th class="grpblue">Pajamos (&euro;)</th>
+        <th class="grpgreen">Nauji (vnt.)</th><th class="grpgreen">Nauji (&euro;)</th>
+        <th class="grpred">Atkrito (vnt.)</th><th class="grpred">Atkrito (&euro;)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>2018</td><td>1 680</td><td>18 113,04</td><td>936</td><td>10 056,01</td><td>72</td><td>672,00</td></tr>
+      <tr><td>2019</td><td>28 818</td><td>309 067,61</td><td>3 864</td><td>39 602,10</td><td>860</td><td>8 165,00</td></tr>
+      <tr><td>2020</td><td>59 751</td><td>612 303,03</td><td>4 088</td><td>37 831,79</td><td>1 311</td><td>11 102,09</td></tr>
+      <tr><td>2021</td><td>86 630</td><td>880 681,12</td><td>4 415</td><td>42 275,53</td><td>1 631</td><td>15 863,35</td></tr>
+      <tr><td>2022</td><td>125 192</td><td>1 253 544,61</td><td>6 048</td><td>58 930,32</td><td>2 403</td><td>25 735,56</td></tr>
+      <tr><td>2023</td><td>167 252</td><td>1 637 523,67</td><td>6 936</td><td>66 257,20</td><td>3 651</td><td>33 359,48</td></tr>
+      <tr><td>2024</td><td>177 892</td><td>1 729 997,38</td><td>2 006</td><td>17 153,00</td><td>3 025</td><td>29 649,50</td></tr>
+      <tr><td>2025</td><td>164 909</td><td>1 595 081,65</td><td>1 350</td><td>13 617,53</td><td>2 840</td><td>27 543,02</td></tr>
+      <tr class="partial"><td>2026*</td><td>83 952<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>816 698,66<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>703<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>6 763,00<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 07)</span></td><td>2 057<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 06)</span></td><td>20 050,10<br><span style="font-size:10px;color:var(--ink3);font-weight:400">(iki 06)</span></td></tr>
+      <tr class="total-row"><td>I&#352; VISO</td><td>896 076</td><td>8 853 010,77</td><td>30 346</td><td>292 486,48</td><td>17 850</td><td>172 140,10</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">* 2026 &ndash; dalinis laikotarpis (Pajamos/Nauji iki 07, Atkrito iki 06).</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Pajam&#371; dinamika pagal metus</div>
+  <div style="position:relative;height:260px"><canvas id="chartAnnual"></canvas></div>
+</div>
+
+<div class="sh">Nauj&#371; r&#279;m&#279;j&#371; sezoni&#353;kumas</div>
+<div class="card">
+  <div class="card-title">Pirmas mok&#279;jimas (First Gift Date) &middot; nauj&#371; sutar&#269;i&#371; matrica</div>
+  <div class="card-sub">Eilut&#279; = m&#279;nuo, stulpelis = metai &middot; skai&#269;iuojama pagal Recurring Donation ID (ne unikal&#371; r&#279;m&#279;j&#261;) &middot; spalva &ndash; nuo &#382;alios (daugiausiai pritraukta) iki raudonos (ma&#382;iausiai)</div>
+  <div class="heatmap-wrap">
+  <table class="heatmap">
+    <thead>
+      <tr>
+        <th>M&#279;nuo</th>
+        <th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th>
+        <th class="total-hdr">Grand Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="row-hdr">1</td><td class="blank"></td><td style="background:#e7e9dc">414</td><td style="background:#eae8dd">350</td><td style="background:#fde2e2">22</td><td style="background:#ebe8dd">347</td><td style="background:#deecd9">577</td><td style="background:#eee7de">282</td><td style="background:#fee2e2">1</td><td style="background:#f9e3e1">86</td><td class="total-col">2 079</td></tr>
+      <tr><td class="row-hdr">2</td><td class="blank"></td><td style="background:#ede7dd">309</td><td style="background:#eee7de">287</td><td style="background:#fde2e2">12</td><td style="background:#efe7de">266</td><td style="background:#f2e6df">219</td><td style="background:#f8e4e0">115</td><td style="background:#fde2e2">27</td><td style="background:#fbe3e1">49</td><td class="total-col">1 284</td></tr>
+      <tr><td class="row-hdr">3</td><td class="blank"></td><td style="background:#e9e9dc">373</td><td style="background:#dfecda">544</td><td style="background:#fee2e2">6</td><td style="background:#e8e9dc">396</td><td style="background:#bbf7d0">1 192</td><td style="background:#efe7de">262</td><td style="background:#fbe3e1">52</td><td style="background:#f8e4e0">116</td><td class="total-col">2 941</td></tr>
+      <tr><td class="row-hdr">4</td><td class="blank"></td><td style="background:#f0e6de">242</td><td style="background:#f9e4e1">91</td><td style="background:#fde2e2">11</td><td style="background:#e6eadc">429</td><td style="background:#caf2d4">927</td><td style="background:#f5e5e0">156</td><td style="background:#f9e3e1">82</td><td style="background:#f7e4e0">128</td><td class="total-col">2 066</td></tr>
+      <tr><td class="row-hdr">5</td><td class="blank"></td><td style="background:#e7e9dc">412</td><td style="background:#fde2e2">17</td><td style="background:#e3eadb">483</td><td style="background:#e6eadc">428</td><td style="background:#c9f3d4">945</td><td style="background:#f8e4e0">116</td><td style="background:#f5e5e0">166</td><td style="background:#f0e6de">253</td><td class="total-col">2 820</td></tr>
+      <tr><td class="row-hdr">6</td><td class="blank"></td><td style="background:#efe7de">270</td><td style="background:#f8e4e0">114</td><td style="background:#d1f0d6">805</td><td style="background:#deecd9">569</td><td style="background:#cff1d5">835</td><td style="background:#f2e6df">217</td><td style="background:#f4e5df">178</td><td style="background:#fae3e1">65</td><td class="total-col">3 053</td></tr>
+      <tr><td class="row-hdr">7</td><td class="blank"></td><td style="background:#e6e9dc">424</td><td style="background:#dbedd9">621</td><td style="background:#c9f3d4">947</td><td style="background:#d7eed7">698</td><td style="background:#d0f1d6">826</td><td style="background:#f0e6de">251</td><td style="background:#f1e6de">240</td><td class="blank"></td><td class="total-col">4 007</td></tr>
+      <tr><td class="row-hdr">8</td><td class="blank"></td><td style="background:#ede7dd">312</td><td style="background:#cbf2d4">900</td><td style="background:#e7e9dc">418</td><td style="background:#daedd8">645</td><td style="background:#ddecd9">595</td><td style="background:#f3e5df">188</td><td style="background:#f6e5e0">148</td><td class="blank"></td><td class="total-col">3 206</td></tr>
+      <tr><td class="row-hdr">9</td><td style="background:#fce3e1">37</td><td style="background:#eae8dd">350</td><td style="background:#e2ebdb">493</td><td style="background:#d8eed8">679</td><td style="background:#d7eed7">700</td><td style="background:#ddecd9">584</td><td style="background:#f7e4e0">120</td><td style="background:#fbe3e1">58</td><td class="blank"></td><td class="total-col">3 021</td></tr>
+      <tr><td class="row-hdr">10</td><td style="background:#f1e6df">230</td><td style="background:#efe7de">271</td><td style="background:#e4eadb">462</td><td style="background:#e5eadb">450</td><td style="background:#ddecd9">594</td><td style="background:#f4e5df">174</td><td style="background:#fae3e1">70</td><td style="background:#fce3e1">41</td><td class="blank"></td><td class="total-col">2 292</td></tr>
+      <tr><td class="row-hdr">11</td><td style="background:#e8e9dc">397</td><td style="background:#e9e8dc">367</td><td style="background:#ebe8dd">330</td><td style="background:#e9e8dc">369</td><td style="background:#dbedd9">623</td><td style="background:#fce3e1">42</td><td style="background:#f7e4e0">128</td><td style="background:#fbe3e1">60</td><td class="blank"></td><td class="total-col">2 316</td></tr>
+      <tr><td class="row-hdr">12</td><td style="background:#e8e9dc">396</td><td style="background:#ede7dd">305</td><td style="background:#fae3e1">78</td><td style="background:#e8e9dc">391</td><td style="background:#ddecd9">588</td><td style="background:#ece8dd">318</td><td style="background:#f7e4e0">129</td><td style="background:#f5e5e0">160</td><td class="blank"></td><td class="total-col">2 365</td></tr>
+      <tr class="total-row">
+        <td>Grand Total</td>
+        <td>1 060</td><td>4 049</td><td>4 287</td><td>4 593</td><td>6 283</td><td>7 234</td><td>2 034</td><td>1 213</td><td>697</td>
+        <td class="total-col" style="background:#d1d5db">31 450</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="legend-scale">
+    <span>Ma&#382;iausiai (1)</span><div class="legend-bar"></div><span>Daugiausiai (1 192)</span>
+  </div>
+  <div class="note">* Skai&#269;iuojama pagal sutart&#303; (RD ID), ne unikal&#371; r&#279;m&#279;j&#261; &ndash; apima Win-back ir papildomas sutartis. 2018 duomenys nuo rugs&#279;jo, 2026 iki liepos.</div>
+</div>
+
+<div class="sh">Kohort&#371; pjūvis &middot; pajamos per laik&#261;</div>
+<div class="card">
+  <div class="card-title">Kiek EUR sumok&#279;jo kiekvienos kohortos r&#279;m&#279;jai kiekvienais metais</div>
+  <div class="card-sub">Eilut&#279; = metai, kai prad&#279;tas r&#279;mimas (kohorta) &middot; Stulpelis = metai, kai gautos pajamos</div>
+  <div class="cohort-wrap">
+  <table class="cohorttable">
+    <thead>
+      <tr>
+        <th class="corner" rowspan="2">Metai, kai<br>prad&#279;tas r&#279;mimas</th>
+        <th colspan="9">Metai, kai gautos pajamos</th>
+        <th class="total-hdr" rowspan="2">VISO</th>
+      </tr>
+      <tr>
+        <th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="row-hdr">2018<span class="cnt">(1 060 sut.)</span></td>
+        <td class="h1">18 270</td><td class="h3">92 965</td><td class="h3">80 072</td><td class="h2">74 591</td><td class="h2">67 637</td><td class="h2">59 197</td><td class="h2">55 134</td><td class="h2">50 882</td><td class="h1">21 312</td>
+        <td class="total-col">520 060</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2019<span class="cnt">(4 049 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="h5">218 022</td><td class="h5">337 051</td><td class="h5">302 133</td><td class="h5">274 532</td><td class="h5">246 110</td><td class="h5">227 650</td><td class="h5">218 960</td><td class="h3">89 947</td>
+        <td class="total-col">1 914 406</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2020<span class="cnt">(4 287 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h4">198 271</td><td class="h5">317 846</td><td class="h5">261 109</td><td class="h5">221 646</td><td class="h4">208 148</td><td class="h4">193 730</td><td class="h3">84 070</td>
+        <td class="total-col">1 484 819</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2021<span class="cnt">(4 593 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h4">190 068</td><td class="h5">363 409</td><td class="h5">283 680</td><td class="h5">260 111</td><td class="h5">231 061</td><td class="h3">100 799</td>
+        <td class="total-col">1 429 127</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2022<span class="cnt">(6 283 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h5">290 395</td><td class="h5">418 495</td><td class="h5">360 004</td><td class="h5">312 460</td><td class="h4">134 319</td>
+        <td class="total-col">1 515 673</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2023<span class="cnt">(7 234 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h5">412 367</td><td class="h5">532 464</td><td class="h5">441 524</td><td class="h4">183 693</td>
+        <td class="total-col">1 570 048</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2024<span class="cnt">(2 034 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h3">90 091</td><td class="h3">100 682</td><td class="h2">37 310</td>
+        <td class="total-col">228 083</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2025<span class="cnt">(1 213 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h2">48 857</td><td class="h2">29 392</td>
+        <td class="total-col">78 248</td>
+      </tr>
+      <tr>
+        <td class="row-hdr">2026<span class="cnt">(697 sut.)</span></td>
+        <td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h1">16 280</td>
+        <td class="total-col">16 280</td>
+      </tr>
+      <tr class="total-row">
+        <td>VISO</td>
+        <td>18 270</td><td>310 988</td><td>615 394</td><td>884 638</td><td>1 257 082</td><td>1 641 496</td><td>1 733 600</td><td>1 598 156</td><td>697 121</td>
+        <td class="grand-total">8 756 744</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">* Spalv&#371; intensyvumas rodo santykin&#303; pajam&#371; dyd&#303; eilut&#279;s viduje (kiekviena kohorta lyginama pati su savimi per laik&#261;, ne su kitomis kohortomis). &#352;altinis: Baz&#279;_Closed_Won_r&#279;mimo_m&#279;nesiams_paskai&#269;iuoti.xlsx. Skai&#269;iai EUR.</div>
+</div>
+
+<div class="sh">&#352;altiniai ir metodologija</div>
+<div class="insight-box">
+  &#8505; Suvestin&#279; nuo 2018 m. iki 2026-07 (Pajamos, Nauji) / 2026-06 (Churn &ndash; d&#279;l 3 m&#279;n. patvirtinimo v&#279;lavimo liepos-rugpj&#363;&#269;io kohortos dar negalutin&#279;s). 2026 metai &#382;ymimi kaip <strong>dalinis (7 arba 6 m&#279;n.)</strong>.
+</div>
+
+</div>
+
+</div>
+
+<div class="foot">LRK Duomen&#371; valdymas &middot; LP F2F &middot; &#352;altinis: LP-F2F-2026-07_ATASKAITA.xlsx (SF pivot)</div>
 
 <script>
-const DATA = {
-  // Šaltiniai: „Kontaktai“ (unikalios įmonės ir visi kontaktai) ir „Banko išrašas“.
-  // all = mėnesinių reikšmių suma; ta pati įmonė skirtingais mėnesiais gali kartotis.
-  // Nekėlė 2 ir Nekėlė 3 įtraukti į nekele_uniq; pivot'as neišskiria „tik nekėlė“, todėl nekele_truly = nekele_uniq.
-  all:{ uniq:12654, grand_total:21352, sutarta:394, derybos:77, pasiulymas:1306, atsakymas:77, laukiama:175, susisiekta:58, perskambinti:3399, neaktualu:135, nenurodyta:603, nekele_uniq:4292, nekele_truly:4292, neprileidzia:151, atsisakė:3463, neigiamas:96, numeris:990, bank_count:660, bank_sum:167841 },
-  m1: { uniq:629,  grand_total:2329, sutarta:0,   derybos:0,  pasiulymas:11,  atsakymas:20, laukiama:2,  susisiekta:1,  perskambinti:32,   neaktualu:0,  nenurodyta:3,   nekele_uniq:543, nekele_truly:543, neprileidzia:0,  atsisakė:14,   neigiamas:50, numeris:0,   bank_count:76,  bank_sum:20789 },
-  m2: { uniq:503,  grand_total:651,  sutarta:0,   derybos:0,  pasiulymas:1,   atsakymas:2,  laukiama:0,  susisiekta:0,  perskambinti:3,    neaktualu:0,  nenurodyta:2,   nekele_uniq:493, nekele_truly:493, neprileidzia:0,  atsisakė:0,    neigiamas:3,  numeris:0,   bank_count:54,  bank_sum:14268 },
-  m3: { uniq:730,  grand_total:1531, sutarta:65,  derybos:2,  pasiulymas:57,  atsakymas:29, laukiama:33, susisiekta:6,  perskambinti:182,  neaktualu:25, nenurodyta:338, nekele_uniq:157, nekele_truly:157, neprileidzia:80, atsisakė:64,   neigiamas:27, numeris:2,   bank_count:107, bank_sum:29291 },
-  m4: { uniq:5206, grand_total:10032,sutarta:83,  derybos:12, pasiulymas:626, atsakymas:7,  laukiama:16, susisiekta:34, perskambinti:1576, neaktualu:11, nenurodyta:140, nekele_uniq:2051,nekele_truly:2051,neprileidzia:45, atsisakė:1686, neigiamas:3,  numeris:496, bank_count:90,  bank_sum:30620 },
-  m5: { uniq:2633, grand_total:3238, sutarta:175, derybos:7,  pasiulymas:316, atsakymas:19, laukiama:50, susisiekta:14, perskambinti:887,  neaktualu:56, nenurodyta:61,  nekele_uniq:387, nekele_truly:387, neprileidzia:14, atsisakė:761,  neigiamas:13, numeris:127, bank_count:137, bank_sum:30966 },
-  m6: { uniq:183,  grand_total:223,  sutarta:47,  derybos:2,  pasiulymas:33,  atsakymas:0,  laukiama:17, susisiekta:3,  perskambinti:65,   neaktualu:1,  nenurodyta:13,  nekele_uniq:6,   nekele_truly:6,   neprileidzia:0,  atsisakė:8,    neigiamas:0,  numeris:0,   bank_count:103, bank_sum:22079 },
-  m7: { uniq:2770, grand_total:3348, sutarta:24,  derybos:54, pasiulymas:262, atsakymas:0,  laukiama:57, susisiekta:0,  perskambinti:654,  neaktualu:42, nenurodyta:46,  nekele_uniq:655, nekele_truly:655, neprileidzia:12, atsisakė:930,  neigiamas:0,  numeris:365, bank_count:93,  bank_sum:19828 }
-};
+function showTab(i){
+  document.querySelectorAll('.tabpanel').forEach((el,idx)=>el.classList.toggle('active', idx===i));
+  document.querySelectorAll('.tabbtn').forEach((el,idx)=>el.classList.toggle('active', idx===i));
+}
 
-// Liepos preliminarūs CC duomenys (dar NE SF) - Telenordi (nuo 07.22) + Telemarketing, gauta el. paštu 2026-08-19
-const JULY_CC_PRELIM = {
-  telenordi:   { baze:2176, skambuciai:1145, pasiulymai:69, suplanuota_eur:27, suplanuota_vnt:7300, gauti_vnt:null, gauti_eur:6450 },
-  telemarketing:{ baze:null, skambuciai:80,   pasiulymai:10, suplanuota_eur:null, suplanuota_vnt:null, gauti_vnt:null, gauti_eur:9750 },
-  viso:        { baze:2176, skambuciai:1225, pasiulymai:79, suplanuota_eur:27, suplanuota_vnt:7300, gauti_vnt:null, gauti_eur:16200 }
-};
+const months7 = ['Sau','Vas','Kov','Bal','Geg','Bir','Lie'];
 
-const MONTH_META = {
-  m1:{name:'Sausis',   bank:'20 789', bank_c:76},
-  m2:{name:'Vasaris',  bank:'14 268', bank_c:54},
-  m3:{name:'Kovas',    bank:'29 291', bank_c:107},
-  m4:{name:'Balandis', bank:'30 620', bank_c:90},
-  m5:{name:'Gegužė',   bank:'30 966', bank_c:137},
-  m6:{name:'Birželis', bank:'22 079', bank_c:103},
-  m7:{name:'Liepa',    bank:'19 828', bank_c:93}
-};
-
-function fmt(v){ return v===0?'—':v.toLocaleString('lt-LT'); }
-function pct(a,b){ if(!b||!a) return '—'; return (a/b*100).toFixed(1).replace('.',',')+'%'; }
-
-/* PIPELINE */
-function buildPipeline(el, d) {
-  const base = d.uniq || 1;
-  const steps = [
-    { cls:'ps-navy',   icon:'🏢', label:'Unikalių kontaktuotų įmonių', val:d.uniq,              desc:'bendra aktyvuota bazė' },
-    { cls:'ps-teal',   icon:'🚫', label:'Nepasiekti kontaktai (nekėlė)',val:d.nekele_uniq,  desc:'įmonės, pažymėtos „Nekėlė“, „Nekėlė 2“ arba „Nekėlė 3“' },
-    { cls:'ps-cyan',   icon:'🔄', label:'Perskambinimai',               val:d.perskambinti,      desc:'laukia prioritetinio grįžimo' },
-    { cls:'ps-blue',   icon:'⏳', label:'Laukiama atsakymo',            val:d.laukiama,          desc:'išsiųstas pasiūlymas / kontaktas, laukiama atsako' },
-    { cls:'ps-orange', icon:'📋', label:'Pasiūlymas išsiųstas',         val:d.pasiulymas,        desc:'aktyvus pipeline uždarymu' },
-    { cls:'ps-amber',  icon:'🤝', label:'Derybos',                      val:d.derybos,           desc:'galimybės didesnės vertės sutarčių' },
-    { cls:'ps-green',  icon:'✅', label:'Sutarta parama',               val:d.sutarta,           desc:'realus rezultatas (SF veiklų duomenys)' },
-  ];
-  const maxV = steps[0].val || 1;
-  let html = '';
-  steps.forEach((s,i) => {
-    const barH = Math.max(4, Math.round(s.val/maxV*54));
-    const p = i>0 ? ` <span class="pipe-pct">${pct(s.val,base)} nuo bazės</span>` : '';
-    html += `<div class="pipe-step ${s.cls}">
-      <div class="pipe-icon">${s.icon}</div>
-      <div class="pipe-content">
-        <div class="pipe-label">${s.label}${p}</div>
-        <div class="pipe-num">${s.val.toLocaleString('lt-LT')}</div>
-        <div class="pipe-desc">${s.desc}</div>
-      </div>
-      <div class="pipe-bar-wrap"><div class="pipe-bar-fill" style="height:${barH}px"></div></div>
-    </div>`;
-    if(i<steps.length-1)
-      html+=`<div class="pipe-arrow"><svg width="11" height="7" viewBox="0 0 11 7"><path d="M5.5 7L0 0h11L5.5 7z" fill="#BFC9CA"/></svg></div>`;
+function groupedLine(id, data25, data26, color, label){
+  new Chart(document.getElementById(id), {
+    type:'line',
+    data:{labels:months7, datasets:[
+      {label:'2025', data:data25, borderColor:'#9ca3af', backgroundColor:'#9ca3af', borderWidth:2, borderDash:[5,4], pointRadius:3, pointBackgroundColor:'#9ca3af', tension:0.3},
+      {label:'2026', data:data26, borderColor:color, backgroundColor:color, borderWidth:3, pointRadius:4, pointBackgroundColor:color, tension:0.3}
+    ]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:true, position:'top', align:'end', labels:{boxWidth:10, font:{size:11, family:"'Figtree',sans-serif", weight:'700'}, color:'#6b7280'}},
+        tooltip:{backgroundColor:'#111827', padding:10, cornerRadius:8, titleFont:{family:"'Figtree',sans-serif",weight:'700'},
+          callbacks:{label:function(ctx){return ctx.dataset.label+': '+ctx.parsed.y.toLocaleString('lt-LT')+' '+label;}}}
+      },
+      scales:{
+        x:{grid:{display:false}, ticks:{font:{size:11}}},
+        y:{grid:{color:'#eef0f6'}, ticks:{font:{size:10}}}
+      }
+    }
   });
-  el.innerHTML = html;
 }
 
-/* STATUS TABLE */
-const ST_ROWS = [
-  { dot:'#1E8449', name:'Sutarta parama',                                         key:'sutarta' },
-  { dot:'#D4AC0D', name:'Derybos',                                                key:'derybos' },
-  { dot:'#E67E22', name:'Pasiūlymas išsiųstas',                                   key:'pasiulymas' },
-  { dot:'#17A589', name:'Perskambinti',                                            key:'perskambinti' },
-  { dot:'#2471A3', name:'Laukiama atsakymo',                                      key:'laukiama' },
-  { dot:'#5DADE2', name:'Susisiekta',                                             key:'susisiekta' },
-  { dot:'#7F8C8D', name:'Atsakymas gautas',                                       key:'atsakymas' },
-  { dot:'#C0392B', name:'Atsisakė / Neigiamas atsakymas / Neprileidžia / Neaktualu', key:'neg' },
-  { dot:'#BDC3C7', name:'Numeris nenaudojamas / nepasiekiamas',                   key:'numeris' },
-  { dot:'#CACFD2', name:'Nekėlė (bent vienas kart.)',                             key:'nekele_uniq' },
-  { dot:'#EAECEE', name:'Nėra pasirinktas statusas',                              key:'nenurodyta' },
-];
+groupedLine('barPajamos', [14263,14000,14012,13991,14046,13664,13836], [7158,12790,13046,12845,13043,12686,12384], '#2563eb', 'vnt.');
+groupedLine('barNauji', [1,23,95,153,196,178,240], [86,49,116,128,251,65,8], '#059669', 'vnt.');
+groupedLine('barChurn', [223,217,231,243,209,204,177], [222,272,359,231,246,235,255], '#C8102E', 'vnt.');
 
-function getVal(d, key) {
-  if(key==='neg') return (d.atsisakė||0)+(d.neigiamas||0)+(d.neprileidzia||0)+(d.neaktualu||0);
-  if(key==='numeris') return d.numeris||0;
-  if(key==='nekele_uniq') return d.nekele_uniq||0;
-  return d[key]||0;
-}
-
-function buildStatusTable(el, d) {
-  const total = d.uniq;
-  const vals = ST_ROWS.map(r=>getVal(d,r.key));
-  const maxV = Math.max(...vals, 1);
-  let html = ST_ROWS.map((r,i) => {
-    const v = vals[i];
-    if(v===0) return '';
-    const w = (v/maxV*100).toFixed(1);
-    return `<tr>
-      <td><span class="st-dot" style="background:${r.dot}"></span>${r.name}</td>
-      <td class="st-count">${v.toLocaleString('lt-LT')}</td>
-      <td class="st-pct">${pct(v,total)}</td>
-      <td class="st-bar-td"><div class="st-bar-bg"><div class="st-bar-fg" style="width:${w}%;background:${r.dot}"></div></div></td>
-    </tr>`;
-  }).join('');
-  html += `<tr class="st-total"><td><strong>IŠ VISO (uniq. įmonių)</strong></td><td class="st-count">${total.toLocaleString('lt-LT')}</td><td class="st-pct">—</td><td></td></tr>`;
-  // Add note about nekele
-  html += `<tr><td colspan="4" style="padding:8px 0 2px;font-size:12px;color:var(--gray-80);font-style:italic">* Nekėlė: ${d.nekele_uniq.toLocaleString('lt-LT')} uniq. įmonių bent kartą nekėlė ragelio, iš jų ${d.nekele_truly?d.nekele_truly.toLocaleString('lt-LT'):0} — tik nekėlė (nė vieno kito kontakto)</td></tr>`;
-  el.innerHTML = html;
-}
-
-/* ── DATA TABLE HELPER ── */
-function buildDT(tableId, rowDefs) {
-  const labs = ['Sausis','Vasaris','Kovas','Balandis','Gegužė','Birželis','Liepa'];
-  const el = document.getElementById(tableId);
-  if(!el) return;
-  let html = '<tr><th></th>';
-  labs.forEach(l => html += `<th>${l}</th>`);
-  html += '</tr>';
-  rowDefs.forEach(r => {
-    const dot = r.color
-      ? `<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${r.color};margin-right:6px;vertical-align:middle;flex-shrink:0"></span>`
-      : '';
-    html += `<tr><td>${dot}${r.label}</td>`;
-    r.values.forEach(v => html += `<td>${r.fmt ? r.fmt(v) : v}</td>`);
-    html += '</tr>';
-  });
-  el.innerHTML = html;
-}
-
-/* CHARTS - built after DOM ready */
-function buildCharts() {
-  const labels = ['Sausis','Vasaris','Kovas','Balandis','Gegužė','Birželis','Liepa'];
-  const keys   = ['m1','m2','m3','m4','m5','m6','m7'];
-
-  const bankCount = keys.map(k=>DATA[k].bank_count || 0);
-  const bankSum   = keys.map(k=>DATA[k].bank_sum || 0);
-  const bankAvg   = keys.map(k=> DATA[k].bank_count > 0 ? Math.round(DATA[k].bank_sum / DATA[k].bank_count) : 0);
-  const uniq      = keys.map(k=>DATA[k].uniq);
-  const pasiulymas= keys.map(k=>DATA[k].pasiulymas);
-  const sutarta   = keys.map(k=>DATA[k].sutarta);
-  const convPasi  = keys.map(k=> DATA[k].pasiulymas > 0 ? parseFloat((DATA[k].sutarta/DATA[k].pasiulymas*100).toFixed(1)) : 0);
-  const convUniq  = keys.map(k=> DATA[k].uniq > 0 ? parseFloat((DATA[k].sutarta/DATA[k].uniq*100).toFixed(1)) : 0);
-
-  const ff = "'Source Sans 3', sans-serif";
-  const gc = 'rgba(0,0,0,.05)';
-  const tf = { family:ff, size:12 };
-  const lf = { family:ff, size:12 };
-  const titleF = { family:ff, size:11 };
-
-  // Common datalabels for bars (above bar)
-  const dlBar = {
-    display: true,
-    anchor:'end', align:'end', offset:2,
-    font:{ family:ff, size:11, weight:'600' },
-    color:'#555',
-    formatter: v => v === 0 ? '' : v.toLocaleString('lt-LT')
-  };
-  // Datalabels for line points (above point)
-  const dlLine = {
-    display: true,
-    anchor:'end', align:'top', offset:4,
-    font:{ family:ff, size:11, weight:'600' },
-    color:'#333',
-    formatter: v => v === 0 ? '' : v.toLocaleString('lt-LT')
-  };
-  const dlLineEur = {
-    ...dlLine,
-    formatter: v => v === 0 ? '' : v.toLocaleString('lt-LT')+' €'
-  };
-  const dlLinePct = {
-    ...dlLine,
-    formatter: v => v === 0 ? '' : v.toString().replace('.',',')+' %'
-  };
-
-  const baseOpts = {
-    responsive:true, maintainAspectRatio:false,
-    layout:{ padding:{ top:20 } },
-    plugins:{
-      legend:{ display:false },
-      datalabels:{ display: false }
+new Chart(document.getElementById('chartAnnual'), {
+  type:'bar',
+  data:{
+    labels:['2018','2019','2020','2021','2022','2023','2024','2025','2026*'],
+    datasets:[{
+      label:'Pajamos (€)',
+      data:[18113.04,309067.61,612303.03,880681.12,1253544.61,1637523.67,1729997.38,1595081.65,816698.66],
+      backgroundColor:['#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#93c5fd','#2563eb'],
+      borderRadius:4
+    }]
+  },
+  options:{responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+      tooltip:{backgroundColor:'#111827', padding:10, cornerRadius:8,
+        callbacks:{label:function(ctx){return ctx.parsed.y.toLocaleString('lt-LT',{maximumFractionDigits:0})+' €'+(ctx.dataIndex===8?' (dalinė, iki 07)':'');}}}
     },
-  };
-
-  // CHART 1: Gauta parama — apimtis: suma (stulpeliai) + mokėjimų sk. (linija)
-  new Chart(document.getElementById('chart-bank1'), {
-    type:'bar',
-    data:{ labels, datasets:[
-      { label:'Suma (€)', data:bankSum,
-        backgroundColor:'rgba(26,82,118,.72)', borderRadius:5, borderSkipped:false, yAxisID:'y2',
-        datalabels:{ ...dlBar, formatter: v => v===0?'':v.toLocaleString('lt-LT')+' €', color:'#1A5276' } },
-      { label:'Mokėjimų sk.', data:bankCount,
-        type:'line', borderColor:'#1E8449', backgroundColor:'rgba(30,132,73,.07)',
-        borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#1E8449',
-        tension:.35, fill:true, yAxisID:'y',
-        datalabels:{ ...dlLine, color:'#1E8449' } },
-    ]},
-    options:{ ...baseOpts,
-      plugins:{ ...baseOpts.plugins,
-        tooltip:{ callbacks:{ label: ctx => ctx.dataset.yAxisID==='y2'
-          ? ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('lt-LT')} €`
-          : ` ${ctx.dataset.label}: ${ctx.parsed.y}` }}
-      },
-      scales:{
-        x:{ grid:{color:gc}, ticks:{font:tf} },
-        y:{ grid:{color:gc}, position:'left', ticks:{font:tf},
-            title:{display:true, text:'Mokėjimų sk.', font:titleF, color:'#1E8449'} },
-        y2:{ grid:{drawOnChartArea:false}, position:'right',
-             ticks:{font:tf, callback:v=>v.toLocaleString('lt-LT')+' €'},
-             title:{display:true, text:'€', font:titleF, color:'#1A5276'} }
-      }
-    }
-  });
-  buildDT('dt-bank1', [
-    { label:'Suma (€)',      color:'rgba(26,82,118,.85)',  values:bankSum,   fmt: v=>v.toLocaleString('lt-LT')+' €' },
-    { label:'Mokėjimų sk.', color:'rgba(30,132,73,.85)',  values:bankCount, fmt: v=>v },
-  ]);
-
-  // CHART 2: Gauta parama kokybė — vid. įmoka (stulpeliai) + konversija % (linija)
-  new Chart(document.getElementById('chart-bank2'), {
-    type:'bar',
-    data:{ labels, datasets:[
-      { label:'Vid. įmoka (€)', data:bankAvg,
-        backgroundColor:'rgba(212,172,13,.78)', borderRadius:5, borderSkipped:false, yAxisID:'y',
-        datalabels:{ ...dlBar, formatter: v=>v===0?'':v.toLocaleString('lt-LT')+' €', color:'#8A6100' } },
-      { label:'Konversija (%)', data:convUniq,
-        type:'line', borderColor:'#8E44AD', backgroundColor:'rgba(142,68,173,.07)',
-        borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#8E44AD',
-        tension:.35, fill:true, yAxisID:'y2',
-        datalabels:{ ...dlLinePct, color:'#6C3483' } },
-    ]},
-    options:{ ...baseOpts,
-      plugins:{ ...baseOpts.plugins,
-        tooltip:{ callbacks:{ label: ctx => ctx.dataset.yAxisID==='y'
-          ? ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('lt-LT')} €`
-          : ` ${ctx.dataset.label}: ${ctx.parsed.y.toString().replace('.',',')} %` }}
-      },
-      scales:{
-        x:{ grid:{color:gc}, ticks:{font:tf} },
-        y:{ grid:{color:gc}, position:'left',
-            ticks:{font:tf, callback:v=>v.toLocaleString('lt-LT')+' €'},
-            title:{display:true, text:'Vid. įmoka (€)', font:titleF, color:'#D4AC0D'} },
-        y2:{ grid:{drawOnChartArea:false}, position:'right',
-             ticks:{font:tf, callback:v=>v+' %'},
-             title:{display:true, text:'Konversija %', font:titleF, color:'#8E44AD'} }
-      }
-    }
-  });
-  buildDT('dt-bank2', [
-    { label:'Vid. įmoka (€)', color:'rgba(212,172,13,.9)', values:bankAvg,  fmt: v=>v.toLocaleString('lt-LT')+' €' },
-    { label:'Konversija (%)', color:'#8E44AD',             values:convUniq, fmt: v=>v.toString().replace('.',',')+' %' },
-  ]);
-
-  // CHART 3: Kontaktų aktyvumas — antrinė ašis: unikalios (kairė) + pasiūlymai (dešinė)
-  new Chart(document.getElementById('chart-contacts'), {
-    type:'bar',
-    data:{ labels, datasets:[
-      { label:'Unikalios kontaktuotos įmonės', data:uniq,
-        backgroundColor:'rgba(27,42,74,.72)', borderRadius:5, borderSkipped:false, yAxisID:'y',
-        datalabels:{ ...dlBar, color:'#1B2A4A' } },
-      { label:'Išsiųsti pasiūlymai', data:pasiulymas,
-        type:'line', borderColor:'#E67E22', backgroundColor:'rgba(230,126,34,.08)',
-        borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#E67E22',
-        tension:.35, fill:true, yAxisID:'y2',
-        datalabels:{ ...dlLine, color:'#C0390B' } },
-    ]},
-    options:{ ...baseOpts,
-      plugins:{ ...baseOpts.plugins,
-        tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('lt-LT')}` }}
-      },
-      scales:{
-        x:{ grid:{color:gc}, ticks:{font:tf} },
-        y:{ grid:{color:gc}, position:'left',
-            ticks:{font:tf, callback:v=>v.toLocaleString('lt-LT')},
-            title:{display:true, text:'Unikalios įmonės', font:titleF, color:'#1B2A4A'} },
-        y2:{ grid:{drawOnChartArea:false}, position:'right',
-             ticks:{font:tf, callback:v=>v.toLocaleString('lt-LT')},
-             title:{display:true, text:'Pasiūlymai', font:titleF, color:'#E67E22'} }
-      }
-    }
-  });
-  buildDT('dt-contacts', [
-    { label:'Unikalios įmonės', color:'rgba(27,42,74,.82)',   values:uniq,       fmt: v=>v.toLocaleString('lt-LT') },
-    { label:'Išs. pasiūlymai',  color:'rgba(230,126,34,.9)',  values:pasiulymas, fmt: v=>v },
-  ]);
-
-  // CHART 4: Kontaktai pagal kanalą — kompaktiška lentelė su SVG ikonomis
-  (function(){
-    const el = document.getElementById('dt-contacts2');
-    if(!el) return;
-    const icoPhone = `<svg style="width:14px;height:14px;vertical-align:middle;margin-right:6px;flex-shrink:0;margin-bottom:1px" viewBox="0 0 24 24" fill="none" stroke="rgba(27,42,74,.85)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
-    const icoEmail = `<svg style="width:14px;height:14px;vertical-align:middle;margin-right:6px;flex-shrink:0;margin-bottom:1px" viewBox="0 0 24 24" fill="none" stroke="rgba(26,82,118,.85)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`;
-    const icoMeet  = `<svg style="width:14px;height:14px;vertical-align:middle;margin-right:6px;flex-shrink:0;margin-bottom:1px" viewBox="0 0 24 24" fill="none" stroke="rgba(23,165,137,.85)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
-    const rows = [
-      { icon:icoPhone, label:'Skamb. unikalūs', cls:'row-call',    vals:['1 001','1 080','1 345','5 357','1 037','40','118'], tot:'9 978' },
-      { icon:icoPhone, label:'Skamb. viso',     cls:'row-call',    vals:['2 899','1 857','2 589','9 963','1 145','48','126'], tot:'18 627' },
-      { icon:icoEmail, label:'El. l. unikalūs', cls:'row-email',   vals:['58','86','234','308','2','2','—'],           tot:'690' },
-      { icon:icoEmail, label:'El. l. viso',     cls:'row-email',   vals:['370','471','923','956','4','12','—'],         tot:'2 736' },
-      { icon:icoMeet,  label:'Susitikimai viso',cls:'row-meeting', vals:['—','—','—','9','—','—','—'],                tot:'9' },
-    ];
-    let html = '<tr class="dt-head"><th></th><th>Sausis</th><th>Vasaris</th><th>Kovas</th><th>Balandis</th><th>Gegužė</th><th>Birželis</th><th>Liepa</th><th>Viso</th></tr>';
-    rows.forEach(r => {
-      html += `<tr class="${r.cls}"><td style="display:flex;align-items:center">${r.icon}${r.label}</td>`;
-      r.vals.forEach(v => html += `<td>${v}</td>`);
-      html += `<td><strong>${r.tot}</strong></td></tr>`;
-    });
-    el.innerHTML = html;
-  })();
-}
-
-/* MONTHLY PAGE */
-function buildMonthPage(key) {
-  const d = DATA[key];
-  const meta = MONTH_META[key];
-  const pg = document.getElementById('pg-'+key);
-  const pasiPct = d.uniq>0?(d.pasiulymas/d.uniq*100).toFixed(1).replace('.',',')+'%':'—';
-  const sutPasiPct = d.pasiulymas>0?(d.sutarta/d.pasiulymas*100).toFixed(1).replace('.',',')+'%':'—';
-  const sutPct = d.uniq>0?(d.sutarta/d.uniq*100).toFixed(1).replace('.',',')+'%':'—';
-  const bankValTxt = `${meta.bank} €`;
-  const bankSubTxt = `${meta.bank_c} mokėjimų`;
-  const bankLbl = 'Gauta parama (Bankas)';
-  const bankNoteTxt = `⚠ <strong>„Sutarta parama" SF (${d.sutarta}) ≠ mokėjimų skaičius Banke (${meta.bank_c})</strong> — pinigai gali būti gaunami ne tą patį mėnesį, kuriame sudaroma sutartis.`;
-
-  pg.innerHTML = `
-    <div class="page-title">
-      <h1>Juridinių Asmenų Pipeline · <span>${meta.name}</span></h1>
-      <div class="meta">Šaltinis: Excel lapai „Kontaktai“ ir „Banko išrašas“ · visi kanalai</div>
-    <div class="kpi-strip">
-      <div class="kpi c-red"><div class="kpi-lbl">Unikalių įmonių</div><div class="kpi-val red">${d.uniq.toLocaleString('lt-LT')}</div><div class="kpi-sub">kontaktuota šį mėnesį</div></div>
-      <div class="kpi c-blue"><div class="kpi-lbl">Viso kontaktų</div><div class="kpi-val">${d.grand_total.toLocaleString('lt-LT')}</div><div class="kpi-sub">skambučiai + laiškai + susit.</div></div>
-      <div class="kpi c-orange"><div class="kpi-lbl">Pasiūlymai</div><div class="kpi-val">${d.pasiulymas}</div><div class="kpi-sub">unikalios įmonės</div></div>
-      <div class="kpi c-amber"><div class="kpi-lbl">Derybos</div><div class="kpi-val">${d.derybos}</div><div class="kpi-sub">unikalios įmonės</div></div>
-      <div class="kpi c-green"><div class="kpi-lbl">Sutarta parama (SF)</div><div class="kpi-val green">${d.sutarta}</div><div class="kpi-sub">unikalios įmonės</div></div>
-      <div class="kpi c-green"><div class="kpi-lbl">${bankLbl}</div><div class="kpi-val green">${bankValTxt}</div><div class="kpi-sub">${bankSubTxt}</div></div>
-    </div>
-    <div class="body-grid">
-      <div class="pipeline-card">
-        <div class="pipeline-head">
-          <div class="pipeline-head-title">Kontaktų piltuvėlis</div>
-          <div class="pipeline-head-sub">Count of Company Code · ${meta.name} 2026</div>
-        </div>
-        <div class="pipeline-body" id="pipe-${key}"></div>
-      </div>
-      <div class="right-panel">
-        <div class="card">
-          <div class="card-head"><span class="card-title">⚡ Konversijos · ${meta.name}</span></div>
-          <div class="card-body">
-            <div class="insight-grid">
-              <div class="insight i-blue"><div class="insight-pct blue">${pasiPct}</div><div class="insight-lbl">Pasiūlymų konversija nuo kontaktuotų</div><div class="insight-formula">${d.pasiulymas} iš ${d.uniq.toLocaleString('lt-LT')}</div></div>
-              <div class="insight i-orange"><div class="insight-pct orange">${sutPasiPct}</div><div class="insight-lbl">Sutartos paramos konversija nuo pasiūlymų</div><div class="insight-formula">${d.sutarta} iš ${d.pasiulymas}</div></div>
-              <div class="insight i-green"><div class="insight-pct green">${sutPct}</div><div class="insight-lbl">Galutinė konversija nuo kontaktuotų</div><div class="insight-formula">${d.sutarta} iš ${d.uniq.toLocaleString('lt-LT')}</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-head"><span class="card-title">📊 Kontaktų statusai · detalės</span><span style="font-size:12px;color:var(--gray-80)">Count of Company Code</span></div>
-          <div class="card-body" style="padding-top:9px;"><table class="st-table" id="st-${key}"></table></div>
-        </div>
-        <div class="card">
-          <div class="card-head"><span class="card-title">💶 ${bankLbl}</span></div>
-          <div class="card-body">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--gray-05);border-radius:6px;border-left:3px solid var(--green)">
-              <div><div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--gray-50)">${meta.name} 2026</div><div style="font-size:12px;color:var(--gray-80);margin-top:2px">${bankSubTxt}</div></div>
-              <div style="font-size:22px;font-weight:900;color:var(--green)">${bankValTxt}</div>
-            </div>
-            <div class="bank-note" style="margin-top:9px">${bankNoteTxt}</div>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  buildPipeline(document.getElementById('pipe-'+key), d);
-  buildStatusTable(document.getElementById('st-'+key), d);
-}
-
-/* INIT */
-buildPipeline(document.getElementById('pipe-all'), DATA.all);
-buildStatusTable(document.getElementById('st-all'), DATA.all);
-['m1','m2','m3','m4','m5','m6','m7'].forEach(buildMonthPage);
-// Charts need DOM + Chart.js
-buildPipelinePage();
-window.addEventListener('load', () => setTimeout(buildCharts, 50));
-
-/* ── PIPELINE PAGE ── */
-function buildPipelinePage() {
-  const CONV  = 3.11;   // I-VII konversijos rodiklis % (394 sutartos paramos / 12 654 mėnesinių unikalių kontaktų suma)
-  const AVG   = 254;    // I-VII vidutinė banko įmoka Eur (167 841 € / 660 mokėjimų)
-  const pg = document.getElementById('pg-pipeline');
-
-  const items = [
-    { cls:'c-teal',   lbl:'Nekėlė ragelio',      val:DATA.all.nekele_uniq,   note:'bent kartą nepasiekti' },
-    { cls:'c-cyan',   lbl:'Perskambinti',          val:DATA.all.perskambinti, note:'laukia prioritetinio grįžimo' },
-    { cls:'c-blue',   lbl:'Laukiama atsakymo',    val:DATA.all.laukiama,      note:'išsiųstas kontaktas/pasiūlymas' },
-    { cls:'c-orange', lbl:'Pasiūlymas išsiųstas', val:DATA.all.pasiulymas,    note:'aktyvus pipeline' },
-    { cls:'c-amber',  lbl:'Derybos',              val:DATA.all.derybos,       note:'aukštos vertės galimybės' },
-  ];
-
-  const totalPipeline = items.reduce((s,i)=>s+i.val, 0);
-  const totalEst      = Math.round(totalPipeline * CONV / 100);
-  const totalEur      = Math.round(totalEst * AVG);
-
-  let cards = items.map(item => {
-    const est    = Math.round(item.val * CONV / 100);
-    const estEur = Math.round(est * AVG);
-    const isSmall = est <= 2;
-    return `<div class="pl-card ${item.cls}">
-      <div class="pl-lbl">${item.lbl}</div>
-      <div class="pl-num">${item.val.toLocaleString('lt-LT')}</div>
-      <div class="pl-est">→ est. ~${est} sutarčių</div>
-      <div class="pl-est" style="font-size:13px;color:#1A5276;margin-top:2px">~${estEur.toLocaleString('lt-LT')} €</div>
-      <div class="pl-rate">${isSmall?'maža imtis — orientacinis':('@ '+CONV.toString().replace('.',',')+' % conv. rate')}</div>
-      <div class="pl-rate">${item.note}</div>
-    </div>`;
-  }).join('');
-
-  pg.innerHTML = `
-    <div class="page-title">
-      <h1>Pipeline <span>Prognozė</span></h1>
-      <div class="meta">Remiantis I–VII (sausis–liepa) statistika · Conv. rate ${CONV.toString().replace('.',',')}% · Vid. įmoka ${AVG} €</div>
-    </div>
-
-    <div class="pl-header">Esami pipeline kontaktai pagal statusą · I–VII mėn. duomenys</div>
-    <div class="pl-cards">${cards}</div>
-
-    <div class="pl-total-box">
-      <div class="pl-total-item">
-        <div class="pl-total-lbl">Pipeline iš viso</div>
-        <div class="pl-total-val">${totalPipeline.toLocaleString('lt-LT')}</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px">kontaktų visuose statusuose</div>
-      </div>
-      <div class="pl-total-item">
-        <div class="pl-total-lbl">Est. sutartys iš pipeline</div>
-        <div class="pl-total-val">~${totalEst}</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px">sutarčių</div>
-      </div>
-      <div class="pl-total-item">
-        <div class="pl-total-lbl">Est. pajamos iš pipeline</div>
-        <div class="pl-total-val">~${totalEur.toLocaleString('lt-LT')} €</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px">prognozuojama suma</div>
-      </div>
-      <div class="pl-total-item">
-        <div class="pl-total-note">Prognozė pagal I–VII vidurkį: ${CONV.toString().replace('.',',')}% conv. rate · ${AVG} €/sutartis.<br>Derybos: maža imtis — orientacinis skaičius.</div>
-      </div>
-    </div>
-
-    <div class="pl-method">
-      <strong>Metodologija:</strong> Prognozė skaičiuojama pagal I–VII (sausis–liepa) sukauptus rodiklius (atnaujinta 2026-08-19, įtraukus gegužės–liepos duomenis).
-      Konversijos rodiklis: 394 sutartos paramos įrašai / 12\u00a0654 unikalių kontaktų mėnesinių reikšmių suma (gali persidengti) = <strong>${CONV.toString().replace('.',',')}%</strong>.
-      Vidutinė įmoka: I–VII banko suma 167\u00a0841 € / 660 mokėjimų = <strong>${AVG} €</strong>.
-      ⚠ Pipeline kortelės (Nekėlė, Perskambinti ir t.t.) rodo I–VII mėn. kontaktų SUMĄ, ne unikalių kontaktų likutį šiandien — dalis jų jau galėjo pereiti į kitą statusą po mėnesio pabaigos.
-    </div>`;
-}
-
-/* LIEPOS PRELIMINARI CC ATASKAITA (dar ne SF) */
-function buildJulyPrelimBox() {
-  const pg = document.getElementById('pg-m7');
-  if (!pg) return;
-  const d = JULY_CC_PRELIM;
-  const f = v => (v===null || v===undefined) ? '—' : v.toLocaleString('lt-LT');
-  pg.insertAdjacentHTML('beforeend', `
-    <div class="card" style="margin-top:14px;border:1px solid #F5CBA7;">
-      <div class="card-head" style="background:#FEF5E7;">
-        <span class="card-title" style="color:#9C640C;">⚠️ Preliminarūs liepos CC duomenys · dar NE SF</span>
-        <span style="font-size:12px;color:#9C640C;">Gauta el. paštu 2026-08-19, kontaktai dar nesukelti į SF Activities</span>
-      </div>
-      <div class="card-body">
-        <div class="note-box" style="border-left-color:#E67E22;margin-bottom:12px;">
-          Aukščiau esantys liepos SF skaičiai (Sutarta parama: ${DATA.m7.sutarta}, Perskambinti: ${DATA.m7.perskambinti} ir t.t.) apima <strong>tik tai, kas jau šiuo metu yra SF sistemoje</strong>. Žemiau esanti lentelė — Telenordi (nuo 07-22) ir Telemarketing veiklos suvestinė, atsiųsta atskirai, dar NEĮTRAUKTA į SF ir todėl NEĮSKAIČIUOTA į aukščiau esančius skaičius. Kai kontaktai bus sukelti į SF, ši lentelė taps nebereikalinga (duomenys atsiras standartiniame pjūvyje).
-        </div>
-        <table class="dt" style="width:100%;">
-          <tr><th></th><th>Telenordi (nuo 07.22)</th><th>Telemarketing</th><th>Viso</th></tr>
-          <tr><td>Priskirta bazė, vnt</td><td><strong>${f(d.telenordi.baze)}</strong></td><td>${f(d.telemarketing.baze)}</td><td><strong>${f(d.viso.baze)}</strong></td></tr>
-          <tr><td>Skambučių kiekis</td><td>${f(d.telenordi.skambuciai)}</td><td>${f(d.telemarketing.skambuciai)}</td><td>${f(d.viso.skambuciai)}</td></tr>
-          <tr><td>Pasiūlymų skaičius</td><td>${f(d.telenordi.pasiulymai)}</td><td>${f(d.telemarketing.pasiulymai)}</td><td>${f(d.viso.pasiulymai)}</td></tr>
-          <tr><td>Suplanuotų rėmimų, Eur</td><td>${f(d.telenordi.suplanuota_eur)}</td><td>${f(d.telemarketing.suplanuota_eur)}</td><td>${f(d.viso.suplanuota_eur)}</td></tr>
-          <tr><td>Suplanuotų rėmimų, vnt</td><td>${f(d.telenordi.suplanuota_vnt)}</td><td>${f(d.telemarketing.suplanuota_vnt)}</td><td>${f(d.viso.suplanuota_vnt)}</td></tr>
-          <tr><td>Gauti rėmimai, vnt</td><td>${f(d.telenordi.gauti_vnt)}</td><td>${f(d.telemarketing.gauti_vnt)}</td><td>${f(d.viso.gauti_vnt)}</td></tr>
-          <tr><td><strong>Gauti rėmimai, Eur</strong></td><td><strong>${f(d.telenordi.gauti_eur)}</strong></td><td><strong>${f(d.telemarketing.gauti_eur)}</strong></td><td><strong>${f(d.viso.gauti_eur)}</strong></td></tr>
-        </table>
-        <div class="note-box" style="margin-top:10px;">
-          ⚠ Pastaba: gautoje lentelėje eilutės „Suplanuotų rėmimų, Eur" (27) ir „Suplanuotų rėmimų, vnt" (7 300) atrodo sukeistos vietomis (27 € neatitinka tipinio vidurkio, o 7 300 vnt. — nerealiai daug sutarčių). Skaičiai perkelti tiksliai taip, kaip gauti — verta patikrinti su šaltiniu prieš naudojant tolimesnėje analizėje.
-        </div>
-      </div>
-    </div>`);
-}
-
-function switchTab(key, el) {
-  document.querySelectorAll('.d-view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('.htab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('dv-'+key).classList.add('active');
-  el.classList.add('active');
-  // Rebuild charts when switching back to 'all' (canvas may need re-render)
-  if(key === 'all') setTimeout(buildCharts, 30);
-}
+    scales:{y:{ticks:{callback:function(v){return (v/1000)+'k €';}}}}
+  }
+});
 </script>
+
 </body>
 </html>
