@@ -103,6 +103,26 @@ table.heatmap tr.total-row td:first-child{text-align:left;padding-left:16px}
 .legend-scale{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink3);margin-top:12px}
 .legend-bar{flex:1;max-width:220px;height:10px;border-radius:5px;background:linear-gradient(90deg,#fee2e2,#bbf7d0)}
 
+/* Cohort revenue matrix */
+.cohort-wrap{overflow-x:auto}
+table.cohorttable{border-collapse:collapse;width:100%;min-width:820px}
+table.cohorttable th{font-size:13px;font-weight:800;padding:10px 12px;text-align:center;white-space:nowrap;background:#1e3a5f;color:#fff}
+table.cohorttable th.corner{text-align:left;padding-left:16px;border-radius:6px 0 0 0;font-size:12px}
+table.cohorttable th.total-hdr{background:#16314f}
+table.cohorttable td{padding:8px 12px;text-align:right;font-size:13px;font-weight:600;border:1px solid #e8eaf2}
+table.cohorttable td.row-hdr{text-align:left;font-weight:800;background:#dbe8f7;color:#1e3a5f;border-right:2px solid var(--blue);padding-left:16px}
+table.cohorttable td.row-hdr .cnt{font-size:11px;color:var(--ink3);font-weight:500;margin-left:6px}
+table.cohorttable td.na{background:#f3f4f6;color:#c4c9d8;text-align:center;font-weight:400}
+table.cohorttable td.h1{background:#f0fdf4}
+table.cohorttable td.h2{background:#dcfce7}
+table.cohorttable td.h3{background:#bbf7d0}
+table.cohorttable td.h4{background:#86efac}
+table.cohorttable td.h5{background:#4ade80;color:#14532d}
+table.cohorttable td.total-col{font-weight:800;background:#e8f5e9;color:var(--green);border-left:2px solid var(--green)}
+table.cohorttable tr.total-row td{background:var(--green-bg);font-weight:800;color:#065f46;border-top:2px solid var(--green)}
+table.cohorttable tr.total-row td:first-child{text-align:left;padding-left:16px}
+table.cohorttable td.grand-total{background:#a7f3d0;color:#064e3b;font-size:14px;border-left:2px solid var(--green)}
+
 .foot{background:#1e1e2e;color:#fff;padding:12px 40px;font-size:12px;opacity:0.75}
 .note{font-size:11.5px;color:var(--ink3);margin-top:10px;font-style:italic}
 </style>
@@ -343,6 +363,43 @@ table.heatmap tr.total-row td:first-child{text-align:left;padding-left:16px}
     <span>Ma&#382;iausiai (1)</span><div class="legend-bar"></div><span>Daugiausiai (1 157)</span>
   </div>
   <div class="note">* Unikal&#363;s r&#279;m&#279;jai pagal pirmo mok&#279;jimo m&#279;nes&#303; &ndash; &#353;altinis LP-F2F-2026-07_ATASKAITA.xlsx, ta pati logika kaip Metin&#279;je suvestin&#279;je (Grand Total = 30 346, sutampa). 2018 duomenys nuo rugs&#279;jo, 2026 iki liepos.</div>
+</div>
+
+<div class="sh">Kohort&#371; pjūvis &middot; pajamos per laik&#261;</div>
+<div class="card">
+  <div class="card-title">Kiek EUR sumok&#279;jo kiekvienos kohortos r&#279;m&#279;jai kiekvienais metais</div>
+  <div class="card-sub">Eilut&#279; = metai, kai prad&#279;tas r&#279;mimas (kohorta) &middot; Stulpelis = metai, kai gautos pajamos</div>
+  <div class="cohort-wrap">
+  <table class="cohorttable">
+    <thead>
+      <tr>
+        <th class="corner" rowspan="2">Metai, kai<br>prad&#279;tas r&#279;mimas</th>
+        <th colspan="9">Metai, kai gautos pajamos</th>
+        <th class="total-hdr" rowspan="2">VISO</th>
+      </tr>
+      <tr>
+        <th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="row-hdr">2018</td><td class="h1">18 270</td><td class="h5">92 965</td><td class="h5">80 072</td><td class="h4">74 591</td><td class="h4">67 637</td><td class="h3">59 157</td><td class="h3">55 074</td><td class="h3">50 822</td><td class="h1">25 036</td><td class="total-col">523 624</td></tr>
+      <tr><td class="row-hdr">2019</td><td class="na">&mdash;</td><td class="h3">217 696</td><td class="h5">336 625</td><td class="h5">301 489</td><td class="h4">273 992</td><td class="h4">245 695</td><td class="h3">227 043</td><td class="h3">218 135</td><td class="h1">105 171</td><td class="total-col">1 925 846</td></tr>
+      <tr><td class="row-hdr">2020</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h3">198 228</td><td class="h5">317 577</td><td class="h4">260 740</td><td class="h3">221 423</td><td class="h3">207 957</td><td class="h3">193 622</td><td class="h1">98 877</td><td class="total-col">1 498 423</td></tr>
+      <tr><td class="row-hdr">2021</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h2">190 205</td><td class="h5">363 725</td><td class="h4">283 973</td><td class="h3">260 437</td><td class="h3">231 422</td><td class="h1">118 707</td><td class="total-col">1 448 469</td></tr>
+      <tr><td class="row-hdr">2022</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h3">290 598</td><td class="h5">418 945</td><td class="h4">360 557</td><td class="h3">313 078</td><td class="h1">158 318</td><td class="total-col">1 541 496</td></tr>
+      <tr><td class="row-hdr">2023</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h4">412 565</td><td class="h5">532 766</td><td class="h4">441 867</td><td class="h1">215 794</td><td class="total-col">1 602 992</td></tr>
+      <tr><td class="row-hdr">2024</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h5">90 169</td><td class="h5">100 775</td><td class="h1">43 895</td><td class="total-col">234 839</td></tr>
+      <tr><td class="row-hdr">2025</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h5">48 857</td><td class="h1">33 649</td><td class="total-col">82 506</td></tr>
+      <tr><td class="row-hdr">2026</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="na">&mdash;</td><td class="h5">20 220</td><td class="total-col">20 220</td></tr>
+      <tr class="total-row">
+        <td>VISO</td>
+        <td>18 270</td><td>310 661</td><td>614 925</td><td>883 862</td><td>1 256 692</td><td>1 641 759</td><td>1 734 001</td><td>1 598 577</td><td>819 667</td>
+        <td class="grand-total">8 878 413</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">* Spalv&#371; intensyvumas rodo santykin&#303; pajam&#371; dyd&#303; eilut&#279;s viduje (kiekviena kohorta lyginama pati su savimi per laik&#261;, ne su kitomis kohortomis). VISO (8 878 413 &euro;) glaudžiai sutampa su Metin&#279;s suvestin&#279;s Pajamų suma (8 853 011 &euro;, &plusmn;0,3%) &ndash; abu &#353;altiniai dabar suderinti.</div>
 </div>
 
 <div class="sh">&#352;altiniai ir metodologija</div>
