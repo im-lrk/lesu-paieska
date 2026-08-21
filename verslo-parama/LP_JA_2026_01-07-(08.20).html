@@ -390,6 +390,7 @@ body { font-family: var(--font); background: var(--gray-05); color: var(--gray-8
       </div>
       <div class="card-body" style="padding:16px 18px;">
         <table id="dt-contacts2" class="dt dt-channel"></table>
+        <div style="font-size:11.5px;color:var(--gray-50);margin-top:8px;">Susitikimai (Ingrida Tauperytė SF „Meeting" + Inga Ž. CRM) skaičiuojami atskirai nuo Skambučių/El. laiškų — todėl šios lentelės „Viso" stulpelio suma viršija „Viso kontaktų" KPI ir piltuvėlio bazę per susitikimų skaičių.</div>
       </div>
     </div>
   </div>
@@ -786,7 +787,10 @@ function buildCharts() {
       { icon:icoEmail, label:'El. l. viso',     cls:'row-email',   vals:['12','4','96','128','84','14','24'],         tot:'362' },
       // Balandžio "9 susitikimai" pašalinta 2026-08-20 - šaltinio nerasta (matyt buvo žodinis pranešimas).
       // Liepos 5 susitikimai - patvirtinti, iš Ingos Ž. Excel CRM (konkrečios įmonės žinomos).
-      { icon:icoMeet,  label:'Susitikimai viso',cls:'row-meeting', vals:['—','—','—','—','—','—','5'],                tot:'5' },
+      // Susitikimai (VISO, ne unikalūs): Ingrida Tauperytė "Meeting" SF pjūvis (1,3,7,9,11 m1-5; nėra m6-7)
+      // + Ingos Ž. liepos 5 (CRM, patvirtinti). Šis skaičius NEĮTRAUKTAS į grand_total/uniq/piltuvėlį (Sonatos
+      // 2026-08-21 nurodymu) - tik informacinė eilutė kanalų lentelėje.
+      { icon:icoMeet,  label:'Susitikimai viso',cls:'row-meeting', vals:['1','3','7','9','11','—','5'],                tot:'36' },
     ];
     let html = '<tr class="dt-head"><th></th><th>Sausis</th><th>Vasaris</th><th>Kovas</th><th>Balandis</th><th>Gegužė</th><th>Birželis</th><th>Liepa</th><th>Viso</th></tr>';
     rows.forEach(r => {
