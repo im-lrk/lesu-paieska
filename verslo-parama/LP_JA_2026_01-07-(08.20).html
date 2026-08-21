@@ -34,10 +34,10 @@ body { font-family: var(--font); background: var(--gray-05); color: var(--gray-8
 }
 .header-brand { display: flex; align-items: center; gap: 13px; padding: 12px 0; }
 .rk-logo {
-  width: 36px; height: 36px; background: var(--red); border-radius: 5px;
+  min-width: 42px; height: 36px; padding: 0 7px; background: var(--red); border-radius: 5px;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: #fff; font-size: 14px; font-weight: 900; letter-spacing: .7px;
 }
-.rk-logo svg { width: 20px; height: 20px; }
 .brand-main { font-size: 16px; font-weight: 700; color: white; }
 .brand-sub  { font-size: 13px; color: rgba(255,255,255,.45); margin-top: 2px; letter-spacing: .3px; }
 .header-tabs { display: flex; align-items: stretch; }
@@ -284,12 +284,9 @@ body { font-family: var(--font); background: var(--gray-05); color: var(--gray-8
 
 <div class="header">
   <div class="header-brand">
-    <div class="rk-logo">
-      <svg viewBox="0 0 22 22" fill="none"><rect x="8" y="1" width="6" height="20" rx="1.5" fill="white"/><rect x="1" y="8" width="20" height="6" rx="1.5" fill="white"/></svg>
-    </div>
+    <div class="rk-logo">LRK</div>
     <div>
       <div class="brand-main">Juridinių asmenų parama</div>
-      <div class="brand-sub">LIETUVOS RAUDONASIS KRYŽIUS · LP DEPARTAMENTAS · 2026 I–VII mėn.</div>
     </div>
   </div>
   <div class="header-tabs">
@@ -314,36 +311,36 @@ body { font-family: var(--font); background: var(--gray-05); color: var(--gray-8
   <div class="kpi-strip">
     <div class="kpi c-red">
       <div class="kpi-lbl">Unikalių įmonių</div>
-      <div class="kpi-val red">8 339</div>
+      <div class="kpi-val red">12 654</div>
       <div class="kpi-sub">kontaktuota 2026 I–VII (mėnesių suma, gali persidengti)</div>
     </div>
     <div class="kpi c-blue">
       <div class="kpi-lbl">Viso kontaktų</div>
-      <div class="kpi-val">20 431</div>
+      <div class="kpi-val">21 352</div>
       <div class="kpi-sub">skambučiai + el. laiškai + susit.</div>
     </div>
     <div class="kpi c-orange">
       <div class="kpi-lbl">Konversija</div>
-      <div class="kpi-val">4,2%</div>
-      <div class="kpi-sub">348 iš 8 339 įmonių</div>
+      <div class="kpi-val">3,1%</div>
+      <div class="kpi-sub">394 iš 12 654 įmonių</div>
     </div>
     <div class="kpi c-amber">
-      <div class="kpi-lbl">Vidutinė įmoka (mišrus šaltinis)</div>
-      <div class="kpi-val">274 €</div>
-      <div class="kpi-sub">159 723 € / 583 įrašų · I–IV Bankas + V–VII SF Closed Won</div>
+      <div class="kpi-lbl">Vidutinė įmoka (Bankas)</div>
+      <div class="kpi-val">254 €</div>
+      <div class="kpi-sub">167 841 € / 660 mokėjimų · I–VII Bankas</div>
     </div>
     <div class="kpi c-green">
       <div class="kpi-lbl">Sutarta parama (SF)</div>
-      <div class="kpi-val green">348</div>
+      <div class="kpi-val green">394</div>
       <div class="kpi-sub">unikalios įmonės, I–VII</div>
     </div>
     <div class="kpi c-green">
-      <div class="kpi-lbl">Gauta parama (mišrus šaltinis)</div>
-      <div class="kpi-val green">159 723 €</div>
-      <div class="kpi-sub">583 įrašų · I–IV Bankas + V–VII SF Closed Won*</div>
+      <div class="kpi-lbl">Gauta parama (Bankas)</div>
+      <div class="kpi-val green">167 841 €</div>
+      <div class="kpi-sub">660 mokėjimų · I–VII</div>
     </div>
   </div>
-  <div class="note-box" style="margin-bottom:14px;">* I–IV mėn. „Gauta parama" — tikri banko išrašų duomenys (95 748 € / 327 mokėjimai). V–VII mėn. banko suderinimo dar nėra, todėl vietoje to naudojama SF „Closed Won" suma (63 975 € / 256 sutartys), filtruota tik Telemarketing + Telenordi kanalais (be Dalios/Emilijos/Vaidos/Živilės įrašų). Tai skirtingi šaltiniai: SF suma rodo SUTARTĄ, ne būtinai FAKTIŠKAI GAUTĄ sumą — kai bus atliktas V–VII banko suderinimas, šiuos skaičius reikės pakeisti tikrais banko duomenimis.</div>
+  <div class="note-box" style="margin-bottom:14px;">Kontaktų rodikliai paimti iš lapo „Kontaktai“, o gautos paramos rodikliai — iš lapo „Banko išrašas“. Unikalių įmonių I–VII rodiklis yra mėnesinių reikšmių suma, todėl ta pati įmonė skirtingais mėnesiais gali būti įskaičiuota daugiau nei kartą.</div>
 
   <!-- 4 CHARTS BETWEEN KPI AND FUNNEL -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -408,19 +405,19 @@ body { font-family: var(--font); background: var(--gray-05); color: var(--gray-8
         <div class="card-body">
           <div class="insight-grid">
             <div class="insight i-blue">
-              <div class="insight-pct blue">10,5%</div>
+              <div class="insight-pct blue">10,3%</div>
               <div class="insight-lbl">Pasiūlymų konversija nuo kontaktuotų įmonių</div>
-              <div class="insight-formula">878 iš 8 339</div>
+              <div class="insight-formula">1 306 iš 12 654</div>
             </div>
             <div class="insight i-orange">
-              <div class="insight-pct orange">39,6%</div>
+              <div class="insight-pct orange">30,2%</div>
               <div class="insight-lbl">Sutartos paramos konversija nuo pasiūlymų</div>
-              <div class="insight-formula">348 iš 878</div>
+              <div class="insight-formula">394 iš 1 306</div>
             </div>
             <div class="insight i-green">
-              <div class="insight-pct green">4,2%</div>
+              <div class="insight-pct green">3,1%</div>
               <div class="insight-lbl">Galutinė konversija nuo kontaktuotų įmonių</div>
-              <div class="insight-formula">348 iš 8 339</div>
+              <div class="insight-formula">394 iš 12 654</div>
             </div>
           </div>
           <div style="margin-top:10px;padding:9px 11px;background:var(--gray-05);border-radius:6px;font-size:13px;color:var(--gray-80);line-height:1.5;border-left:3px solid var(--navy);">
@@ -457,35 +454,17 @@ body { font-family: var(--font); background: var(--gray-05); color: var(--gray-8
 
 <script>
 const DATA = {
-  // nekele_uniq = unikalios įmonės, kurios bent kartą nekėlė ragelio
-  // nekele_truly = unikalios įmonės, kurios TIK nekėlė ragelio (nieko kito)
-  // all = I-VII suma. uniq/nekele_uniq ir kt. yra atskirai per mėnesį suskaičiuotų unikalių įmonių SUMA,
-  // o ne viena bendra distinct skaičiuoklė per visą laikotarpį — jei ta pati įmonė kontaktuota keliais
-  // skirtingais mėnesiais, ji šioje sumoje įskaičiuota daugiau nei kartą (persidengimas tarp mėnesių).
-  // Bankas (bank_count/bank_sum) apima tik I-IV — V-VII banko suderinimo duomenų faile nebuvo.
-  // Bankas (bank_count/bank_sum): I-IV - tikri banko išrašų duomenys (95 748€/327); V-VII - SF Closed Won
-  // suma, filtruota Created By = Telemarketing/Telenordi (63 975€/256), nes banko suderinimo dar nėra.
-  all:{ uniq:8339, grand_total:20431, sutarta:348, derybos:42, pasiulymas:878, atsakymas:63, laukiama:1291, susisiekta:45, perskambinti:4163, neaktualu:47, nenurodyta:3301, nekele_uniq:2631, nekele_truly:1509, neprileidzia:229, atsisakė:2111, neigiamas:727, numeris:527, bank_count:583, bank_sum:159723 },
-  m1: { uniq:1039, grand_total:3087, sutarta:1,   derybos:0,  pasiulymas:12,  atsakymas:20, laukiama:224,  susisiekta:1,  perskambinti:67,   neaktualu:0,  nenurodyta:400,  nekele_uniq:544,  nekele_truly:521,  neprileidzia:9,   atsisakė:14,   neigiamas:169, numeris:0,   bank_count:76,  bank_sum:21309 },
-  m2: { uniq:1117, grand_total:2140, sutarta:13,  derybos:0,  pasiulymas:1,   atsakymas:3,  laukiama:485,  susisiekta:0,  perskambinti:9,    neaktualu:0,  nenurodyta:732,  nekele_uniq:493,  nekele_truly:492,  neprileidzia:24,  atsisakė:0,    neigiamas:237, numeris:0,   bank_count:54,  bank_sum:14268 },
-  m3: { uniq:1437, grand_total:3208, sutarta:106, derybos:2,  pasiulymas:61,  atsakymas:31, laukiama:553,  susisiekta:7,  perskambinti:355,  neaktualu:3,  nenurodyta:1290, nekele_uniq:157,  nekele_truly:87,   neprileidzia:142, atsisakė:66,   neigiamas:318, numeris:0,   bank_count:107, bank_sum:29291 },
-  m4: { uniq:5404, grand_total:10635,sutarta:116, derybos:16, pasiulymas:655, atsakymas:7,  laukiama:17,   susisiekta:34, perskambinti:3101, neaktualu:7,  nenurodyta:825,  nekele_uniq:2048, nekele_truly:1169, neprileidzia:45,  atsisakė:1693, neigiamas:3,   numeris:496, bank_count:90,  bank_sum:30880 },
-  // m5-m7: šaltinis - "Pivot" lapo "Count of Company Code" x Month pjūvis (2026-08-19 darbinis failas).
-  // Papildomos SF etiketės, kurių nebuvo I-IV mėn. pjūvyje, sudėtos į artimiausią kategoriją:
-  //  "Jau remia" -> neaktualu; "Laukiama įmokos" -> laukiama; "Išsiųstas pasiūlymas" -> pasiulymas;
-  //  "Nekėlė 2/3" -> nekele_uniq; "Numeris nenaudojamas" -> numeris; "Neaktualu / nedomina" -> neaktualu.
-  // nekele_truly šiam pjūviui atskirai neskaičiuojamas (pivot'as neduoda šios detalės) - laikinai = nekele_uniq.
-  // bank_count/bank_sum m5-m7: BANKO duomenų faile nebuvo, todėl vietoje jų naudojama "SF_Closed Won"
-  // suma (Opportunity Amount, Stage=Closed Won), FILTRUOTA tik Created By: Full Name = Telemarketing arba
-  // Telenordi (be Dalios/Emilijos/Vaidos/Živilės įrašų) - tai SF užfiksuota sutarta suma, NE banko
-  // išrašais patvirtintas gavimas. Liepos suma (16 200€) tiksliai sutampa su preliminaria CC lentele - patikrinta.
-  m5: { uniq:1039, grand_total:1149, sutarta:85,  derybos:3,  pasiulymas:109, atsakymas:2,  laukiama:8,    susisiekta:2,  perskambinti:434,  neaktualu:28, nenurodyta:29,   nekele_uniq:248,  nekele_truly:248,  neprileidzia:5,   atsisakė:287,  neigiamas:0,   numeris:21,  bank_count:116, bank_sum:28725 },
-  m6: { uniq:43,   grand_total:61,   sutarta:23,  derybos:3,  pasiulymas:11,  atsakymas:0,  laukiama:0,    susisiekta:1,  perskambinti:16,   neaktualu:0,  nenurodyta:14,   nekele_uniq:2,    nekele_truly:2,    neprileidzia:0,   atsisakė:2,    neigiamas:0,   numeris:0,   bank_count:74,  bank_sum:19050 },
-  // m7: SF duomenys DAR NEPILNI - liepos CC (Telenordi+Telemarketing) kontaktai dar nesukelti į SF Activities.
-  // Žemiau esantys SF skaičiai apima tik tai, kas jau SF sistemoje; preliminarūs CC skaičiai rodomi atskirai puslapyje.
-  // m6/m7 papildomai įtraukti naujos Verslo skyriaus vadovės kontaktai (atskiras "Distinct Count of
-  // Įmonės pavadinimas" pjūvis, gautas 2026-08-20) - susumuota tiesiogiai su SF pipeline skaičiais.
-  m7: { uniq:143,  grand_total:151, sutarta:4,   derybos:18, pasiulymas:29,  atsakymas:0,  laukiama:4,    susisiekta:0,  perskambinti:181,  neaktualu:9,  nenurodyta:11,   nekele_uniq:55,   nekele_truly:55,   neprileidzia:4,   atsisakė:49,   neigiamas:0,   numeris:10,  bank_count:66,  bank_sum:16200 }
+  // Šaltiniai: „Kontaktai“ (unikalios įmonės ir visi kontaktai) ir „Banko išrašas“.
+  // all = mėnesinių reikšmių suma; ta pati įmonė skirtingais mėnesiais gali kartotis.
+  // Nekėlė 2 ir Nekėlė 3 įtraukti į nekele_uniq; pivot'as neišskiria „tik nekėlė“, todėl nekele_truly = nekele_uniq.
+  all:{ uniq:12654, grand_total:21352, sutarta:394, derybos:77, pasiulymas:1306, atsakymas:77, laukiama:175, susisiekta:58, perskambinti:3399, neaktualu:135, nenurodyta:603, nekele_uniq:4292, nekele_truly:4292, neprileidzia:151, atsisakė:3463, neigiamas:96, numeris:990, bank_count:660, bank_sum:167841 },
+  m1: { uniq:629,  grand_total:2329, sutarta:0,   derybos:0,  pasiulymas:11,  atsakymas:20, laukiama:2,  susisiekta:1,  perskambinti:32,   neaktualu:0,  nenurodyta:3,   nekele_uniq:543, nekele_truly:543, neprileidzia:0,  atsisakė:14,   neigiamas:50, numeris:0,   bank_count:76,  bank_sum:20789 },
+  m2: { uniq:503,  grand_total:651,  sutarta:0,   derybos:0,  pasiulymas:1,   atsakymas:2,  laukiama:0,  susisiekta:0,  perskambinti:3,    neaktualu:0,  nenurodyta:2,   nekele_uniq:493, nekele_truly:493, neprileidzia:0,  atsisakė:0,    neigiamas:3,  numeris:0,   bank_count:54,  bank_sum:14268 },
+  m3: { uniq:730,  grand_total:1531, sutarta:65,  derybos:2,  pasiulymas:57,  atsakymas:29, laukiama:33, susisiekta:6,  perskambinti:182,  neaktualu:25, nenurodyta:338, nekele_uniq:157, nekele_truly:157, neprileidzia:80, atsisakė:64,   neigiamas:27, numeris:2,   bank_count:107, bank_sum:29291 },
+  m4: { uniq:5206, grand_total:10032,sutarta:83,  derybos:12, pasiulymas:626, atsakymas:7,  laukiama:16, susisiekta:34, perskambinti:1576, neaktualu:11, nenurodyta:140, nekele_uniq:2051,nekele_truly:2051,neprileidzia:45, atsisakė:1686, neigiamas:3,  numeris:496, bank_count:90,  bank_sum:30620 },
+  m5: { uniq:2633, grand_total:3238, sutarta:175, derybos:7,  pasiulymas:316, atsakymas:19, laukiama:50, susisiekta:14, perskambinti:887,  neaktualu:56, nenurodyta:61,  nekele_uniq:387, nekele_truly:387, neprileidzia:14, atsisakė:761,  neigiamas:13, numeris:127, bank_count:137, bank_sum:30966 },
+  m6: { uniq:183,  grand_total:223,  sutarta:47,  derybos:2,  pasiulymas:33,  atsakymas:0,  laukiama:17, susisiekta:3,  perskambinti:65,   neaktualu:1,  nenurodyta:13,  nekele_uniq:6,   nekele_truly:6,   neprileidzia:0,  atsisakė:8,    neigiamas:0,  numeris:0,   bank_count:103, bank_sum:22079 },
+  m7: { uniq:2770, grand_total:3348, sutarta:24,  derybos:54, pasiulymas:262, atsakymas:0,  laukiama:57, susisiekta:0,  perskambinti:654,  neaktualu:42, nenurodyta:46,  nekele_uniq:655, nekele_truly:655, neprileidzia:12, atsisakė:930,  neigiamas:0,  numeris:365, bank_count:93,  bank_sum:19828 }
 };
 
 // Liepos preliminarūs CC duomenys (dar NE SF) - Telenordi (nuo 07.22) + Telemarketing, gauta el. paštu 2026-08-19
@@ -496,13 +475,13 @@ const JULY_CC_PRELIM = {
 };
 
 const MONTH_META = {
-  m1:{name:'Sausis',   bank:'21 309', bank_c:76},
+  m1:{name:'Sausis',   bank:'20 789', bank_c:76},
   m2:{name:'Vasaris',  bank:'14 268', bank_c:54},
   m3:{name:'Kovas',    bank:'29 291', bank_c:107},
-  m4:{name:'Balandis', bank:'30 880', bank_c:90, src:'bank'},
-  m5:{name:'Gegužė',   bank:'28 725', bank_c:116, src:'sf'},
-  m6:{name:'Birželis', bank:'19 050', bank_c:74,  src:'sf'},
-  m7:{name:'Liepa',    bank:'16 200', bank_c:66,  src:'sf'}
+  m4:{name:'Balandis', bank:'30 620', bank_c:90},
+  m5:{name:'Gegužė',   bank:'30 966', bank_c:137},
+  m6:{name:'Birželis', bank:'22 079', bank_c:103},
+  m7:{name:'Liepa',    bank:'19 828', bank_c:93}
 };
 
 function fmt(v){ return v===0?'—':v.toLocaleString('lt-LT'); }
@@ -513,7 +492,7 @@ function buildPipeline(el, d) {
   const base = d.uniq || 1;
   const steps = [
     { cls:'ps-navy',   icon:'🏢', label:'Unikalių kontaktuotų įmonių', val:d.uniq,              desc:'bendra aktyvuota bazė' },
-    { cls:'ps-teal',   icon:'🚫', label:'Nepasiekti kontaktai (tik nekėlė)',val:d.nekele_truly,  desc:`${d.nekele_uniq.toLocaleString('lt-LT')} įm. bent kartą nekėlė — iš jų ${d.nekele_truly.toLocaleString('lt-LT')} tik nekėlė, nieko daugiau` },
+    { cls:'ps-teal',   icon:'🚫', label:'Nepasiekti kontaktai (nekėlė)',val:d.nekele_uniq,  desc:'įmonės, pažymėtos „Nekėlė“, „Nekėlė 2“ arba „Nekėlė 3“' },
     { cls:'ps-cyan',   icon:'🔄', label:'Perskambinimai',               val:d.perskambinti,      desc:'laukia prioritetinio grįžimo' },
     { cls:'ps-blue',   icon:'⏳', label:'Laukiama atsakymo',            val:d.laukiama,          desc:'išsiųstas pasiūlymas / kontaktas, laukiama atsako' },
     { cls:'ps-orange', icon:'📋', label:'Pasiūlymas išsiųstas',         val:d.pasiulymas,        desc:'aktyvus pipeline uždarymu' },
@@ -766,11 +745,11 @@ function buildCharts() {
     const icoEmail = `<svg style="width:14px;height:14px;vertical-align:middle;margin-right:6px;flex-shrink:0;margin-bottom:1px" viewBox="0 0 24 24" fill="none" stroke="rgba(26,82,118,.85)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`;
     const icoMeet  = `<svg style="width:14px;height:14px;vertical-align:middle;margin-right:6px;flex-shrink:0;margin-bottom:1px" viewBox="0 0 24 24" fill="none" stroke="rgba(23,165,137,.85)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
     const rows = [
-      { icon:icoPhone, label:'Skamb. unikalūs', cls:'row-call',    vals:['1 001','1 080','1 345','5 357','1 037','41','124'], tot:'9 985' },
-      { icon:icoPhone, label:'Skamb. viso',     cls:'row-call',    vals:['2 899','1 857','2 589','9 963','1 145','49','132'], tot:'18 634' },
-      { icon:icoEmail, label:'El. l. unikalūs', cls:'row-email',   vals:['58','86','234','308','2','2','14'],           tot:'704' },
-      { icon:icoEmail, label:'El. l. viso',     cls:'row-email',   vals:['370','471','923','956','4','12','14'],         tot:'2 750' },
-      { icon:icoMeet,  label:'Susitikimai viso',cls:'row-meeting', vals:['—','—','—','9','—','—','5'],                tot:'14' },
+      { icon:icoPhone, label:'Skamb. unikalūs', cls:'row-call',    vals:['1 001','1 080','1 345','5 357','1 037','40','118'], tot:'9 978' },
+      { icon:icoPhone, label:'Skamb. viso',     cls:'row-call',    vals:['2 899','1 857','2 589','9 963','1 145','48','126'], tot:'18 627' },
+      { icon:icoEmail, label:'El. l. unikalūs', cls:'row-email',   vals:['58','86','234','308','2','2','—'],           tot:'690' },
+      { icon:icoEmail, label:'El. l. viso',     cls:'row-email',   vals:['370','471','923','956','4','12','—'],         tot:'2 736' },
+      { icon:icoMeet,  label:'Susitikimai viso',cls:'row-meeting', vals:['—','—','—','9','—','—','—'],                tot:'9' },
     ];
     let html = '<tr class="dt-head"><th></th><th>Sausis</th><th>Vasaris</th><th>Kovas</th><th>Balandis</th><th>Gegužė</th><th>Birželis</th><th>Liepa</th><th>Viso</th></tr>';
     rows.forEach(r => {
@@ -790,20 +769,15 @@ function buildMonthPage(key) {
   const pasiPct = d.uniq>0?(d.pasiulymas/d.uniq*100).toFixed(1).replace('.',',')+'%':'—';
   const sutPasiPct = d.pasiulymas>0?(d.sutarta/d.pasiulymas*100).toFixed(1).replace('.',',')+'%':'—';
   const sutPct = d.uniq>0?(d.sutarta/d.uniq*100).toFixed(1).replace('.',',')+'%':'—';
-  const isSF = meta.src === 'sf';
   const bankValTxt = `${meta.bank} €`;
-  const bankSubTxt = isSF ? `${meta.bank_c} SF sutarčių (Closed Won)` : `${meta.bank_c} mokėjimų`;
-  const bankLbl = isSF ? 'Gauta parama (SF Closed Won)' : 'Gauta parama (Bankas)';
-  const monthGenitive = { m5:'gegužės', m6:'birželio', m7:'liepos' };
-  const bankNoteTxt = isSF
-    ? `⚠ <strong>Banko suderinimo už ${monthGenitive[key]||meta.name.toLowerCase()} mėn. dar nėra</strong> — vietoje to rodoma SF „Closed Won" suma (${meta.bank_c} sutartys/${meta.bank} €), filtruota tik Telemarketing + Telenordi (be Dalios/Emilijos/Vaidos/Živilės įrašų). Tai SF užfiksuota sutarta suma, NE banko išrašais patvirtintas gavimas — realiai gauta suma gali skirtis.`
-    : `⚠ <strong>„Sutarta parama" SF (${d.sutarta}) ≠ „Gauta parama" Banke (${meta.bank_c})</strong> — pinigai gaunami ne tą patį mėnesį, kuriame sudaroma sutartis.`;
+  const bankSubTxt = `${meta.bank_c} mokėjimų`;
+  const bankLbl = 'Gauta parama (Bankas)';
+  const bankNoteTxt = `⚠ <strong>„Sutarta parama" SF (${d.sutarta}) ≠ mokėjimų skaičius Banke (${meta.bank_c})</strong> — pinigai gali būti gaunami ne tą patį mėnesį, kuriame sudaroma sutartis.`;
 
   pg.innerHTML = `
     <div class="page-title">
       <h1>Juridinių Asmenų Pipeline · <span>${meta.name}</span></h1>
-      <div class="meta">Šaltinis: Excel lapas ${key.replace('m','')} (Count of Company Code) · visi kanalai</div>
-      ${key==='m7' ? '<div class="meta" style="color:#B9770E;font-weight:700;margin-top:2px;">⚠ Duomenys nepilni — liepos CC kontaktai (Telenordi + Telemarketing) dar nesukelti į SF. Žr. preliminarią lentelę puslapio apačioje.</div>' : ''}
+      <div class="meta">Šaltinis: Excel lapai „Kontaktai“ ir „Banko išrašas“ · visi kanalai</div>
     <div class="kpi-strip">
       <div class="kpi c-red"><div class="kpi-lbl">Unikalių įmonių</div><div class="kpi-val red">${d.uniq.toLocaleString('lt-LT')}</div><div class="kpi-sub">kontaktuota šį mėnesį</div></div>
       <div class="kpi c-blue"><div class="kpi-lbl">Viso kontaktų</div><div class="kpi-val">${d.grand_total.toLocaleString('lt-LT')}</div><div class="kpi-sub">skambučiai + laiškai + susit.</div></div>
@@ -855,15 +829,14 @@ function buildMonthPage(key) {
 buildPipeline(document.getElementById('pipe-all'), DATA.all);
 buildStatusTable(document.getElementById('st-all'), DATA.all);
 ['m1','m2','m3','m4','m5','m6','m7'].forEach(buildMonthPage);
-buildJulyPrelimBox();
 // Charts need DOM + Chart.js
 buildPipelinePage();
 window.addEventListener('load', () => setTimeout(buildCharts, 50));
 
 /* ── PIPELINE PAGE ── */
 function buildPipelinePage() {
-  const CONV  = 4.17;   // I-VII konversijos rodiklis % (348 sutarčių / 8 339 unikalių kontaktų)
-  const AVG   = 274;    // I-VII vidutinė įmoka Eur (mišrus šaltinis: I-IV Bankas + V-VII SF Closed Won)
+  const CONV  = 3.11;   // I-VII konversijos rodiklis % (394 sutartos paramos / 12 654 mėnesinių unikalių kontaktų suma)
+  const AVG   = 254;    // I-VII vidutinė banko įmoka Eur (167 841 € / 660 mokėjimų)
   const pg = document.getElementById('pg-pipeline');
 
   const items = [
@@ -924,8 +897,8 @@ function buildPipelinePage() {
 
     <div class="pl-method">
       <strong>Metodologija:</strong> Prognozė skaičiuojama pagal I–VII (sausis–liepa) sukauptus rodiklius (atnaujinta 2026-08-19, įtraukus gegužės–liepos duomenis).
-      Konversijos rodiklis: 348 sutarčių / 8\u00a0339 unikalių kontaktų (mėnesių suma, gali persidengti) = <strong>${CONV.toString().replace('.',',')}%</strong>.
-      Vidutinė įmoka: mišrus šaltinis — I–IV banko suma 95\u00a0748 € + V–VII SF Closed Won 63\u00a0975 € (filtruota Telemarketing+Telenordi) = 159\u00a0723 € / 583 įrašų = <strong>${AVG} €</strong>.
+      Konversijos rodiklis: 394 sutartos paramos įrašai / 12\u00a0654 unikalių kontaktų mėnesinių reikšmių suma (gali persidengti) = <strong>${CONV.toString().replace('.',',')}%</strong>.
+      Vidutinė įmoka: I–VII banko suma 167\u00a0841 € / 660 mokėjimų = <strong>${AVG} €</strong>.
       ⚠ Pipeline kortelės (Nekėlė, Perskambinti ir t.t.) rodo I–VII mėn. kontaktų SUMĄ, ne unikalių kontaktų likutį šiandien — dalis jų jau galėjo pereiti į kitą statusą po mėnesio pabaigos.
     </div>`;
 }
